@@ -75,38 +75,38 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + BUS_INVENTORY_TABLE_NAME + " (" +
                 COL_NAME_USERID + " INTEGER PRIMARY KEY," +
-                COL_NAME_ITEMID + " TEXT," +
+                COL_NAME_ITEMID + " INTEGER," +
                 COL_NAME_QUANTITY + " INTEGER," +
                 COL_NAME_AVAILABLE_QUANTITY + " INTEGER)");
 
         db.execSQL("create table " + ITEM_TABLE_NAME + " (" +
-                COL_NAME_ITEMID + " TEXT PRIMARY KEY," +
+                COL_NAME_ITEMID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_NAME_ITEMNAME + " TEXT," +
                 COL_NAME_ITEMPRICE + " INTEGER," +
                 COL_NAME_USERID + " INTEGER," +
                 COL_NAME_CUSTOMdETAIL + " TEXT)");
 
         db.execSQL("create table " + CUSTOMER_ORDER_TABLE_NAME + " (" +
-                COL_NAME_ORDERID + " TEXT PRIMARY KEY," +
+                COL_NAME_ORDERID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_NAME_CREATE_TIME + " TEXT," +
-                COL_NAME_BUS_USERID + "INTEGER," +
-                COL_NAME_CUS_USERID + "INTEGER," +
+                COL_NAME_BUS_USERID + " INTEGER," +
+                COL_NAME_CUS_USERID + " INTEGER," +
                 COL_NAME_STATUS + " TEXT," +
                 COL_NAME_TOTAL + " INTEGER)");
 
         db.execSQL("create table " + SUP_INVENTORY_TABLE_NAME + " (" +
                 COL_NAME_FOOD_NAME + " TEXT PRIMARY KEY," +
                 COL_NAME_SALESPRICE + " INTEGER," +
-                COL_NAME_ITEMID + " TEXT," +
+                COL_NAME_ITEMID + " INTEGER," +
                 COL_NAME_USERID + " INTEGER)");
 
         db.execSQL("create table " + ORDER_INFO_TABLE_NAME + " (" +
-                COL_NAME_ORDERID + " TEXT PRIMARY KEY," +
-                COL_NAME_ITEMID + " TEXT," +
+                COL_NAME_ORDERID + " INTEGER PRIMARY KEY," +
+                COL_NAME_ITEMID + " INTEGER," +
                 COL_NAME_QUANTITY + " INTEGER)");
 
         db.execSQL("create table " + BUS_REQUEST_TABLE_NAME + " (" +
-                COL_NAME_ORDERID + " TEXT PRIMARY KEY," +
+                COL_NAME_ORDERID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_NAME_REQUEST_DATE + " TEXT," +
                 COL_NAME_NEEDBY_DATE + " TEXT," +
                 COL_NAME_BUS_USERID + " INTEGER," +
