@@ -37,8 +37,10 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String CUSTOMER_ORDER_TABLE_NAME = "CustomerOrder";
     public static final String COL_NAME_ORDERID = "OrderID";
     public static final String COL_NAME_CREATE_TIME = "CreateTime";
-    public static final String COL_NAME_STATUS = "Status";
+    public static final String COL_NAME_STATUS = "OrderStatus";
     public static final String COL_NAME_TOTAL = "TotalPrice";
+    public static final String COL_NAME_BUS_USERID = "UserIDBusiness";
+    public static final String COL_NAME_CUS_USERID = "UserIDCustomer";
 
     // supplier inventory
     public static final String SUP_INVENTORY_TABLE_NAME = "SupplierInventory";
@@ -52,6 +54,7 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String BUS_REQUEST_TABLE_NAME = "BusinessRequest";
     public static final String COL_NAME_REQUEST_DATE = "RequestDate";
     public static final String COL_NAME_NEEDBY_DATE = "NeedByDate";
+    public static final String COL_NAME_SUP_USERID = "UserIDSupplier";
 
 
 
@@ -86,8 +89,8 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + CUSTOMER_ORDER_TABLE_NAME + " (" +
                 COL_NAME_ORDERID + " TEXT PRIMARY KEY," +
                 COL_NAME_CREATE_TIME + " TEXT," +
-                COL_NAME_USERID + " INTEGER," +
-                COL_NAME_USERID + " INTEGER," +
+                COL_NAME_BUS_USERID + "INTEGER," +
+                COL_NAME_CUS_USERID + "INTEGER," +
                 COL_NAME_STATUS + " TEXT," +
                 COL_NAME_TOTAL + " INTEGER)");
 
@@ -106,8 +109,8 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
                 COL_NAME_ORDERID + " TEXT PRIMARY KEY," +
                 COL_NAME_REQUEST_DATE + " TEXT," +
                 COL_NAME_NEEDBY_DATE + " TEXT," +
-                COL_NAME_USERID + " INTEGER," +
-                COL_NAME_USERID + " INTEGER," +
+                COL_NAME_BUS_USERID + " INTEGER," +
+                COL_NAME_SUP_USERID + " INTEGER," +
                 COL_NAME_TOTAL + " INTEGER)");
 
     }
