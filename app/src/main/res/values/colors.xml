@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#5A8030</color>
     <color name="colorAccent">#F1E369</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorNavIcon">#000000</color>
+    <color name="colorGreyBackground">#E4E4E4</color>
     <color name="colorNavText">#000000</color>
     <color name="colorHeaderTitle">#000000</color>
 </resources>
