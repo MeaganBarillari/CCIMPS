@@ -13,13 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Current Orders"
+            android:text="Current Requests"
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/colorBlack"/>
 
         <LinearLayout
-            android:id = "@+id/current_orders_list"
+            android:id = "@+id/current_requests_list"
             android:layout_width = "fill_parent"
             android:layout_height = "wrap_content"
             android:background = "@color/colorTableHeader" >
@@ -31,7 +31,7 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text="Product"/>
+                android:text="Business"/>
 
             <TextView
                 android:layout_width = "0dp"
@@ -40,7 +40,7 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text = "Order Date and Time" />
+                android:text = "Price" />
 
             <TextView
                 android:layout_width = "0dp"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:gravity="center_vertical"
-            android:text="Order History"
+            android:text="Requests History"
             android:textSize="20dp"
             android:textColor="@color/colorBlack"/>
 
@@ -82,7 +82,7 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text = "Product"/>
+                android:text = "Order Number"/>
 
             <TextView
                 android:layout_width = "0dp"
