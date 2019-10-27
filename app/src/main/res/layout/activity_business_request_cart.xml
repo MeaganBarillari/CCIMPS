@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Shopping Cart"
+            android:textSize="25dp"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:id = "@+id/relativeLayout2"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:background = "@color/colorGreyBackground" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Supplier"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Item"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Qty"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1.5"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Price" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/current_customer_orders_listview"
+            android:layout_width="match_parent"
+            android:layout_height="377dp"
+            android:background="@color/colorGreyBackground"
+            android:divider="@color/colorWhite"
+            android:dividerHeight="10.0sp"
+            android:textColor="@color/colorBlack"></ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Need by:"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"/>
+
+        <EditText
+            android:id="@+id/etNeedbydate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Need By Date"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Total:"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"/>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="-559dp"
+        android:layout_marginEnd="239dp"
+        android:layout_marginRight="239dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="center_vertical"
+        android:text="Back"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="234dp"
+        android:layout_marginLeft="234dp"
+        android:layout_marginTop="-559dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginRight="89dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:text="Confirm"
+        android:textAlignment="center" />
+
+</RelativeLayout>
