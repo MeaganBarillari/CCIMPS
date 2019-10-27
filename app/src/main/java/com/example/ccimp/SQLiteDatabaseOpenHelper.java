@@ -1,5 +1,6 @@
 package com.example.ccimp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -126,5 +127,11 @@ public class SQLiteDatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BUS_REQUEST_TABLE_NAME);
 
         onCreate(db);
+    }
+
+    public void addNewUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME_EMAIL, "123@wisc.edu");
     }
 }
