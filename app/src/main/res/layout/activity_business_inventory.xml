@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Orders"
+            android:text="Inventory"
             android:textSize="25dp"
             android:textColor="@color/colorBlack"/>
 
@@ -32,7 +32,7 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text = "Customer Name"/>
+                android:text = "Item"/>
 
             <TextView
                 android:layout_width = "0dp"
@@ -41,7 +41,16 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text = "Placed"/>
+                android:text = "Price"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Total Qty"/>
 
             <TextView
                 android:layout_width = "0dp"
@@ -50,7 +59,7 @@
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:text = "Price" />
+                android:text = "Avail Qty" />
         </LinearLayout>
 
         <ListView
