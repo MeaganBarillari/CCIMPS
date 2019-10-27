@@ -24,6 +24,7 @@
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.customer.CustomerMainActivity" />
+        <activity android:name=".ui.business.BusinessMainActivity" />
     </application>
 
 </manifest>
