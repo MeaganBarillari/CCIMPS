@@ -11,13 +11,36 @@
         android:orientation="vertical"
         android:padding="10dip" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Inventory"
-            android:textSize="25dp"
-            android:textColor="@color/colorBlack"/>
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:text="Inventory Offerings"
+                android:textSize="25dp"
+                android:textColor="@color/colorBlack"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/customerNavigation"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/customer_navigation"
+                android:background="@color/colorAccent"
+                app:itemIconTint="@color/colorNavIcon"
+                android:text="Request\n Items"
+                app:itemTextColor="@color/colorNavText">
+            </com.google.android.material.button.MaterialButton>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id = "@+id/relativeLayout2"
@@ -67,7 +90,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/current_customer_orders_listview"
+            android:id="@+id/business_inventory_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/colorWhite"

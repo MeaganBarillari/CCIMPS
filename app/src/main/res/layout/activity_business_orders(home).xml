@@ -43,7 +43,7 @@
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
                 android:background="@color/colorTableHeader"
-                android:text = "Placed"/>
+                android:text = "Date/Time"/>
 
             <TextView
                 android:layout_width = "0dp"
@@ -53,7 +53,7 @@
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
                 android:background="@color/colorTableHeader"
-                android:text = "Price" />
+                android:text = "Status" />
         </LinearLayout>
 
         <ListView

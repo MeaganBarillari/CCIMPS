@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Order Number:"
+            android:text="Order Number"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"/>
 
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Customer Name:"
+            android:text="Customer Name"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"/>
 
