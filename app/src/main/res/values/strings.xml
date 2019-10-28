@@ -3,16 +3,29 @@
     <string name="title_activity_login">Login in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="title_activity_register">Register</string>
     <string name="welcome">"Welcome !"</string>
+    <string name="logout">Logout</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="title_home">Home</string>
+    <string name="title_order">Orders</string>
+    <string name="title_requests">Requests</string>
+    <string name="title_profile">Profile</string>
+    <string name="business_menu">Business Menu</string>
 
     <string-array name="userTypes">
         <item>Customer</item>
         <item>Business</item>
         <item>Supplier</item>
+    </string-array>
+
+    <string-array name="statusTypes">
+        <item>Decline</item>
+        <item>Accept</item>
+        <item>Complete</item>
+        <item>Ready for Pick-up</item>
+        <item>Working On It</item>
     </string-array>
 </resources>

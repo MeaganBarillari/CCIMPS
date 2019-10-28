@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingLeft="16dip"
+    android:paddingRight="12dip"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall">
+
+    <RadioButton
+        android:id="@+id/customer_order_listview_radio"
+        android:layout_width="45dip"
+        android:layout_height="wrap_content"
+        android:paddingRight="12dip"
+        android:gravity="center_vertical"
+        android:focusable="false"
+        android:clickable="false"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="Menu Item"
+            android:textSize="20sp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:id="@+id/business_name"
+            android:textColor="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Menu Detail"
+            android:textSize="14sp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/business_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

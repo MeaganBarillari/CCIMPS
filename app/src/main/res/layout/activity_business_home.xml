@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Orders"
+            android:textSize="25dp"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:id = "@+id/relativeLayout2"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:background = "@color/colorGreyBackground" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorTableHeader"
+                android:text = "Customer Name"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorTableHeader"
+                android:text = "Placed"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1.5"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorTableHeader"
+                android:text = "Price" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/current_customer_orders_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/colorWhite"
+            android:dividerHeight="10.0sp"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack">
+        </ListView>
+
+    </LinearLayout>
+
+</RelativeLayout>
