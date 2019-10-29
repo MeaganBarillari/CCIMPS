@@ -2,7 +2,11 @@ package com.example.ccimp.ui.model;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+
+import com.example.ccimp.ui.supplier.SupplierMainActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,7 +21,6 @@ import java.net.URLEncoder;
 
 public class backgroundWorker extends AsyncTask<String,Void,String> {
     Context context;
-    AlertDialog alertDialog;
     backgroundWorker (Context ctx) {
      context = ctx;
     }
@@ -67,14 +70,14 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login status");
+//        alertDialog = new AlertDialog.Builder(context).create();
+//        alertDialog.setTitle("Login status");
     }
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        Intent intent = new Intent(context, SupplierMainActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
