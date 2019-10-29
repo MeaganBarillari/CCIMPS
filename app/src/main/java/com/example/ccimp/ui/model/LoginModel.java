@@ -13,19 +13,22 @@ public class LoginModel implements LoginPresenter {
         this.mLoginView = loginView;
     }
     @Override
-    public void performLogin(String userEmail, String password){
+    public void performLogin(String type, String userEmail, String password) {
 
-        if (TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(password)){
-            mLoginView.loginValidations();
-        }
 
-        else{
-            if (userEmail.equals("abc@wisc.edu") && password.equals("abc")){
-                mLoginView.loginSuccess();
-            }
-            else{
-                mLoginView.loginError();
-            }
-        }
+        // might do more validation
+//        if (TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(password)){
+//
+//            mLoginView.loginValidations();
+//        }
+//        else{
+
+//            if (result == "login success"){
+//                mLoginView.loginSuccess();
+//            }
+//            else{
+//                mLoginView.loginError();
+//            }
+// }
     }
 }

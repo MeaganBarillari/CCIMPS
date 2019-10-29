@@ -1,0 +1,203 @@
+[33mcommit a8297a3e03464801de1f961a183471d0a4ac34cf[m[33m ([m[1;36mHEAD -> [m[1;32mwilliamtest[m[33m, [m[1;31morigin/williamtest[m[33m)[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Sun Oct 27 10:27:15 2019 -0500
+
+    Inventory Page
+
+[33mcommit 5817e06cb99bf6c4f8cbbf773fc7f548016c56f3[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Sun Oct 27 10:08:04 2019 -0500
+
+    Update AndroidManifest.xml
+
+[33mcommit 01b824617c273fcf3a32db5fc9dee0c7af2aa366[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Sun Oct 27 10:05:35 2019 -0500
+
+    business navigation bar (words not showing)
+
+[33mcommit 699aa38e11277e27948a4af74acab430fa5ea5cb[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Sun Oct 27 09:14:31 2019 -0500
+
+    business layouts
+
+[33mcommit 2c140b04f4fd5873add02cd301feff24e0ad8d71[m
+Author: MeaganBarillari <m.barillari7@gmail.com>
+Date:   Sat Oct 26 13:13:58 2019 -0500
+
+    customer ui layouts
+
+[33mcommit bdf37d8847ce9ca50933bf9b69445e41fd4d2a31[m
+Author: MeaganBarillari <m.barillari7@gmail.com>
+Date:   Mon Oct 21 17:51:23 2019 -0500
+
+    creating customer views
+
+[33mcommit 7258073b3c032f3cdc3357762b0ef7acbfc6884e[m
+Author: MeaganBarillari <m.barillari7@gmail.com>
+Date:   Sun Oct 20 16:04:15 2019 -0500
+
+    added login/register activity
+
+[33mcommit f5fc08dcdf0475f20ea31efe097b3d658c46416c[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Thu Oct 17 14:46:12 2019 -0500
+
+    Update activity_main.xml
+
+[33mcommit e6a1eea85c8824f9c56f86117ee2a84a2877157b[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Thu Oct 17 12:21:22 2019 -0500
+
+    Button
+
+[33mcommit 796c9b526a77ad513037373a62d568b182a6c64e[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Thu Oct 17 12:14:37 2019 -0500
+
+    Update README.md
+
+[33mcommit 15ed5514d6dd48e2dd76e408eee3c2e2630e2d36[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Thu Oct 17 12:13:50 2019 -0500
+
+    Update README.md
+
+[33mcommit a693c78d8620cfb6795470c3983ba4303e1b66fa[m
+Author: Reng-Hung Shih <rshih2@wisc.edu>
+Date:   Thu Oct 17 12:09:45 2019 -0500
+
+    test commit
+
+[33mcommit d23dbba6b089e0e986fca4bb3255ccc70bf69f6b[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 01:14:46 2019 -0500
+
+    Create README.md
+
+[33mcommit 112f2f1956b3e8134aa70ff13e8aa7fb61385225[m
+Author: Shifan Zhou <szhou235@wisc.edu>
+Date:   Tue Oct 8 01:12:16 2019 -0500
+
+    project created
+
+[33mcommit d83a2b23596be9b5b51981db7758ae592c701e4c[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:34 2019 -0500
+
+    Delete settings.gradle
+
+[33mcommit f6a319d42c005a6fa5e58e95eb7abcfe2a8ca3d9[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:28 2019 -0500
+
+    Delete local.properties
+
+[33mcommit 4466f82255e359bb8f4bbe127f5a707ab003c12b[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:22 2019 -0500
+
+    Delete gradlew.bat
+
+[33mcommit c10358223b6c2d88a2de570486aab0e7c664e09e[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:16 2019 -0500
+
+    Delete gradlew
+
+[33mcommit fdf9914d0a9688aa37fe5ee63793e232d478c95b[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:09 2019 -0500
+
+    Delete gradle.properties
+
+[33mcommit 13d5c69073bfb52873ebf493b04f14ff3391e59e[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:50:04 2019 -0500
+
+    Delete build.gradle
+
+[33mcommit d7085af83ec2145060aeb58e44c18641881b2944[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:49:57 2019 -0500
+
+    Delete CCIMP.iml
+
+[33mcommit ac0460b003527f8820d58bfe3d0a24a1f88acdb4[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:49:49 2019 -0500
+
+    Delete .gitignore
+
+[33mcommit 22aef6326fb0d8807e3afc0f9d26c214e6363c2b[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Tue Oct 8 00:46:44 2019 -0500
+
+    Set up the Android studio project
+
+[33mcommit 4439a9b396558e6ca1382cf2f381b4b9ef813c58[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:18:31 2019 -0500
+
+    Delete settings.gradle
+
+[33mcommit 2221573b66abbb324c7dbe3abc12ea84a05e86fe[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:18:22 2019 -0500
+
+    Delete local.properties
+
+[33mcommit becc7a4fd1b8b1f634ad1a4a32d4370f2a92927d[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:18:14 2019 -0500
+
+    Delete gradlew.bat
+
+[33mcommit 91257292e6e03b817bc6835c29424fc0ff45e317[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:18:06 2019 -0500
+
+    Delete gradlew
+
+[33mcommit bb71d76aee9397dc7b3b2892f32be0c154364871[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:17:57 2019 -0500
+
+    Delete gradle.properties
+
+[33mcommit 4fd6316801957dcfff4c1d3598851a9ca90bd986[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:17:50 2019 -0500
+
+    Delete build.gradle
+
+[33mcommit c361492f10c769e124d1b8fa1b518f185cc18566[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:17:39 2019 -0500
+
+    Delete My Application.iml
+
+[33mcommit ada54f37068b11742cb2f869d796270610b661b1[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 18:17:26 2019 -0500
+
+    Delete .gitignore
+
+[33mcommit 11612a210a8867d49fc587aeb2e6950c873249f4[m
+Author: 7nafoaix <54223814+7nafoaix@users.noreply.github.com>
+Date:   Mon Oct 7 17:46:39 2019 -0500
+
+    Add files via upload
+
+[33mcommit 22beda35dc898e9c8a5f7f868d445badf62aa9c0[m
+Author: MeaganBarillari <m.barillari7@gmail.com>
+Date:   Mon Sep 23 17:33:08 2019 -0500
+
+    first commit?
+
+[33mcommit b9d9b06e151cb476caffb817adb3cd39b631d7be[m
+Author: Meagan Barillari <m.barillari7@gmail.com>
+Date:   Thu Sep 19 18:34:34 2019 -0500
+
+    Initial commit
