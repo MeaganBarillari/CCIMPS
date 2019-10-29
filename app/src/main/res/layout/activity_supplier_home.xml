@@ -11,63 +11,70 @@
         android:orientation="vertical"
         android:padding="10dip" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Inventory"
-            android:textSize="25dp"
-            android:textColor="@color/colorBlack"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Inventory Offerings"
+                android:textSize="25dp"
+                android:textColor="@color/colorBlack"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/customerNavigation"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/customer_navigation"
+                android:background="@color/colorAccent"
+                app:itemIconTint="@color/colorNavIcon"
+                android:text="Add Item"
+                app:itemTextColor="@color/colorNavText">
+            </com.google.android.material.button.MaterialButton>
+
+        </LinearLayout>
 
         <LinearLayout
-            android:id = "@+id/relativeLayout2"
+            android:id = "@+id/current_orders_list"
             android:layout_width = "fill_parent"
             android:layout_height = "wrap_content"
-            android:background = "@color/colorGreyBackground" >
+            android:layout_marginTop="10dp"
+            android:background = "@color/colorTableHeader" >
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "2"
+                android:layout_weight = "3"
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Item Name"/>
+                android:text="Item Name"/>
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "2"
+                android:layout_weight = "2.5"
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Price"/>
+                android:text = "Sale Price" />
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "2"
+                android:layout_weight = ".7"
                 android:gravity = "center"
                 android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Total Qty"/>
-
-            <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "1.5"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Avail Qty" />
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
 
         <ListView
-            android:id="@+id/current_customer_orders_listview"
+            android:id="@+id/supplier_inventory_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/colorWhite"

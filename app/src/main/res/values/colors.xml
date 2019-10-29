@@ -9,4 +9,5 @@
     <color name="colorGreyBackground">#E4E4E4</color>
     <color name="colorNavText">#000000</color>
     <color name="colorHeaderTitle">#000000</color>
+    <color name="colorTableHeader">#D8D8D8</color>"
 </resources>
