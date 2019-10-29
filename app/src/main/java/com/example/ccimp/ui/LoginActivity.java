@@ -8,16 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.PresenterImpl;
+import com.example.ccimp.ui.model.LoginModel;
+import com.example.ccimp.ui.model.LoginModel;
 import com.example.ccimp.ui.presenter.LoginPresenter;
 import com.example.ccimp.ui.view.LoginView;
 
 public class LoginActivity extends AppCompatActivity implements LoginView{
     EditText etEmail, etPassword;
     Button btnlogin;
+    TextView tvSingup;
 
     LoginPresenter mLoginPresenter;
     LoginView mLoginView;
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         etPassword = findViewById(R.id.input_password);
         etEmail = findViewById(R.id.input_email);
         btnlogin = findViewById(R.id.btn_login);
+        tvSingup = findViewById(R.id.link_signup);
 
         btnlogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -41,7 +45,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             }
         });
 
-        mLoginPresenter = new PresenterImpl(LoginActivity.this);
+        tvSingup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
+        mLoginPresenter = new LoginModel(LoginActivity.this);
 
     }
 

@@ -5,11 +5,11 @@ import android.text.TextUtils;
 import com.example.ccimp.ui.presenter.LoginPresenter;
 import com.example.ccimp.ui.view.LoginView;
 
-public class PresenterImpl implements LoginPresenter {
+public class LoginModel implements LoginPresenter {
 
     LoginView mLoginView;
 
-    public PresenterImpl(LoginView loginView){
+    public LoginModel(LoginView loginView){
         this.mLoginView = loginView;
     }
     @Override
