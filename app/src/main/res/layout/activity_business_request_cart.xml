@@ -80,7 +80,7 @@
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
                 android:background="@color/colorTableHeader"
-                android:text = "Qauntity"/>
+                android:text = "Quantity"/>
 
             <TextView
                 android:layout_width = "0dp"
@@ -109,7 +109,7 @@
         android:id="@+id/fab_customer_order"
         android:layout_width="155dp"
         android:layout_height="55dp"
-        android:text="Send Order"
+        android:text="Send\n Request"
         android:textColor="@color/colorBlack"
         android:background="@color/colorAccent"
         android:clickable="true"
