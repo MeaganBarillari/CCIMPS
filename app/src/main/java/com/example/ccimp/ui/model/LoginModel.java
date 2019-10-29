@@ -16,6 +16,7 @@ public class LoginModel implements LoginPresenter {
     public void performLogin(String type, String userEmail, String password) {
 
 
+
         // might do more validation
 //        if (TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(password)){
 //
