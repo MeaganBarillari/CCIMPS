@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal">
     </ImageView>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btn_activity_login"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:background="@color/colorPrimary"
         android:text="@string/title_activity_login" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btn_activity_register"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
