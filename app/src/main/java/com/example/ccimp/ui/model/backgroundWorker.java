@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.model;
 
 import android.app.AlertDialog;
 import android.content.Context;

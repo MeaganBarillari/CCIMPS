@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.LoginModel;
+import com.example.ccimp.ui.model.backgroundWorker;
 import com.example.ccimp.ui.presenter.LoginPresenter;
 import com.example.ccimp.ui.view.LoginView;
 
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
                 String type = "login";
-                mLoginPresenter.performLogin(type, userEmail, userPassword);
+                mLoginPresenter.performLogin(type, userEmail, userPassword, LoginActivity.this);
             }
         });
         tvSignup = findViewById(R.id.link_signup);
