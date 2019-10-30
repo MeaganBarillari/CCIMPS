@@ -27,6 +27,9 @@
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.customer.CustomerMainActivity" />
         <activity android:name=".ui.business.BusinessMainActivity" />
+        <activity android:name=".ui.SupplierRequestsActivity"></activity>
+        <activity android:name=".ui.SupplierProfileActivity"></activity>
+        <activity android:name=".ui.SupplierProfileActivity"></activity>
     </application>
 
 </manifest>

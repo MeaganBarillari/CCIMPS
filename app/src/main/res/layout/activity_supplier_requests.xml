@@ -1,55 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true" >
+    android:fillViewport="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dip" >
+        android:padding="10dip">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:text="Current Requests"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
 
         <LinearLayout
-            android:id = "@+id/current_requests_list"
-            android:layout_width = "fill_parent"
-            android:layout_height = "wrap_content"
-            android:background = "@color/colorTableHeader" >
+            android:id="@+id/current_requests_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTableHeader">
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "2"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text="Business"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Business"
+                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "2"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text = "Price" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Price"
+                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "1.5"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text = "Order Status" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Order Status"
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
 
         <ListView
@@ -57,8 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorGreyBackground"
-            android:textColor="@color/colorBlack">
-        </ListView>
+            android:textColor="@color/colorBlack"></ListView>
 
         <TextView
             android:layout_width="match_parent"
@@ -67,51 +74,61 @@
             android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:text="Requests History"
-            android:textSize="20dp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
 
         <LinearLayout
-            android:id = "@+id/relativeLayout2"
-            android:layout_width = "fill_parent"
-            android:layout_height = "wrap_content"
-            android:background = "@color/colorTableHeader" >
+            android:id="@+id/relativeLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTableHeader">
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "2"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text = "Order Number"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Order Number"
+                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "2"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text = "Order Date and Time"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Order Date and Time"
+                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:layout_width = "0dp"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "1.5"
-                android:gravity = "center"
-                android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:text = "Order Status" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Order Status"
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/previous_requests_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:background="@color/colorGreyBackground" >
-        </ListView>
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack"></ListView>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</ScrollView>
+
+    </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/supplierNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/supplier_navigation"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText" />
+</RelativeLayout>

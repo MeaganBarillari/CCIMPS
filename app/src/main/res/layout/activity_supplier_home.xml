@@ -24,7 +24,7 @@
                 android:textSize="25dp"
                 android:textColor="@color/colorBlack"/>
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/customerNavigation"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 app:itemIconTint="@color/colorNavIcon"
                 android:text="Add Item"
                 app:itemTextColor="@color/colorNavText">
-            </com.google.android.material.button.MaterialButton>
+            </Button>
 
         </LinearLayout>
 
@@ -84,5 +84,15 @@
         </ListView>
 
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/supplierNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/supplier_navigation"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
 
 </RelativeLayout>
