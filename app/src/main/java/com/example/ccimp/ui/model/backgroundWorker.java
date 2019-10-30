@@ -122,8 +122,8 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
 
         //Intent intent = new Intent(context, SupplierMainActivity.class);
         //context.startActivity(intent);
-//        Intent intent = new Intent(context, SupplierMainActivity.class);
-//        context.startActivity(intent);
+        //Intent intent = new Intent(context, SupplierMainActivity.class);
+        //context.startActivity(intent);
 
         alertDialog.setMessage(result);
         alertDialog.show();
