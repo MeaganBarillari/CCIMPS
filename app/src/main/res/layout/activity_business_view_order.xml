@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
+<!--    might be useless-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

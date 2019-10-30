@@ -12,12 +12,12 @@
         android:title="Requests" />
 
     <item
-        android:id="@+id/navigation_customer_order"
+        android:id="@+id/navigation_inventory"
         android:icon="@drawable/ic_inventory"
         android:title="Inventory" />
 
     <item
-        android:id="@+id/navigation_customer_profile"
+        android:id="@+id/navigation_business_profile"
         android:icon="@drawable/ic_profile"
         android:title="@string/title_profile" />
 

@@ -29,7 +29,22 @@
         <activity android:name=".ui.business.BusinessMainActivity" />
         <activity android:name=".ui.SupplierRequestsActivity"></activity>
         <activity android:name=".ui.SupplierProfileActivity"></activity>
-        <activity android:name=".ui.SupplierProfileActivity"></activity>
+        <activity android:name=".ui.SupplierHomeActivity"></activity>
+        <activity android:name=".ui.BusinessHomeActivity"></activity>
+        <activity android:name=".ui.BusinessInventoryActivity"></activity>
+        <activity android:name=".ui.BusinessOrderDetailActivity"></activity>
+        <activity android:name=".ui.BusinessProfileActivity"></activity>
+        <activity android:name=".ui.BusinessRequestCartActivity"></activity>
+        <activity android:name=".ui.BusinessRequestFromSupplierActivity"></activity>
+        <activity android:name=".ui.BusinessRequestPerSupplierActivity"></activity>
+        <activity android:name=".ui.BusinessRequestsActivity"></activity>
+        <activity android:name=".ui.BusinessSupplierMenuActivity"></activity>
+        <activity android:name=".ui.CustomerHomeActivity"></activity>
+        <activity android:name=".ui.CustomerMenuActivity"></activity>
+        <activity android:name=".ui.CustomerOrderCartActivity"></activity>
+        <activity android:name=".ui.CustomerOrdersActivity"></activity>
+        <activity android:name=".ui.CustomerProfileActivity"></activity>
+
     </application>
 
 </manifest>

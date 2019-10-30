@@ -26,8 +26,8 @@
                 android:textSize="25dp"
                 android:textColor="@color/colorBlack"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/customerNavigation"
+            <Button
+                android:id="@+id/requestItem"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -38,7 +38,7 @@
                 app:itemIconTint="@color/colorNavIcon"
                 android:text="Request\n Items"
                 app:itemTextColor="@color/colorNavText">
-            </com.google.android.material.button.MaterialButton>
+            </Button>
 
         </LinearLayout>
 
@@ -101,4 +101,13 @@
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/businessNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/business_navigation"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
 </RelativeLayout>
