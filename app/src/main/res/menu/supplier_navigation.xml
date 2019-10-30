@@ -3,13 +3,18 @@
 
     <item
         android:id="@+id/supplier_navigation_home"
-        android:icon="@drawable/ic_menu"
-        android:title="@string/menu" />
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_supplier_order"
+        android:id="@+id/navigation_supplier_history"
         android:icon="@drawable/ic_requests"
-        android:title="@string/title_requests" />
+        android:title="history" />
+
+    <item
+        android:id="@+id/navigation_supplier_inventory"
+        android:icon="@drawable/ic_inventory"
+        android:title="inventory" />
 
     <item
         android:id="@+id/navigation_supplier_profile"
