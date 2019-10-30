@@ -1,5 +1,6 @@
 package com.example.ccimp.ui.model;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -14,17 +15,20 @@ public class RegisterModel implements RegisterPresenter {
     }
 
     @Override
-    public void performSignup(String fullName, String email, String address, String phone, String password, String rePassword, String userType){
+    public void performSignup(String type, String email, String address, String phone, String password, String rePassword, String userType, Context context){
         if(!password.equals(rePassword)){
             mRegisterView.pwdUnmatch();
         }
         else {
-            if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(address) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword) || TextUtils.isEmpty(userType)){
-                mRegisterView.signupValidations();
-            }
-            else{
-                mRegisterView.signupSuccess();
-            }
+            backgroundWorker bgWorker = new backgroundWorker(context);
+            bgWorker.execute(type, email, address, phone, password, userType);
+
+//            if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(address) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword) || TextUtils.isEmpty(userType)){
+//                mRegisterView.signupValidations();
+//            }
+//            else{
+//                mRegisterView.signupSuccess();
+//            }
 
         }
 
