@@ -20,6 +20,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class backgroundWorker extends AsyncTask<String,Void,String> {
+    AlertDialog alertDialog;
     Context context;
     backgroundWorker (Context ctx) {
      context = ctx;
@@ -70,14 +71,16 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-//        alertDialog = new AlertDialog.Builder(context).create();
-//        alertDialog.setTitle("Login status");
+       alertDialog = new AlertDialog.Builder(context).create();
+       alertDialog.setTitle("Login status");
     }
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, SupplierMainActivity.class);
-        context.startActivity(intent);
+        //Intent intent = new Intent(context, SupplierMainActivity.class);
+        //context.startActivity(intent);
+        alertDialog.setMessage(result);
+        alertDialog.show();
     }
 
     @Override
