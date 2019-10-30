@@ -67,11 +67,12 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
             }
         }else if(type.equals("register")) {
             try {
-                String user_email = params[1];
-                String address = params[2];
-                String phone = params[3];
-                String password = params[4];
-                String userType = params[5];
+                String username = params[1];
+                String user_email = params[2];
+                String address = params[3];
+                String phone = params[4];
+                String password = params[5];
+                String userType = params[6];
                 URL url = new URL(register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -80,6 +81,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("user_email","UTF-8") + "=" + URLEncoder.encode(user_email,"UTF-8") + "&"
+                        + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
                         + URLEncoder.encode("user_password","UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
                         + URLEncoder.encode("user_type","UTF-8") + "=" + URLEncoder.encode(userType, "UTF-8") + "&"
                         + URLEncoder.encode("user_phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8") + "&"

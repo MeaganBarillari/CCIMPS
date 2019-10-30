@@ -18,7 +18,7 @@ import com.example.ccimp.ui.presenter.RegisterPresenter;
 import com.example.ccimp.ui.view.RegisterView;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
-    EditText etEmail, etAddress, etPhone, etPassword, etRePassword;
+    EditText etUsername, etEmail, etAddress, etPhone, etPassword, etRePassword;
     TextView tvLogin;
     Spinner spinner;
     Button btnSignup;
@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        etUsername = findViewById(R.id.input_name);
         etEmail = findViewById(R.id.input_email);
         etAddress = findViewById(R.id.input_address);
         etPhone = findViewById(R.id.input_phoneNumber);
@@ -42,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = etUsername.getText().toString();
                 String email = etEmail.getText().toString();
                 String address = etAddress.getText().toString();
                 String phone = etPhone.getText().toString();
@@ -49,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 String rePassword = etRePassword.getText().toString();
                 String userType = spinner.getSelectedItem().toString();
                 String type = "register";
-                mRegisterPresenter.performSignup(type, email, address, phone, password, rePassword, userType, RegisterActivity.this);
+                mRegisterPresenter.performSignup(type,username, email, address, phone, password, rePassword, userType, RegisterActivity.this);
             }
         });
 

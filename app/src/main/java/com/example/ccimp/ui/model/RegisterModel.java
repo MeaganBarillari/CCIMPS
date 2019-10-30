@@ -15,13 +15,13 @@ public class RegisterModel implements RegisterPresenter {
     }
 
     @Override
-    public void performSignup(String type, String email, String address, String phone, String password, String rePassword, String userType, Context context){
+    public void performSignup(String type, String username, String email, String address, String phone, String password, String rePassword, String userType, Context context){
         if(!password.equals(rePassword)){
             mRegisterView.pwdUnmatch();
         }
         else {
             backgroundWorker bgWorker = new backgroundWorker(context);
-            bgWorker.execute(type, email, address, phone, password, userType);
+            bgWorker.execute(type, username, email, address, phone, password, userType);
 
 //            if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(address) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword) || TextUtils.isEmpty(userType)){
 //                mRegisterView.signupValidations();
