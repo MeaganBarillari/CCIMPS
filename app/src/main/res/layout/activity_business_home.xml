@@ -11,13 +11,34 @@
         android:orientation="vertical"
         android:padding="10dip" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Orders"
-            android:textSize="25dp"
-            android:textColor="@color/colorBlack"/>
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:text="Orders"
+                android:textSize="40dp"
+                android:textColor="@color/colorBlack"/>
+
+            <Button
+                android:id="@+id/btnHistory"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/colorAccent"
+                android:text="See History"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:id = "@+id/relativeLayout2"
@@ -71,16 +92,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="469dp"
-        android:layout_marginLeft="250dp"
-        android:background="@color/colorAccent"
-        android:textSize="20dp"
-        android:text="See History" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/businessNavigation"
