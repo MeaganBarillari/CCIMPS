@@ -23,7 +23,7 @@ public class SupplierHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
 
-        btnseehistory.findViewById(R.id.btnHistory);
+        btnseehistory = findViewById(R.id.btnHistory);
         btnseehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

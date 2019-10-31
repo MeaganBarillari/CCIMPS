@@ -21,7 +21,7 @@ public class BusinessHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_home);
 
-        btnHistory.findViewById(R.id.btnHistory);
+        btnHistory = findViewById(R.id.btnHistory);
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

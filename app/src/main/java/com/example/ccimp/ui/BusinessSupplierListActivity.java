@@ -17,7 +17,7 @@ public class BusinessSupplierListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_inventory);
+        setContentView(R.layout.activity_business_supplier_list);
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
