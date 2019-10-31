@@ -14,9 +14,9 @@ public class LoginModel implements LoginPresenter {
         this.mLoginView = loginView;
     }
     @Override
-    public void performLogin(String type, String userEmail, String password, Context context) {
+    public void performLogin(String type, String userEmail, String password,String userType, Context context) {
         backgroundWorker bgworker = new backgroundWorker(context);
-        bgworker.execute(type, userEmail, password);
+        bgworker.execute(type, userEmail, password, userType);
 
 
         // might do more validation

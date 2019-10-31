@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.example.ccimp.ui.view.LoginView;
 public class LoginActivity extends AppCompatActivity implements LoginView{
     EditText etEmail, etPassword;
     Button btnLogin;
+    Spinner spinner;
     TextView tvSignup;
     LoginPresenter mLoginPresenter;
     LoginView mLoginView;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         setContentView(R.layout.activity_login);
         etEmail = findViewById(R.id.input_email);
         etPassword = findViewById(R.id.input_password);
-
+        spinner = (Spinner) findViewById(R.id.login_userType);
         btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -37,8 +39,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
+                String userType = spinner.getSelectedItem().toString();
                 String type = "login";
-                mLoginPresenter.performLogin(type, userEmail, userPassword, LoginActivity.this);
+                mLoginPresenter.performLogin(type, userEmail, userPassword, userType, LoginActivity.this);
             }
         });
         tvSignup = findViewById(R.id.link_signup);
