@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BusinessOrderDetailActivity extends AppCompatActivity {
 
     Button btnChangeStatus;
+    TextView customerName, totalPrice, customerID, orderStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,10 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_business_order_detail);
 
         btnChangeStatus = findViewById(R.id.btnChangeStatus);
+        customerName = findViewById(R.id.customer_name);
+        customerID = findViewById(R.id.customer_number);
+        orderStatus = findViewById(R.id.request_status);
+        totalPrice = findViewById(R.id.request_total_amount);
 
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +35,14 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            customerName.setText(bundle.getString("customerName"));
+            totalPrice.setText(bundle.getString("totalPrice"));
+            customerID.setText(bundle.getString("customerID"));
+            orderStatus.setText(bundle.getString("orderStatus"));
+        }
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
