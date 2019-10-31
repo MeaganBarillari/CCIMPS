@@ -92,7 +92,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:id="@+id/request_total_amount"
+            android:id="@+id/totalPrice"
             android:background="@color/colorGreyBackground"
             android:textColor="@color/colorBlack"
             android:elevation="4dp"
@@ -143,7 +143,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/current_orders_listview"
+            android:id="@+id/requestiems"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"

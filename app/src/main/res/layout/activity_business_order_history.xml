@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/current_customer_orders_listview"
+            android:id="@+id/pastorders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/colorWhite"

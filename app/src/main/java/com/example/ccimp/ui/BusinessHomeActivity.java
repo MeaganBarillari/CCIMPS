@@ -25,8 +25,6 @@ public class BusinessHomeActivity extends AppCompatActivity {
 
     Button btnHistory;
     ListView listView;
-    TextView tvsecond;
-    RelativeLayout layout1;
     Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
 //    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", 1, "312", "123");
 //    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", 1, "200", "123456");

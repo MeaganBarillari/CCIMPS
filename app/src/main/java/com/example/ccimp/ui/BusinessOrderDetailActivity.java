@@ -4,19 +4,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.Item;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BusinessOrderDetailActivity extends AppCompatActivity {
 
     Button btnChangeStatus;
     TextView customerName, totalPrice, customerID, orderStatus;
+    ListView listView;
+    Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
+    Item[] values = new Item[]{item1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,11 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        listView = findViewById(R.id.itemList);
+        CustomAdapter customAdapter = new CustomAdapter();
+
+        listView.setAdapter(customAdapter);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
@@ -69,6 +81,37 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    class CustomAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return values.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = getLayoutInflater().inflate(R.layout.row, null);
+            TextView column1 = view.findViewById(R.id.column1);
+            TextView column2 = view.findViewById(R.id.column2);
+            TextView column3 = view.findViewById(R.id.column3);
+            column1.setText(values[position].getName());
+            column2.setText(values[position].getQuantity());
+            column3.setText(values[position].getPrice());
+
+            return view;
+        }
     }
 
 }

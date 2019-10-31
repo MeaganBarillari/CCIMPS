@@ -1,14 +1,15 @@
 package com.example.ccimp.ui.model;
 
 public class Item {
-    String itemID, name, price, supplierID, customDetail;
+    String itemID, name, price, supplierID, quantity, customDetail;
 
-    public Item(String itemID, String name, String price, String supplierID, String customDetail){
+    public Item(String itemID, String name, String price, String supplierID, String quantity, String customDetail){
         this.itemID = itemID;
         this.name = name;
         this.price = price;
         this.supplierID = supplierID;
         this.customDetail = customDetail;
+        this.quantity = quantity;
     }
 
     public String getItemID() {
@@ -49,5 +50,13 @@ public class Item {
 
     public void setCustomDetail(String customDetail) {
         this.customDetail = customDetail;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 }

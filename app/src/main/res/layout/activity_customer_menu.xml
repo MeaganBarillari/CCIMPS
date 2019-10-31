@@ -20,7 +20,7 @@
             android:textColor="@color/colorBlack"/>
 
         <ListView
-            android:id="@+id/current_orders_listview"
+            android:id="@+id/businessmenulist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
@@ -32,19 +32,16 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_customer_order"
+    <Button
+        android:id="@+id/btnCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_business_selection"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="16dp"
-        app:elevation="4dp"
-        app:fabCustomSize="65dp"
-        android:focusable="true"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="469dp"
+        android:layout_marginLeft="250dp"
+        android:background="@color/colorAccent"
+        android:textSize="20dp"
+        android:text="Cart"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/customerNavigation"

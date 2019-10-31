@@ -4,30 +4,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.inventory_supplier;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
     Button btnBack, btnCart, btnFeedback;
+    ListView listView;
+    inventory_supplier inventory1 = new inventory_supplier("123", "321", "Beans", "100", "3");
+    inventory_supplier[] values = new inventory_supplier[]{inventory1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_per_supplier);
 
-        btnBack.findViewById(R.id.btBack);
-        btnCart.findViewById(R.id.btCart);
-        btnFeedback.findViewById(R.id.btFeedback);
+        btnBack = findViewById(R.id.btBack);
+        btnCart = findViewById(R.id.btCart);
+        btnFeedback = findViewById(R.id.btFeedback);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestFromSupplierActivity.class));
+                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessSupplierListActivity.class));
             }
         });
 
@@ -44,6 +52,12 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
 
             }
         });
+
+        listView = findViewById(R.id.suppliermenu);
+
+        CustomAdapter customAdapter = new CustomAdapter();
+
+        listView.setAdapter(customAdapter);
 
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
@@ -71,6 +85,33 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    class CustomAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return values.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
+            TextView column1 = view.findViewById(R.id.column1);
+            column1.setText(values[position].getItemName());
+
+            return view;
+        }
     }
 
 }

@@ -20,7 +20,7 @@
             android:textColor="@color/colorBlack"/>
 
         <ListView
-            android:id="@+id/current_customer_orders_listview"
+            android:id="@+id/suppliermenu"
             android:layout_width="match_parent"
             android:layout_height="408dp"
             android:background="@color/colorGreyBackground"

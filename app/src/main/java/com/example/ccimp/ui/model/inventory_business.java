@@ -2,13 +2,14 @@ package com.example.ccimp.ui.model;
 
 public class inventory_business {
 
-    private String itemName, businessID, itemID, quantity, availQuantity;
-    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity){
+    private String itemName, businessID, itemID, quantity, availQuantity, price;
+    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity, String price){
         this.itemName = itemName;
         this.businessID = businessID;
         this.itemID = itemID;
         this.quantity = quantity;
         this.availQuantity = availQuantity;
+        this.price = price;
     }
 
     public String getItemName() {
@@ -49,5 +50,13 @@ public class inventory_business {
 
     public void setAvailQuantity(String availQuantity) {
         this.availQuantity = availQuantity;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
