@@ -39,15 +39,11 @@ public class SupplierProfileActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierProfileActivity.this,SupplierRequestsActivity.class);
+                        Intent c = new Intent(SupplierProfileActivity.this,SupplierHomeActivity.class);
                         startActivity(c);
                         break;
-                    case R.id.navigation_supplier_history:
-                        Intent a = new Intent(SupplierProfileActivity.this,SupplierRequestsHistoryActivity.class);
-                        startActivity(a);
-                        break;
                     case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierProfileActivity.this,SupplierHomeActivity.class);
+                        Intent d = new Intent(SupplierProfileActivity.this,SupplierInventoryActivity.class);
                         startActivity(d);
                         break;
                     case R.id.navigation_supplier_profile:

@@ -7,11 +7,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_supplier_history"
-        android:icon="@drawable/ic_requests"
-        android:title="history" />
-
-    <item
         android:id="@+id/navigation_supplier_inventory"
         android:icon="@drawable/ic_inventory"
         android:title="inventory" />

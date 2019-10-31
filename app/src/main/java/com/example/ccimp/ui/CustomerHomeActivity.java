@@ -15,21 +15,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CustomerHomeActivity extends AppCompatActivity {
 
-    FloatingActionButton btnCustomerorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
 
-        btnCustomerorder = findViewById(R.id.fab_customer_order);
-
-        btnCustomerorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
 
         BottomNavigationView navigation = findViewById(R.id.customerNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

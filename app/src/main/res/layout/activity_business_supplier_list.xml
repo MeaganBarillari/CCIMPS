@@ -15,15 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Businesses"
+            android:text="Suppliers"
             android:textSize="25dp"
             android:textColor="@color/colorBlack"/>
 
         <ListView
-            android:id="@+id/current_orders_listview"
+            android:id="@+id/current_customer_orders_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:divider="@color/colorWhite"
             android:dividerHeight="10.0sp"
             android:background="@color/colorGreyBackground"
@@ -32,13 +31,12 @@
 
     </LinearLayout>
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/customerNavigation"
+        android:id="@+id/businessNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/customer_navigation"
+        app:menu="@menu/business_navigation"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/colorNavIcon"
         app:itemTextColor="@color/colorNavText"/>

@@ -12,17 +12,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ccimp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SupplierRequestsActivity extends AppCompatActivity {
+public class SupplierInventoryActivity extends AppCompatActivity {
 
-
-
-    Button btnlogout;
-
+    Button btnadditem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supplier_requests);
+        setContentView(R.layout.activity_supplier_inventory);
 
+        btnadditem = findViewById(R.id.btnadditem);
+
+        btnadditem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -30,19 +35,15 @@ public class SupplierRequestsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierRequestsActivity.this,SupplierRequestsActivity.class);
+                        Intent c = new Intent(SupplierInventoryActivity.this,SupplierHomeActivity.class);
                         startActivity(c);
                         break;
-                    case R.id.navigation_supplier_history:
-                        Intent a = new Intent(SupplierRequestsActivity.this,SupplierRequestsHistoryActivity.class);
-                        startActivity(a);
-                        break;
                     case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierRequestsActivity.this,SupplierHomeActivity.class);
+                        Intent d = new Intent(SupplierInventoryActivity.this,SupplierInventoryActivity.class);
                         startActivity(d);
                         break;
                     case R.id.navigation_supplier_profile:
-                        Intent b = new Intent(SupplierRequestsActivity.this,SupplierProfileActivity.class);
+                        Intent b = new Intent(SupplierInventoryActivity.this,SupplierProfileActivity.class);
                         startActivity(b);
                         break;
                 }
@@ -50,4 +51,5 @@ public class SupplierRequestsActivity extends AppCompatActivity {
             }
         });
     }
+
 }

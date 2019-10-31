@@ -11,53 +11,70 @@
         android:orientation="vertical"
         android:padding="10dip" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Orders"
-            android:textSize="25dp"
-            android:textColor="@color/colorBlack"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Inventory Offerings"
+                android:textSize="25dp"
+                android:textColor="@color/colorBlack"/>
+
+            <Button
+                android:id="@+id/btnadditem"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/customer_navigation"
+                android:background="@color/colorAccent"
+                app:itemIconTint="@color/colorNavIcon"
+                android:text="Add Item"
+                app:itemTextColor="@color/colorNavText">
+            </Button>
+
+        </LinearLayout>
 
         <LinearLayout
-            android:id = "@+id/relativeLayout2"
+            android:id = "@+id/current_orders_list"
             android:layout_width = "fill_parent"
             android:layout_height = "wrap_content"
-            android:background = "@color/colorGreyBackground" >
+            android:layout_marginTop="10dp"
+            android:background = "@color/colorTableHeader" >
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "2"
+                android:layout_weight = "3"
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Customer Name"/>
+                android:text="Item Name"/>
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "2"
+                android:layout_weight = "2.5"
                 android:gravity = "center"
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Date/Time"/>
+                android:text = "Sale Price" />
 
             <TextView
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "1.5"
+                android:layout_weight = ".7"
                 android:gravity = "center"
                 android:padding = "5dp"
-                android:textColor="@color/colorBlack"
-                android:background="@color/colorTableHeader"
-                android:text = "Status" />
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
 
         <ListView
-            android:id="@+id/current_customer_orders_listview"
+            android:id="@+id/supplier_inventory_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/colorWhite"
@@ -68,23 +85,12 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="90dp"
-        android:layout_marginLeft="250dp"
-        android:background="@color/colorAccent"
-        android:textSize="20dp"
-        android:text="See History" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/businessNavigation"
+        android:id="@+id/supplierNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/business_navigation"
+        app:menu="@menu/supplier_navigation"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/colorNavIcon"
         app:itemTextColor="@color/colorNavText"/>
