@@ -40,8 +40,8 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
         if (bundle != null){
             customerName.setText(bundle.getString("customerName"));
             totalPrice.setText(bundle.getString("totalPrice"));
-            customerID.setText(bundle.getString("customerID"));
-            orderStatus.setText(bundle.getString("orderStatus"));
+            customerID.setText(bundle.getString("userID"));
+            orderStatus.setText(bundle.getString("status"));
         }
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
