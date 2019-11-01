@@ -88,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/business_navigation"
+        app:labelVisibilityMode="labeled"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/colorNavIcon"
         app:itemTextColor="@color/colorNavText"/>
