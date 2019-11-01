@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.ccimp.ui.BusinessHomeActivity;
+import com.example.ccimp.ui.CustomerHomeActivity;
 import com.example.ccimp.ui.LoginActivity;
+import com.example.ccimp.ui.SupplierHomeActivity;
 import com.example.ccimp.ui.business.BusinessMainActivity;
 import com.example.ccimp.ui.customer.CustomerMainActivity;
 import com.example.ccimp.ui.supplier.SupplierMainActivity;
@@ -131,13 +134,13 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
         Intent intent;
         if(result.equals("login success")){
             if(userLoginType.equals("Customer")){
-                intent = new Intent(context, CustomerMainActivity.class);
+                intent = new Intent(context, CustomerHomeActivity.class);
                 context.startActivity(intent);
             }else if(userLoginType.equals("Business")){
-                intent = new Intent(context, BusinessMainActivity.class);
+                intent = new Intent(context, BusinessHomeActivity.class);
                 context.startActivity(intent);
             }else if(userLoginType.equals("Supplier")){
-                intent = new Intent(context,SupplierMainActivity.class);
+                intent = new Intent(context, SupplierHomeActivity.class);
                 context.startActivity(intent);
             }
         }

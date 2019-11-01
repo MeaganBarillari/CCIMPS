@@ -20,7 +20,7 @@
             android:label="@string/business_menu" />
         <activity android:name=".ui.supplier.SupplierMainActivity" />
         <activity
-            android:name=".ui.CustomerHomeActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
         <activity android:name=".ui.customer.CustomerMainActivity" />
         <activity android:name=".ui.business.BusinessMainActivity" />
         <activity android:name=".ui.SupplierProfileActivity" />
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.SupplierHomeActivity" />
         <activity android:name=".ui.SupplierRequestDetailActivity" />
         <activity android:name=".ui.BusinessHomeActivity" />
         <activity android:name=".ui.BusinessInventoryActivity" />
@@ -45,7 +45,7 @@
         <activity android:name=".ui.BusinessRequestPerSupplierActivity" />
         <activity android:name=".ui.BusinessRequestsActivity" />
         <activity android:name=".ui.BusinessSupplierMenuActivity" />
-        <activity android:name=".ui.SupplierHomeActivity" />
+        <activity android:name=".ui.CustomerHomeActivity" />
         <activity android:name=".ui.CustomerMenuActivity" />
         <activity android:name=".ui.CustomerOrderCartActivity" />
         <activity android:name=".ui.CustomerOrdersActivity" />
