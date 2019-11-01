@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.ccimp.ui.LoginActivity;
+import com.example.ccimp.ui.business.BusinessMainActivity;
+import com.example.ccimp.ui.customer.CustomerMainActivity;
 import com.example.ccimp.ui.supplier.SupplierMainActivity;
 
 import java.io.BufferedReader;
@@ -22,6 +25,7 @@ import java.net.URLEncoder;
 public class backgroundWorker extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     Context context;
+    String userLoginType;
     backgroundWorker (Context ctx) {
      context = ctx;
     }
@@ -35,6 +39,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
             try {
                 String user_email = params[1];
                 String password = params[2];
+                String userType = params[3];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -42,9 +47,9 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_email","UTF-8") + "=" +
-                        URLEncoder.encode(user_email,"UTF-8") + "&" +
-                        URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                String post_data = URLEncoder.encode("user_email","UTF-8") + "=" + URLEncoder.encode(user_email,"UTF-8") + "&"
+                        + URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
+                        + URLEncoder.encode("userType", "UTF-8") + "=" + URLEncoder.encode(userType, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -59,6 +64,9 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+                if(result.equals("login success")){
+                    userLoginType = userType;
+                }
                 return result;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -100,6 +108,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+
                 return result;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -119,14 +128,25 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-
-        //Intent intent = new Intent(context, SupplierMainActivity.class);
-        //context.startActivity(intent);
-        //Intent intent = new Intent(context, SupplierMainActivity.class);
-        //context.startActivity(intent);
-
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        Intent intent;
+        if(result.equals("login success")){
+            if(userLoginType.equals("Customer")){
+                intent = new Intent(context, CustomerMainActivity.class);
+                context.startActivity(intent);
+            }else if(userLoginType.equals("Business")){
+                intent = new Intent(context, BusinessMainActivity.class);
+                context.startActivity(intent);
+            }else if(userLoginType.equals("Supplier")){
+                intent = new Intent(context,SupplierMainActivity.class);
+                context.startActivity(intent);
+            }
+        }
+        else if(result.equals("Register success")){
+            intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+        }
+//        alertDialog.setMessage(result);
+//        alertDialog.show();
     }
 
     @Override

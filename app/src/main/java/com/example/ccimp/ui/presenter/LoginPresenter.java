@@ -4,6 +4,6 @@ import android.content.Context;
 
 public interface LoginPresenter {
 
-    void performLogin(String type, String userEmail, String password, Context context);
+    void performLogin(String type, String userEmail, String password,String userType, Context context);
 
 }
