@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:paddingBottom="24dp">
+
+
+        <TextView
+            android:id="@+id/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Customer Name"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/customer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="Customer Number"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_layout"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="Current Status"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "match_parent"
+                android:layout_weight = "1.75"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/request_status"
+                android:background="@color/colorGreyBackground"
+                android:textColor="@color/colorBlack"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Status" />
+
+            <Button
+                android:id="@+id/btnChangeStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:text="Change\n Status"
+                android:gravity="center"
+                android:background="@color/colorAccent">
+            </Button>
+        </LinearLayout>
+
+        <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="Total Amount $"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@+id/request_total_amount"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack"
+            android:elevation="4dp"
+            android:padding="20dp"
+            android:text="$13.75" />
+
+        <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Items in Order"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:id = "@+id/current_requests_list"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background = "@color/colorTableHeader" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text="Item Name"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Quantity" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1.5"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Price" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/itemList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack"></ListView>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/businessNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/business_navigation"
+        app:labelVisibilityMode="labeled"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
+
+</RelativeLayout>

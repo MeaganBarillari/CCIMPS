@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:textSize="40dp"
+                android:paddingLeft="8dp"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorBlack"
+                android:text="Review Order" />
+
+            <TextView
+                android:id="@+id/order_total_tag"
+                android:layout_width="171dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingTop="13dp"
+                android:text="Total Amount:"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/BusinessName"
+                android:layout_width="160dp"
+                android:layout_height="52dp"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="16dp"
+                android:text="Business Name"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/order_pric"
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:paddingLeft="45dp"
+                android:text="$13.75"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/customer_checkout_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:divider="@color/colorWhite"
+            android:dividerHeight="10.0sp"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack">
+        </ListView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fab_customer_order"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:text="Send Order"
+        android:textColor="@color/colorBlack"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="16dp"
+        app:elevation="4dp"
+        app:fabCustomSize="65dp"
+        android:focusable="true"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/customerNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/customer_navigation"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
+
+</RelativeLayout>

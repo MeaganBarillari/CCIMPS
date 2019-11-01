@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:text="Orders"
+                android:textSize="40dp"
+                android:textColor="@color/colorBlack"/>
+
+            <Button
+                android:id="@+id/btnHistory"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/colorAccent"
+                android:text="See History"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id = "@+id/relativeLayout2"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:background = "@color/colorGreyBackground" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:textAlignment="center"
+                android:background="@color/colorTableHeader"
+                android:text = "Customer Name"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorTableHeader"
+                android:text = "Date/Time"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorTableHeader"
+                android:text = "Status" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/orderlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/colorWhite"
+            android:dividerHeight="10.0sp"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack">
+        </ListView>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/businessNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/business_navigation"
+        app:labelVisibilityMode="labeled"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
+
+</RelativeLayout>

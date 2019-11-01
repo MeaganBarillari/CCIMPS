@@ -1,0 +1,42 @@
+<LinearLayout android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id = "@+id/requestName"
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_weight = "2"
+        android:background = "@color/colorGreyBackground"
+        android:ellipsize = "end"
+        android:padding = "5dp"
+        android:text = "Request Name"
+        android:textColor="@color/colorBlack"
+        android:singleLine = "true" />
+
+    <TextView
+        android:id = "@+id/requestDateTime"
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_weight = "2"
+        android:background = "@color/colorGreyBackground"
+        android:ellipsize = "end"
+        android:padding = "5dp"
+        android:text = "Request Date and Time"
+        android:textColor="@color/colorBlack"
+        android:singleLine = "true" />
+
+
+    <TextView
+        android:id = "@+id/request_status"
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_weight = "1.5"
+        android:background = "@color/colorGreyBackground"
+        android:ellipsize = "end"
+        android:padding = "5dp"
+        android:textColor="@color/colorBlack"
+        android:text = "Request Status"
+        android:singleLine = "true" />
+</LinearLayout>

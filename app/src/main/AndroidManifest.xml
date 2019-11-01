@@ -2,20 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ccimp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.business.BusinessSupplierListActivity"></activity>
+        <activity android:name=".ui.business.BusinessOrderHistoryActivity" />
+        <activity android:name=".ui.supplier.SupplierRequestsHistoryActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.supplier.SupplierProfileActivity" />
+        <activity android:name=".ui.supplier.SupplierHomeActivity" />
+        <activity android:name=".ui.supplier.SupplierRequestDetailActivity" />
+        <activity android:name=".ui.business.BusinessHomeActivity" />
+        <activity android:name=".ui.business.BusinessInventoryActivity" />
+        <activity android:name=".ui.business.BusinessOrderDetailActivity" />
+        <activity android:name=".ui.business.BusinessProfileActivity" />
+        <activity android:name=".ui.supplier.SupplierInventoryActivity"/>
+        <activity android:name=".ui.business.BusinessRequestCartActivity" />
+        <activity android:name=".ui.business.BusinessRequestFromSupplierActivity" />
+        <activity android:name=".ui.business.BusinessRequestPerSupplierActivity" />
+        <activity android:name=".ui.business.BusinessRequestsActivity" />
+        <activity android:name=".ui.business.BusinessSupplierMenuActivity" />
+        <activity android:name=".ui.customer.CustomerHomeActivity" />
+        <activity android:name=".ui.customer.CustomerMenuActivity" />
+        <activity android:name=".ui.customer.CustomerOrderCartActivity" />
+        <activity android:name=".ui.customer.CustomerOrdersActivity" />
+        <activity android:name=".ui.customer.CustomerProfileActivity" />
     </application>
 
 </manifest>

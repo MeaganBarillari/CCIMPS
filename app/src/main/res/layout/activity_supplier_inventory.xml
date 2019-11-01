@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Inventory Offerings"
+                android:textSize="25dp"
+                android:textColor="@color/colorBlack"/>
+
+            <Button
+                android:id="@+id/btnadditem"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/customer_navigation"
+                android:background="@color/colorAccent"
+                app:itemIconTint="@color/colorNavIcon"
+                android:text="Add Item"
+                app:itemTextColor="@color/colorNavText">
+            </Button>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id = "@+id/current_orders_list"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="10dp"
+            android:background = "@color/colorTableHeader" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "3"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text="Item Name"/>
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "2.5"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack"
+                android:text = "Sale Price" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = ".7"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/supplier_inventory_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/colorWhite"
+            android:dividerHeight="10.0sp"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack">
+        </ListView>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/supplierNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/supplier_navigation"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorNavIcon"
+        app:itemTextColor="@color/colorNavText"/>
+
+</RelativeLayout>
