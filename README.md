@@ -5,7 +5,7 @@ Instructions:\
 2.Clone git repo\
 3.Open cloned repo in android studio\
 4.Checkout branch - geetika\
-5.Compile and run application
+5.Compile and run application\
 6.Register is functional, but we have made already made accounts for testing ease. Please feel free to register new accounts if you’d like\
 7. Login info is provided below:\
   1)Login Info as a Customer: \
