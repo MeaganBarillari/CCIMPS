@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.order_info;
-import com.example.ccimp.ui.model.request_info;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CustomerOrderCartActivity extends AppCompatActivity {
 
@@ -60,7 +58,7 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(CustomerOrderCartActivity.this,CustomerHomeActivity.class);
+                        Intent c = new Intent(CustomerOrderCartActivity.this, CustomerHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_customer_order:
@@ -68,7 +66,7 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
                         startActivity(a);
                         break;
                     case R.id.navigation_customer_profile:
-                        Intent b = new Intent(CustomerOrderCartActivity.this,CustomerProfileActivity.class);
+                        Intent b = new Intent(CustomerOrderCartActivity.this, CustomerProfileActivity.class);
                         startActivity(b);
                         break;
                 }

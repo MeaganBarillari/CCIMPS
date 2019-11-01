@@ -1,4 +1,7 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.business;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,55 +9,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.Order;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessOrderDetailActivity extends AppCompatActivity {
+public class BusinessOrderHistoryActivity extends AppCompatActivity {
 
-    Button btnChangeStatus;
-    TextView customerName, totalPrice, customerID, orderStatus;
     ListView listView;
-    Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
-    Item[] values = new Item[]{item1};
+    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
+    //    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", 1, "312", "123");
+//    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", 1, "200", "123456");
+//    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", 1, "200", "123456");
+//    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", 1, "200", "123456");
+//    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", 1, "200", "123456");
+    Order[] values = new Order[]{order1};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_order_detail);
+        setContentView(R.layout.activity_business_order_history);
 
-        btnChangeStatus = findViewById(R.id.btnChangeStatus);
-        customerName = findViewById(R.id.customer_name);
-        customerID = findViewById(R.id.customer_number);
-        orderStatus = findViewById(R.id.request_status);
-        totalPrice = findViewById(R.id.request_total_amount);
+        listView = findViewById(R.id.pastorders);
 
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        listView = findViewById(R.id.itemList);
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            customerName.setText(bundle.getString("customerName"));
-            totalPrice.setText(bundle.getString("totalPrice"));
-            customerID.setText(bundle.getString("userID"));
-            orderStatus.setText(bundle.getString("status"));
-        }
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,19 +45,19 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(BusinessOrderDetailActivity.this, BusinessHomeActivity.class);
+                        Intent c = new Intent(BusinessOrderHistoryActivity.this, BusinessHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessOrderDetailActivity.this,BusinessRequestsActivity.class);
+                        Intent a = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessOrderDetailActivity.this, BusinessInventoryActivity.class);
+                        Intent b = new Intent(BusinessOrderHistoryActivity.this, BusinessInventoryActivity.class);
                         startActivity(b);
                         break;
                     case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessOrderDetailActivity.this, BusinessProfileActivity.class);
+                        Intent d = new Intent(BusinessOrderHistoryActivity.this, BusinessProfileActivity.class);
                         startActivity(d);
                         break;
                 }
@@ -106,12 +89,13 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
             TextView column1 = view.findViewById(R.id.column1);
             TextView column2 = view.findViewById(R.id.column2);
             TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getName());
-            column2.setText(values[position].getQuantity());
-            column3.setText(values[position].getPrice());
+            column1.setText(values[position].getCustomerName());
+            column2.setText(values[position].getCreateDateTime());
+            column3.setText(values[position].getStatus());
 
             return view;
         }
     }
 
 }
+

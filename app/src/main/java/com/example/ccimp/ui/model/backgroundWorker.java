@@ -5,13 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.example.ccimp.ui.BusinessHomeActivity;
-import com.example.ccimp.ui.CustomerHomeActivity;
+import com.example.ccimp.ui.business.BusinessHomeActivity;
+import com.example.ccimp.ui.customer.CustomerHomeActivity;
 import com.example.ccimp.ui.LoginActivity;
-import com.example.ccimp.ui.SupplierHomeActivity;
-import com.example.ccimp.ui.business.BusinessMainActivity;
-import com.example.ccimp.ui.customer.CustomerMainActivity;
-import com.example.ccimp.ui.supplier.SupplierMainActivity;
+import com.example.ccimp.ui.supplier.SupplierHomeActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,11 +26,11 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     Context context;
     String userLoginType;
-    backgroundWorker (Context ctx) {
+    public backgroundWorker(Context ctx) {
      context = ctx;
     }
     @Override
-    protected String doInBackground(String... params) {
+    public String doInBackground(String... params) {
         String type = params[0];
 
         String login_url = "http://shifanzhou.com/login.php";

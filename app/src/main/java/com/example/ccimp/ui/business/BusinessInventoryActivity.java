@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.business;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,59 +15,62 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.inventory_business;
-import com.example.ccimp.ui.model.inventory_supplier;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class CustomerMenuActivity extends AppCompatActivity {
+public class BusinessInventoryActivity extends AppCompatActivity {
 
-    Button btnCart;
+
     ListView listView;
-    inventory_business inventory1 = new inventory_business("Coffee", "132", "2", "30", "20", "200");
+    inventory_business inventory1 = new inventory_business("Bread", "231", "312", "30", "20", "600");
     inventory_business[] values = new inventory_business[]{inventory1};
 
+    Button btnRequestItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_menu);
+        setContentView(R.layout.activity_business_inventory);
 
-        btnCart = findViewById(R.id.btnCart);
+        btnRequestItems = findViewById(R.id.requestItem);
 
-        btnCart.setOnClickListener(new View.OnClickListener() {
+        btnRequestItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CustomerMenuActivity.this, CustomerOrderCartActivity.class));
+                startActivity(new Intent(BusinessInventoryActivity.this, BusinessSupplierListActivity.class));
             }
         });
 
-        listView= findViewById(R.id.businessmenulist);
+        listView = findViewById(R.id.listitem);
+
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
 
-        BottomNavigationView navigation = findViewById(R.id.customerNavigation);
+        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(CustomerMenuActivity.this,CustomerHomeActivity.class);
+                        Intent c = new Intent(BusinessInventoryActivity.this, BusinessHomeActivity.class);
                         startActivity(c);
                         break;
-                    case R.id.navigation_customer_order:
-                        Intent a = new Intent(CustomerMenuActivity.this,CustomerOrdersActivity.class);
+                    case R.id.navigation_requests:
+                        Intent a = new Intent(BusinessInventoryActivity.this, BusinessRequestsActivity.class);
                         startActivity(a);
                         break;
-                    case R.id.navigation_customer_profile:
-                        Intent b = new Intent(CustomerMenuActivity.this,CustomerProfileActivity.class);
+                    case R.id.navigation_inventory:
+                        Intent b = new Intent(BusinessInventoryActivity.this,BusinessInventoryActivity.class);
                         startActivity(b);
+                        break;
+                    case R.id.navigation_business_profile:
+                        Intent d = new Intent(BusinessInventoryActivity.this, BusinessProfileActivity.class);
+                        startActivity(d);
                         break;
                 }
                 return false;
             }
         });
     }
-
     class CustomAdapter extends BaseAdapter {
 
         @Override
@@ -87,9 +90,15 @@ public class CustomerMenuActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
+            View view = getLayoutInflater().inflate(R.layout.rowfourlines, null);
             TextView column1 = view.findViewById(R.id.column1);
+            TextView column2 = view.findViewById(R.id.column2);
+            TextView column3 = view.findViewById(R.id.column3);
+            TextView column4 = view.findViewById(R.id.column4);
             column1.setText(values[position].getItemName());
+            column2.setText(values[position].getPrice());
+            column3.setText(values[position].getQuantity());
+            column4.setText(values[position].getAvailQuantity());
 
             return view;
         }

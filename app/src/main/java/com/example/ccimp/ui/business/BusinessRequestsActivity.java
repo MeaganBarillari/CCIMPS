@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.business;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,7 +45,7 @@ public class BusinessRequestsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(BusinessRequestsActivity.this,BusinessHomeActivity.class);
+                        Intent c = new Intent(BusinessRequestsActivity.this, BusinessHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_requests:
@@ -54,11 +53,11 @@ public class BusinessRequestsActivity extends AppCompatActivity {
                         startActivity(a);
                         break;
                     case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessRequestsActivity.this,BusinessInventoryActivity.class);
+                        Intent b = new Intent(BusinessRequestsActivity.this, BusinessInventoryActivity.class);
                         startActivity(b);
                         break;
                     case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessRequestsActivity.this,BusinessProfileActivity.class);
+                        Intent d = new Intent(BusinessRequestsActivity.this, BusinessProfileActivity.class);
                         startActivity(d);
                         break;
                 }

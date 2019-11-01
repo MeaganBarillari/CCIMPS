@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.business;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,38 +15,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.inventory_supplier;
-import com.example.ccimp.ui.model.Item;
-import com.example.ccimp.ui.model.request_info;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class BusinessRequestCartActivity extends AppCompatActivity {
-
+public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
+    Button btnBack, btnCart, btnFeedback;
     ListView listView;
-    TextView orderPrice;
-    request_info request1 = new request_info("123", "321", "3", "1000");
-    Item item1 = new Item("123", "Beans", "300", "231", "3", "Fresh");
-    Item[] values = new Item[]{item1};
+    inventory_supplier inventory1 = new inventory_supplier("123", "321", "Beans", "100", "3");
+    inventory_supplier[] values = new inventory_supplier[]{inventory1};
 
-    Button btnsendrequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_request_cart);
+        setContentView(R.layout.activity_request_per_supplier);
 
+        btnBack = findViewById(R.id.btBack);
+        btnCart = findViewById(R.id.btCart);
+        btnFeedback = findViewById(R.id.btFeedback);
 
-        orderPrice = findViewById(R.id.order_price);
-        orderPrice.setText(request1.getTotalPrice());
-        btnsendrequest = findViewById(R.id.fab_customer_order);
-
-        btnsendrequest.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessRequestCartActivity.this, BusinessRequestsActivity.class));
+                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessSupplierListActivity.class));
             }
         });
 
-        listView = findViewById(R.id.business_checkout_listview);
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestCartActivity.class));
+            }
+        });
+
+        btnFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        listView = findViewById(R.id.suppliermenu);
 
         CustomAdapter customAdapter = new CustomAdapter();
 
@@ -59,19 +66,19 @@ public class BusinessRequestCartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(BusinessRequestCartActivity.this,BusinessHomeActivity.class);
+                        Intent c = new Intent(BusinessRequestPerSupplierActivity.this, BusinessHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessRequestCartActivity.this,BusinessRequestsActivity.class);
+                        Intent a = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestsActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessRequestCartActivity.this,BusinessInventoryActivity.class);
+                        Intent b = new Intent(BusinessRequestPerSupplierActivity.this, BusinessInventoryActivity.class);
                         startActivity(b);
                         break;
                     case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessRequestCartActivity.this,BusinessProfileActivity.class);
+                        Intent d = new Intent(BusinessRequestPerSupplierActivity.this, BusinessProfileActivity.class);
                         startActivity(d);
                         break;
                 }
@@ -99,15 +106,9 @@ public class BusinessRequestCartActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowfourlines, null);
+            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
             TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            TextView column4 = view.findViewById(R.id.column4);
-            column1.setText(values[position].getName());
-            column2.setText(values[position].getSupplierID());
-            column3.setText(values[position].getQuantity());
-            column4.setText(values[position].getPrice());
+            column1.setText(values[position].getItemName());
 
             return view;
         }

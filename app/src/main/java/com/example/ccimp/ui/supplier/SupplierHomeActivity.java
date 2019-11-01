@@ -1,10 +1,11 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.supplier;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,51 +15,50 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.Request;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SupplierRequestDetailActivity extends AppCompatActivity {
-
-    TextView businessName, requestID, status, totalPrice;
+public class SupplierHomeActivity extends AppCompatActivity {
 
     ListView listView;
+    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1", "2019/10/31", "Working");
+    Request[] values = new Request[]{request1};
 
-    Button btnChangeStatus;
-    Item item1 = new Item("123", "Beans", "300", "231", "3", "Black");
-    Item[] values = new Item[]{item1};
+    Button btnseehistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supplier_request_detail);
+        setContentView(R.layout.activity_supplier_home);
 
-        btnChangeStatus = findViewById(R.id.btnChangeStatus);
-        businessName = findViewById(R.id.business_name);
-        requestID = findViewById(R.id.request_number);
-        status = findViewById(R.id.request_status);
-        totalPrice = findViewById(R.id.totalPrice);
-
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            businessName.setText(bundle.getString("businessName"));
-            requestID.setText(bundle.getString("requestID"));
-            status.setText(bundle.getString("status"));
-            totalPrice.setText(bundle.getString("totalPrice"));
-        }
-
-
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+        btnseehistory = findViewById(R.id.btnHistory);
+        btnseehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class));
             }
         });
 
-        listView = findViewById(R.id.requestiems);
+        listView = findViewById(R.id.current_orders_listview);
+
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
+                intent.putExtra("businessName", values[position].getBusinessName());
+                intent.putExtra("requestID", values[position].getRequestID());
+                intent.putExtra("businessID", values[position].getBusinessID());
+                intent.putExtra("status", values[position].getStatus());
+                intent.putExtra("totalPrice", values[position].getPrice());
+                startActivity(intent);
+            }
+        });
+
+
 
         BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,15 +66,15 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierRequestDetailActivity.this,SupplierHomeActivity.class);
+                        Intent c = new Intent(SupplierHomeActivity.this,SupplierHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierRequestDetailActivity.this,SupplierInventoryActivity.class);
+                        Intent d = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
                         startActivity(d);
                         break;
                     case R.id.navigation_supplier_profile:
-                        Intent b = new Intent(SupplierRequestDetailActivity.this,SupplierProfileActivity.class);
+                        Intent b = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
                         startActivity(b);
                         break;
                 }
@@ -82,6 +82,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     class CustomAdapter extends BaseAdapter {
 
         @Override
@@ -105,9 +106,9 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             TextView column1 = view.findViewById(R.id.column1);
             TextView column2 = view.findViewById(R.id.column2);
             TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getName());
-            column2.setText(values[position].getQuantity());
-            column3.setText(values[position].getPrice());
+            column1.setText(values[position].getBusinessName());
+            column2.setText(values[position].getPrice());
+            column3.setText(values[position].getStatus());
 
             return view;
         }

@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Order;
-import com.example.ccimp.ui.model.Request;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerOrdersActivity extends AppCompatActivity {
@@ -48,7 +46,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent c = new Intent(CustomerOrdersActivity.this,CustomerHomeActivity.class);
+                        Intent c = new Intent(CustomerOrdersActivity.this, CustomerHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_customer_order:
@@ -56,7 +54,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                         startActivity(a);
                         break;
                     case R.id.navigation_customer_profile:
-                        Intent b = new Intent(CustomerOrdersActivity.this,CustomerProfileActivity.class);
+                        Intent b = new Intent(CustomerOrdersActivity.this, CustomerProfileActivity.class);
                         startActivity(b);
                         break;
                 }

@@ -2,7 +2,6 @@ package com.example.ccimp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.RegisterModel;
 import com.example.ccimp.ui.presenter.RegisterPresenter;
+import com.example.ccimp.ui.presenter.IRegisterPresenter;
 import com.example.ccimp.ui.view.RegisterView;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
@@ -22,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     TextView tvLogin;
     Spinner spinner;
     Button btnSignup;
-    RegisterPresenter mRegisterPresenter;
+    IRegisterPresenter mRegisterPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             }
         });
 
-        mRegisterPresenter = new RegisterModel(RegisterActivity.this);
+        mRegisterPresenter = new RegisterPresenter(RegisterActivity.this);
     }
 
     @Override

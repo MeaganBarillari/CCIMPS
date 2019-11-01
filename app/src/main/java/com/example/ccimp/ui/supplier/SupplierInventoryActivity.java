@@ -1,11 +1,10 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.supplier;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,50 +14,50 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.inventory_supplier;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class CustomerHomeActivity extends AppCompatActivity {
+public class SupplierInventoryActivity extends AppCompatActivity {
+
     ListView listView;
-    User business1 = new User("123", "Starbucks", "cudbvu", "fcydb", "supplier", "092", "abc");
-    User[] values = new User[]{business1};
+    inventory_supplier inventory1 = new inventory_supplier("123", "312", "Beans", "200", "30");
+    inventory_supplier[] values = new inventory_supplier[]{inventory1};
 
-
+    Button btnadditem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_home);
+        setContentView(R.layout.activity_supplier_inventory);
 
-        listView = findViewById(R.id.businesslist);
+        btnadditem = findViewById(R.id.btnadditem);
+
+        btnadditem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        listView = findViewById(R.id.supplier_inventory_listview);
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CustomerHomeActivity.this, CustomerMenuActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        BottomNavigationView navigation = findViewById(R.id.customerNavigation);
+        BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(CustomerHomeActivity.this,CustomerHomeActivity.class);
+                    case R.id.supplier_navigation_home:
+                        Intent c = new Intent(SupplierInventoryActivity.this, SupplierHomeActivity.class);
                         startActivity(c);
                         break;
-                    case R.id.navigation_customer_order:
-                        Intent a = new Intent(CustomerHomeActivity.this,CustomerOrdersActivity.class);
-                        startActivity(a);
+                    case R.id.navigation_supplier_inventory:
+                        Intent d = new Intent(SupplierInventoryActivity.this,SupplierInventoryActivity.class);
+                        startActivity(d);
                         break;
-                    case R.id.navigation_customer_profile:
-                        Intent b = new Intent(CustomerHomeActivity.this,CustomerProfileActivity.class);
+                    case R.id.navigation_supplier_profile:
+                        Intent b = new Intent(SupplierInventoryActivity.this, SupplierProfileActivity.class);
                         startActivity(b);
                         break;
                 }
@@ -86,9 +85,11 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
+            View view = getLayoutInflater().inflate(R.layout.rowtwolines, null);
             TextView column1 = view.findViewById(R.id.column1);
-            column1.setText(values[position].getUsername());
+            TextView column2 = view.findViewById(R.id.column2);
+            column1.setText(values[position].getItemName());
+            column2.setText(values[position].getPrice());
 
             return view;
         }

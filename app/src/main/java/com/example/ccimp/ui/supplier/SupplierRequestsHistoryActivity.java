@@ -1,4 +1,4 @@
-package com.example.ccimp.ui;
+package com.example.ccimp.ui.supplier;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,15 +40,15 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierRequestsHistoryActivity.this,SupplierHomeActivity.class);
+                        Intent c = new Intent(SupplierRequestsHistoryActivity.this, SupplierHomeActivity.class);
                         startActivity(c);
                         break;
                     case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierRequestsHistoryActivity.this,SupplierInventoryActivity.class);
+                        Intent d = new Intent(SupplierRequestsHistoryActivity.this, SupplierInventoryActivity.class);
                         startActivity(d);
                         break;
                     case R.id.navigation_supplier_profile:
-                        Intent b = new Intent(SupplierRequestsHistoryActivity.this,SupplierProfileActivity.class);
+                        Intent b = new Intent(SupplierRequestsHistoryActivity.this, SupplierProfileActivity.class);
                         startActivity(b);
                         break;
                 }

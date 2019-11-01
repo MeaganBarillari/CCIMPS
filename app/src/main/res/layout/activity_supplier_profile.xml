@@ -94,7 +94,7 @@
             android:text="User Address" />
 
         <Button
-            android:id="@+id/btnlogout"
+            android:id="@+id/btn_logout"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

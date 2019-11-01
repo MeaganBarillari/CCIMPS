@@ -12,9 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.LoginModel;
-import com.example.ccimp.ui.model.backgroundWorker;
 import com.example.ccimp.ui.presenter.LoginPresenter;
+import com.example.ccimp.ui.presenter.ILoginPresenter;
 import com.example.ccimp.ui.view.LoginView;
 
 public class LoginActivity extends AppCompatActivity implements LoginView{
@@ -22,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     Button btnLogin;
     Spinner spinner;
     TextView tvSignup;
-    LoginPresenter mLoginPresenter;
+    ILoginPresenter mLoginPresenter;
     LoginView mLoginView;
 
     @Override
@@ -52,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             }
         });
 
-        mLoginPresenter = new LoginModel(LoginActivity.this);
+        mLoginPresenter = new LoginPresenter(LoginActivity.this);
     }
 
 
