@@ -1,7 +1,7 @@
 # CCIMPS
 CS506 Fall 2019 Project
 Instructions:
-1.Download android studio
+1.Download android studio\n
 2.Clone git repo
 3.Open cloned repo in android studio
 4.Checkout branch -
