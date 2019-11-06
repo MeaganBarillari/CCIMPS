@@ -26,6 +26,7 @@ public class SupplierHomeActivity extends AppCompatActivity {
 
     Button btnseehistory;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class SupplierHomeActivity extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
