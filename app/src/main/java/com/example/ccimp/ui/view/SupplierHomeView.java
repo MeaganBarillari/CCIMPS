@@ -1,9 +1,12 @@
 package com.example.ccimp.ui.view;
 
+import android.view.MenuItem;
+
 public interface SupplierHomeView {
-    void callSupplierNavigation(String supplierMenuItem);
+    boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-    void ViewAllCurrentRequest(int supplierID);
 
-    void switchSeeHistoryScreen(int supplierID);
+    void SupplierRequestHistory(int supplierID);
+
+    void SupplierRequestDetail(int requestID);
 }
