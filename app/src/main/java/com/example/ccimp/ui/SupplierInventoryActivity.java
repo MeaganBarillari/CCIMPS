@@ -35,7 +35,8 @@ public class SupplierInventoryActivity extends AppCompatActivity {
         btnadditem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SupplierInventoryActivity.this, SupplierAddToInventoryActivity.class);
+                startActivity(intent);
             }
         });
 
