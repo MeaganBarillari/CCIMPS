@@ -2,6 +2,7 @@ package com.example.ccimp.ui.supplier;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.presenter.SupplierCurrentRequestAdapter;
+import com.example.ccimp.ui.presenter.SupplierHomePresenter;
+import com.example.ccimp.ui.view.SupplierHomeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SupplierHomeActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    ListView listView;
-    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1", "2019/10/31", "Working");
+public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeView {
+
+    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1",
+            "2019/10/31", "Working");
     Request[] values = new Request[]{request1};
 
     Button btnseehistory;
+    ArrayList<Request> requestArrayList;
+    SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
 
@@ -39,13 +47,14 @@ public class SupplierHomeActivity extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.current_orders_listview);
+        requestArrayList = new ArrayList<Request>();
+        View rootView = inflater.inflate(R.layout.activity_supplier_home, container, false);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestArrayList);
+        ListView requestListView = (ListView) rootView.findViewById(R.id.current_request_listview);
+        requestListView.setAdapter(supplierCurrentRequestAdapter);
 
-        listView.setAdapter(customAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
@@ -58,59 +67,44 @@ public class SupplierHomeActivity extends AppCompatActivity {
             }
         });
 
-
-
         BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierHomeActivity.this,SupplierHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
-                        startActivity(d);
-                        break;
-                    case R.id.navigation_supplier_profile:
-                        Intent b = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
-                        startActivity(b);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.supplier_navigation_home:
+                Intent c = new Intent(SupplierHomeActivity.this,SupplierHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_supplier_inventory:
+                Intent d = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
+                startActivity(d);
+                break;
+            case R.id.navigation_supplier_profile:
+                Intent b = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
+                startActivity(b);
+                break;
         }
+        return false;
+    }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
 
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getBusinessName());
-            column2.setText(values[position].getPrice());
-            column3.setText(values[position].getStatus());
+    @Override
+    public void SupplierRequestHistory(int supplierID) {
 
-            return view;
-        }
+    }
+
+    @Override
+    public void SupplierRequestDetail(int requestID) {
+
     }
 }
