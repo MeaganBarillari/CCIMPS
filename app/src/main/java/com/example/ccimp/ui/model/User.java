@@ -2,7 +2,7 @@ package com.example.ccimp.ui.model;
 
 public class User {
 
-    private int userID;
+    private String userID;
     private String username;
     private String email;
     private String password;
@@ -10,7 +10,7 @@ public class User {
     private String phone;
     private String address;
 
-    public User(int userID, String username, String email, String password, String type, String phone, String address) {
+    public User(String userID, String username, String email, String password, String type, String phone, String address) {
         this.userID = userID;
         this.username = username;
         this.email = email;
@@ -20,11 +20,11 @@ public class User {
         this.address = address;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

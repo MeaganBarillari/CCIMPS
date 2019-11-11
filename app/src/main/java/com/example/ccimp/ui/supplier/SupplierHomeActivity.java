@@ -27,7 +27,8 @@ import java.util.ArrayList;
 
 public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
 
-    private User user = new User(123, "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    // TODO: Change to use shared preferences!
+    private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     private Button btnseehistory;
     private ListView requestListView;
     BottomNavigationView navigation;
@@ -37,7 +38,8 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     protected void onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
-        supplierHomePresenter = new SupplierHomePresenter(this);
+        // TODO: Use shared preferences for userID passed to request history activity
+        supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
 
         navigation = findViewById(R.id.supplierNavigation);
         btnseehistory = findViewById(R.id.btnHistory);
@@ -48,6 +50,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
 
         // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
         // populating the listview will be handled by the SupplierRequestHistoryPresenter
+        // TODO: Use shared preferences for userID passed to request history activity
         btnseehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,15 +60,19 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             }
         });
 
+        // Get requestID selected and pass it to RequestDetailActivity
         requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                TextView requestID = (TextView) view.findViewById(R.id.text1);
-//                parent.getAdapter().getItem()
+                Request  request = (Request) parent.getItemAtPosition(position);
+                String requestID = request.getRequestID();
+                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
+                intent.putExtra("RequestID", requestID);
+                startActivity(intent);
             }
         });
 
-        // Handled
+        // Handled in activity
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

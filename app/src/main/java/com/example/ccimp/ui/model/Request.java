@@ -23,9 +23,7 @@ public class Request {
         this.businessName = businessName;
     }
 
-    public String getRequestID() {
-        return requestID;
-    }
+    public String getRequestID() { return requestID; }
 
     public void setRequestID(String requestID) {
         this.requestID = requestID;

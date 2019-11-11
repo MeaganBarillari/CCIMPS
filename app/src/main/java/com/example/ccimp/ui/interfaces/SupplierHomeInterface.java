@@ -12,10 +12,6 @@ public interface SupplierHomeInterface {
     interface SupplierHomePresenter {
 
         void onViewCreate();
-
-//        void viewHistory(int supplierID);
-//
-//        void viewRequestDetail(int requestID, Context context);
     }
 
     interface SupplierHomeView {
