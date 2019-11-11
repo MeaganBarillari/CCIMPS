@@ -12,17 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.LoginInterface;
 import com.example.ccimp.ui.presenter.LoginPresenter;
-import com.example.ccimp.ui.presenter.ILoginPresenter;
-import com.example.ccimp.ui.view.LoginView;
 
-public class LoginActivity extends AppCompatActivity implements LoginView{
+public class LoginActivity extends AppCompatActivity implements LoginInterface.LoginView{
     EditText etEmail, etPassword;
     Button btnLogin;
     Spinner spinner;
     TextView tvSignup;
-    ILoginPresenter mLoginPresenter;
-    LoginView mLoginView;
+    LoginPresenter mLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             }
         });
 
-        mLoginPresenter = new LoginPresenter(LoginActivity.this);
+        mLoginPresenter = new LoginPresenter((LoginInterface.LoginView) LoginActivity.this);
     }
-
-
-
-//    public void onLogin(View view) {
-//        String email = userEmail.getText().toString();
-//        String pass = password.getText().toString();
-//        String type = "login";
-//
-//        backgroundWorker bgworker = new backgroundWorker(this);
-//        bgworker.execute(type, email, pass);
-//    }
 
     @Override
     public void loginValidations(){

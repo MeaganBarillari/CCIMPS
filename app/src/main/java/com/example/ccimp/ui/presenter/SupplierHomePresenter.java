@@ -5,35 +5,28 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.supplier.SupplierHomeActivity;
-import com.example.ccimp.ui.supplier.SupplierInventoryActivity;
-import com.example.ccimp.ui.supplier.SupplierProfileActivity;
-import com.example.ccimp.ui.view.SupplierHomeView;
+import com.example.ccimp.ui.interfaces.SupplierHomeInterface;
+import com.example.ccimp.ui.model.Request;
 
-public class SupplierHomePresenter implements ISupplierHomePresenter{
+import java.util.ArrayList;
 
-    SupplierHomeView supplierHomeView;
+public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHomePresenter {
 
-    public SupplierHomePresenter(SupplierHomeView supplierHomeView){
+    SupplierHomeInterface.SupplierHomeView supplierHomeView;
+    ArrayList<Request> requestArrayList;
+    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1",
+            "2019/10/31", "Working");
+
+    public SupplierHomePresenter(SupplierHomeInterface.SupplierHomeView supplierHomeView){
         this.supplierHomeView = supplierHomeView;
-    }
-    @Override
-    public void viewAllCurrentRequests(int supplierId, Context context) {
 
-    }
-
-    @Override
-    public void viewHistory(int supplierID, Context context) {
-
+        // Will need to be replaced by a call to another function that populates the list from the model
+        requestArrayList = new ArrayList();
+        requestArrayList.add(request1);
     }
 
     @Override
-    public void viewRequestDetail(int requestID, Context context) {
-        supplierHomeView.SupplierRequestDetail(requestID);
-    }
-
-    @Override
-    public void handleSupplierNavigation(MenuItem itemID, Context context) {
-        supplierHomeView.callSupplierNavigation(itemID);
+    public void onViewCreate() {
+        supplierHomeView.setupRequestList(requestArrayList);
     }
 }

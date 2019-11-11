@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,57 +16,56 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.SupplierHomeInterface;
 import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.SupplierCurrentRequestAdapter;
 import com.example.ccimp.ui.presenter.SupplierHomePresenter;
-import com.example.ccimp.ui.view.SupplierHomeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeView {
+public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
 
-    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1",
-            "2019/10/31", "Working");
-    Request[] values = new Request[]{request1};
-
-    Button btnseehistory;
-    ArrayList<Request> requestArrayList;
-    SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
+    private User user = new User(123, "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    private Button btnseehistory;
+    private ListView requestListView;
+    BottomNavigationView navigation;
+    private SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
+    private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
 
     protected void onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
+        supplierHomePresenter = new SupplierHomePresenter(this);
 
+        navigation = findViewById(R.id.supplierNavigation);
         btnseehistory = findViewById(R.id.btnHistory);
+        requestListView = findViewById(R.id.current_request_listview);
+
+        // Will populate the request array list by calling to database and creating request objects
+        supplierHomePresenter.onViewCreate();
+
+        // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
+        // populating the listview will be handled by the SupplierRequestHistoryPresenter
         btnseehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class));
-            }
-        });
-
-        requestArrayList = new ArrayList<Request>();
-        View rootView = inflater.inflate(R.layout.activity_supplier_home, container, false);
-
-        supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestArrayList);
-        ListView requestListView = (ListView) rootView.findViewById(R.id.current_request_listview);
-        requestListView.setAdapter(supplierCurrentRequestAdapter);
-
-        requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                intent.putExtra("businessName", values[position].getBusinessName());
-                intent.putExtra("requestID", values[position].getRequestID());
-                intent.putExtra("businessID", values[position].getBusinessID());
-                intent.putExtra("status", values[position].getStatus());
-                intent.putExtra("totalPrice", values[position].getPrice());
+                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class);
+                intent.putExtra("SupplierID", user.getUserID());
                 startActivity(intent);
             }
         });
 
-        BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
+        requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                TextView requestID = (TextView) view.findViewById(R.id.text1);
+//                parent.getAdapter().getItem()
+            }
+        });
+
+        // Handled
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -77,6 +75,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         });
     }
 
+    // Directs supplier to correct activity based on navigation selected
     @Override
     public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
         switch (supplierMenuItem.getItemId()) {
@@ -96,15 +95,9 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         return false;
     }
 
-
-
-    @Override
-    public void SupplierRequestHistory(int supplierID) {
-
-    }
-
-    @Override
-    public void SupplierRequestDetail(int requestID) {
-
+    // Called by presenter
+    public void setupRequestList(ArrayList<Request> requestList) {
+        supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestList);
+        requestListView.setAdapter(supplierCurrentRequestAdapter);
     }
 }

@@ -12,16 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.RegisterInterface;
 import com.example.ccimp.ui.presenter.RegisterPresenter;
-import com.example.ccimp.ui.presenter.IRegisterPresenter;
-import com.example.ccimp.ui.view.RegisterView;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterView {
+public class RegisterActivity extends AppCompatActivity implements RegisterInterface.RegisterView {
     EditText etUsername, etEmail, etAddress, etPhone, etPassword, etRePassword;
     TextView tvLogin;
     Spinner spinner;
     Button btnSignup;
-    IRegisterPresenter mRegisterPresenter;
+    RegisterPresenter mRegisterPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             }
         });
 
-        mRegisterPresenter = new RegisterPresenter(RegisterActivity.this);
+        mRegisterPresenter = new RegisterPresenter((RegisterInterface.RegisterView) RegisterActivity.this);
     }
 
     @Override

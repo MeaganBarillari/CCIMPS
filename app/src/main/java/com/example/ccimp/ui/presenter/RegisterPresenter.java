@@ -2,14 +2,13 @@ package com.example.ccimp.ui.presenter;
 
 import android.content.Context;
 
+import com.example.ccimp.ui.interfaces.RegisterInterface;
 import com.example.ccimp.ui.model.backgroundWorker;
-import com.example.ccimp.ui.presenter.IRegisterPresenter;
-import com.example.ccimp.ui.view.RegisterView;
 
-public class RegisterPresenter implements IRegisterPresenter {
-    RegisterView mRegisterView;
+public class RegisterPresenter implements RegisterInterface.RegisterPresenter {
+    RegisterInterface.RegisterView mRegisterView;
 
-    public RegisterPresenter(RegisterView registerView){
+    public RegisterPresenter(RegisterInterface.RegisterView registerView) {
         this.mRegisterView = registerView;
     }
 

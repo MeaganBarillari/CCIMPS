@@ -48,7 +48,7 @@ public class BusinessSupplierListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(BusinessSupplierListActivity.this, BusinessRequestPerSupplierActivity.class);
-                intent.putExtra("supplierID", values[position].getUserid());
+                intent.putExtra("supplierID", values[position].getUserID());
                 startActivity(intent);
             }
         });
