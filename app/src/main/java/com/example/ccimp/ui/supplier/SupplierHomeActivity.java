@@ -41,7 +41,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         // TODO: Use shared preferences for userID passed to request history activity
         supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
 
-//        navigation = findViewById(R.id.supplierNavigation);
+        navigation = findViewById(R.id.supplierNavigation);
         btnseehistory = findViewById(R.id.btnHistory);
         requestListView = findViewById(R.id.current_requests_listview);
 
@@ -72,14 +72,14 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             }
         });
 
-//        // Handled in activity
-//        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                return callSupplierNavigation(item);
-//            }
-//
-//        });
+        // Handled in activity
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callSupplierNavigation(item);
+            }
+
+        });
     }
 
     // Directs supplier to correct activity based on navigation selected
@@ -87,16 +87,16 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
-                Intent c = new Intent(SupplierHomeActivity.this, SupplierHomeActivity.class);
-                startActivity(c);
+                Intent home = new Intent(SupplierHomeActivity.this, SupplierHomeActivity.class);
+                startActivity(home);
                 break;
             case R.id.navigation_supplier_inventory:
-                Intent d = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
-                startActivity(d);
+                Intent inventory = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
+                startActivity(inventory);
                 break;
             case R.id.navigation_supplier_profile:
-                Intent b = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
-                startActivity(b);
+                Intent profile = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
+                startActivity(profile);
                 break;
         }
         return false;
