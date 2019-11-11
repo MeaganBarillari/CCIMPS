@@ -44,9 +44,9 @@ public class SupplierAddToInventoryActivity extends AppCompatActivity {
                 String itemName = etItemName.getText().toString();
                 String price = etPrice.getText().toString();
                 String supplierID = "13";
-                String customerDetail = itemName;
+                String customDetail = itemName;
                 backgroundWorker bgWorker = new backgroundWorker(SupplierAddToInventoryActivity.this);
-                bgWorker.execute(itemName, price, supplierID, customerDetail);
+                bgWorker.execute(itemName, price, supplierID, customDetail);
             }
         });
 
@@ -77,7 +77,7 @@ public class SupplierAddToInventoryActivity extends AppCompatActivity {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("itemName", "UTF-8") + "=" + URLEncoder.encode(itemName, "UTF-8") + "&"
+                    String post_data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(itemName, "UTF-8") + "&"
                             + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") + "&"
                             + URLEncoder.encode("supplierID", "UTF-8") + "=" + URLEncoder.encode(supplierID, "UTF-8") + "&"
                             + URLEncoder.encode("customDetail", "UTF-8") + "=" + URLEncoder.encode(customDetail, "UTF-8");
@@ -116,6 +116,8 @@ public class SupplierAddToInventoryActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
         alertDialog.show();
+        Intent intent = new Intent(SupplierAddToInventoryActivity.this, SupplierHomeActivity.class);
+        startActivity(intent);
         }
 
         @Override
