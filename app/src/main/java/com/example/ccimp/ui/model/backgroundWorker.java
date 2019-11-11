@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.ccimp.ui.RegisterActivity;
 import com.example.ccimp.ui.business.BusinessHomeActivity;
 import com.example.ccimp.ui.customer.CustomerHomeActivity;
 import com.example.ccimp.ui.LoginActivity;
@@ -139,14 +140,14 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
             }else if(userLoginType.equals("Supplier")){
                 intent = new Intent(context, SupplierHomeActivity.class);
                 context.startActivity(intent);
+                ((LoginActivity)context).finish();
             }
         }
         else if(result.equals("Register success")){
             intent = new Intent(context, LoginActivity.class);
             context.startActivity(intent);
+            ((RegisterActivity)context).finish();
         }
-//        alertDialog.setMessage(result);
-//        alertDialog.show();
     }
 
     @Override

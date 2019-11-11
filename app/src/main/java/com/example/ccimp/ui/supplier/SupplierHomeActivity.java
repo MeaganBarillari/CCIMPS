@@ -35,15 +35,15 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     private SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
     private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
 
-    protected void onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
         // TODO: Use shared preferences for userID passed to request history activity
         supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
 
-        navigation = findViewById(R.id.supplierNavigation);
+//        navigation = findViewById(R.id.supplierNavigation);
         btnseehistory = findViewById(R.id.btnHistory);
-        requestListView = findViewById(R.id.current_request_listview);
+        requestListView = findViewById(R.id.current_requests_listview);
 
         // Will populate the request array list by calling to database and creating request objects
         supplierHomePresenter.onViewCreate();
@@ -72,14 +72,14 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             }
         });
 
-        // Handled in activity
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callSupplierNavigation(item);
-            }
-
-        });
+//        // Handled in activity
+//        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                return callSupplierNavigation(item);
+//            }
+//
+//        });
     }
 
     // Directs supplier to correct activity based on navigation selected
@@ -87,7 +87,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
-                Intent c = new Intent(SupplierHomeActivity.this,SupplierHomeActivity.class);
+                Intent c = new Intent(SupplierHomeActivity.this, SupplierHomeActivity.class);
                 startActivity(c);
                 break;
             case R.id.navigation_supplier_inventory:
