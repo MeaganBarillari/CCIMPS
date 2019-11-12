@@ -26,12 +26,12 @@ public class BusinessHomeActivity extends AppCompatActivity {
     Button btnHistory;
     ListView listView;
     Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
-//    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", 1, "312", "123");
-//    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", 1, "200", "123456");
-//    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", 1, "200", "123456");
-//    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", 1, "200", "123456");
-//    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", 1, "200", "123456");
-    Order[] values = new Order[]{order1};
+    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", "1", "312", "123");
+    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", "1", "200", "123456");
+    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", "1", "200", "123456");
+    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", "1", "200", "123456");
+    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", "1", "200", "123456");
+    Order[] values = new Order[]{order1, order2, order3, order4, order5, order6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
