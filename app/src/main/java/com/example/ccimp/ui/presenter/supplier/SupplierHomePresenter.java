@@ -1,11 +1,6 @@
-package com.example.ccimp.ui.presenter;
+package com.example.ccimp.ui.presenter.supplier;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.MenuItem;
-
-import com.example.ccimp.R;
-import com.example.ccimp.ui.interfaces.SupplierHomeInterface;
+import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
 import com.example.ccimp.ui.model.Request;
 
 import java.util.ArrayList;

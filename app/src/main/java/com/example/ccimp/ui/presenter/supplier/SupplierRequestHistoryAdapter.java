@@ -1,4 +1,4 @@
-package com.example.ccimp.ui.presenter;
+package com.example.ccimp.ui.presenter.supplier;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,14 +15,13 @@ import com.example.ccimp.ui.model.Request;
 
 import java.util.ArrayList;
 
-public class SupplierCurrentRequestAdapter extends ArrayAdapter<Request> {
+public class SupplierRequestHistoryAdapter extends ArrayAdapter<Request> {
     private ArrayList<Request> requestArrayList;
 
-    public SupplierCurrentRequestAdapter(@NonNull Context context, int resourceId, ArrayList<Request> requestArrayList) {
+    public SupplierRequestHistoryAdapter(@NonNull Context context, int resourceId, ArrayList<Request> requestArrayList) {
         super(context,resourceId,requestArrayList);
         this.requestArrayList = requestArrayList;
     }
-    @NonNull
 
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
@@ -33,18 +32,18 @@ public class SupplierCurrentRequestAdapter extends ArrayAdapter<Request> {
 
         // Get request object at the position
         Request request = requestArrayList.get(position);
-        TextView businessName = v.findViewById(R.id.column1);
-        TextView price = v.findViewById(R.id.column2);
-        TextView status = v.findViewById(R.id.column3);
+        TextView requestID = v.findViewById(R.id.column1);
+        TextView requestDateTime = v.findViewById(R.id.column2);
+        TextView requestStatus = v.findViewById(R.id.column3);
 
-        if (businessName != null){
-            businessName.setText(request.getBusinessName());
+        if (requestID != null){
+            requestID.setText(request.getRequestID());
         }
-        if (price != null){
-            price.setText(request.getPrice());
+        if (requestDateTime != null){
+            requestDateTime.setText(request.getRequestDate());
         }
-        if(status != null){
-            status.setText(request.getStatus());
+        if(requestStatus != null){
+            requestStatus.setText(request.getStatus());
         }
 
         return v;

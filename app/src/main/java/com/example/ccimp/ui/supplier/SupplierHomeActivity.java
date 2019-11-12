@@ -2,25 +2,21 @@ package com.example.ccimp.ui.supplier;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.interfaces.SupplierHomeInterface;
+import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
 import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
-import com.example.ccimp.ui.presenter.SupplierCurrentRequestAdapter;
-import com.example.ccimp.ui.presenter.SupplierHomePresenter;
+import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
+import com.example.ccimp.ui.presenter.supplier.SupplierHomePresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -29,6 +25,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
 
     // TODO: Change to use shared preferences!
     private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+
     private Button btnseehistory;
     private ListView requestListView;
     BottomNavigationView navigation;
@@ -38,6 +35,9 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
+
+
+
         // TODO: Use shared preferences for userID passed to request history activity
         supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
 
@@ -47,6 +47,8 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
 
         // Will populate the request array list by calling to database and creating request objects
         supplierHomePresenter.onViewCreate();
+
+
 
         // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
         // populating the listview will be handled by the SupplierRequestHistoryPresenter

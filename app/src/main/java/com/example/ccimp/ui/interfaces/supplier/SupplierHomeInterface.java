@@ -1,4 +1,4 @@
-package com.example.ccimp.ui.interfaces;
+package com.example.ccimp.ui.interfaces.supplier;
 
 import android.content.Context;
 import android.view.MenuItem;
