@@ -48,5 +48,4 @@ public class SupplierRequestHistoryAdapter extends ArrayAdapter<Request> {
 
         return v;
     }
-
 }

@@ -36,8 +36,6 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
 
-
-
         // TODO: Use shared preferences for userID passed to request history activity
         supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
 
@@ -47,8 +45,6 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
 
         // Will populate the request array list by calling to database and creating request objects
         supplierHomePresenter.onViewCreate();
-
-
 
         // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
         // populating the listview will be handled by the SupplierRequestHistoryPresenter
@@ -62,14 +58,13 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             }
         });
 
-        // Get requestID selected and pass it to RequestDetailActivity
+        // Get request object and pass it to RequestDetailActivity
         requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Request  request = (Request) parent.getItemAtPosition(position);
-                String requestID = request.getRequestID();
                 Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                intent.putExtra("RequestID", requestID);
+                intent.putExtra("Request", request);
                 startActivity(intent);
             }
         });
