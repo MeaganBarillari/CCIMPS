@@ -34,7 +34,7 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
 
         supplierProfilePresenter = new SupplierProfilePresenter(this, user.getUserID());
 
-        btnlogout = findViewById(R.id.btn_login);
+        btnlogout = findViewById(R.id.btn_logout);
 
         navigation = findViewById(R.id.supplierNavigation);
 
