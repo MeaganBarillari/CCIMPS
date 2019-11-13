@@ -1,52 +1,50 @@
 package com.example.ccimp.ui;
 
-import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Order;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessHomeActivity extends AppCompatActivity {
 
     Button btnHistory;
     ListView listView;
-    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
-    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", "1", "312", "123");
-    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", "1", "200", "123456");
-    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", "1", "200", "123456");
-    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", "1", "200", "123456");
-    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", "1", "200", "123456");
-    Order[] values = new Order[]{order1, order2, order3, order4, order5, order6};
+    List<Order> orderList;
+//    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
+//    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", "1", "312", "123");
+//    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", "1", "200", "123456");
+//    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", "1", "200", "123456");
+//    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", "1", "200", "123456");
+//    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", "1", "200", "123456");
+//    Order[] values = new Order[]{order1, order2, order3, order4, order5, order6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +61,26 @@ public class BusinessHomeActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.orderlist);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        orderList = new ArrayList<>();
+        showList();
+        System.out.println(orderList);
 
-        listView.setAdapter(customAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
-                intent.putExtra("customerName", values[position].getCustomerName());
-                intent.putExtra("orderID", values[position].getOrderID());
-                intent.putExtra("createDateTime", values[position].getCreateDateTime());
-                intent.putExtra("businessID", values[position].getBusinessID());
-                intent.putExtra("userID", values[position].getUserID());
-                intent.putExtra("status", values[position].getStatus());
-                intent.putExtra("totalPrice", values[position].getTotalPrice());
-                startActivity(intent);
-            }
-        });
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
+//                intent.putExtra("customerName", values[position].getCustomerName());
+//                intent.putExtra("orderID", values[position].getOrderID());
+//                intent.putExtra("createDateTime", values[position].getCreateDateTime());
+//                intent.putExtra("businessID", values[position].getBusinessID());
+//                intent.putExtra("userID", values[position].getUserID());
+//                intent.putExtra("status", values[position].getStatus());
+//                intent.putExtra("totalPrice", values[position].getTotalPrice());
+//                startActivity(intent);
+//            }
+//        });
 
 
         BottomNavigationView navigation = findViewById(R.id.businessNavigation);
@@ -110,105 +110,93 @@ public class BusinessHomeActivity extends AppCompatActivity {
         });
     }
 
-    class CustomAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return values.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
+    class customerOrderAdapter extends ArrayAdapter<Order> {
+        private List<Order> orderList;
+        private Context ctx;
+        public customerOrderAdapter(List<Order> P, Context c){
+            super(c, R.layout.activity_business_home, P);
+            this.orderList = P;
+            this.ctx = c;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getCustomerName());
-            column2.setText(values[position].getCreateDateTime());
-            column3.setText(values[position].getStatus());
+            LayoutInflater inflater = LayoutInflater.from(ctx);
+            View view = inflater.inflate(R.layout.activity_business_home, null, true);
+            TextView customerName = view.findViewById(R.id.tvCustomerName);
+            TextView dateTime = view.findViewById(R.id.tvDateTime);
+            TextView status = view.findViewById(R.id.tvStatus);
 
+            Order order = orderList.get(position);
+            customerName.setText(order.getCustomerName());
+            dateTime.setText(order.getCreateDateTime());
+            status.setText(order.getStatus());
             return view;
         }
     }
 
-    private class backgroundWorker extends AsyncTask<String, Void, String> {
-        Context context;
-        backgroundWorker(Context ctx) {
-            context = ctx;
+    private static class Handler{
+        public  static Handler mInstance;
+        private RequestQueue requestQueue;
+        private static Context ctx;
+
+        private Handler(Context context) {
+            ctx = context;
+            requestQueue = getRequestQueue();
         }
 
-        @Override
-        protected String doInBackground(String... params) {
-
-            String addItem_url = "http://shifanzhou.com/getBusinessRequests.php";
-            try {
-                String itemName = params[0];
-                String price = params[1];
-                String supplierID = params[2];
-                String customDetail = params[3];
-
-                URL url = new URL(addItem_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(itemName, "UTF-8") + "&"
-                        + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") + "&"
-                        + URLEncoder.encode("supplierID", "UTF-8") + "=" + URLEncoder.encode(supplierID, "UTF-8") + "&"
-                        + URLEncoder.encode("customDetail", "UTF-8") + "=" + URLEncoder.encode(customDetail, "UTF-8");
-                bufferedWriter.write(post_data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                String result = "";
-                String line = "";
-                while ((line = bufferedReader.readLine()) != null) {
-                    result += line;
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-
-                return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        public RequestQueue getRequestQueue(){
+            if(requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
             }
-            return null;
+
+            return requestQueue;
         }
 
+        public static synchronized  Handler getInstance (Context context) {
+            if(mInstance == null) {
+                mInstance = new Handler(context);
+            }
 
-        @Override
-        protected void onPreExecute() {
-
+            return mInstance;
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-
+        public  <T> void addToRequestQue(Request<T> request){
+            requestQueue.add(request);
         }
+    }
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
+    private void showList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessRequests.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("businessRequest");
+                            System.out.println(array + "!");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                Order o = new Order(orderObj.getString("businessID"), null, orderObj.getString("requestDate"), null, null, orderObj.getString("status"), null);
+                                orderList.add(o);
+                            }
 
+                            customerOrderAdapter adapter = new customerOrderAdapter(orderList, getApplicationContext());
+                            listView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
 }

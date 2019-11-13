@@ -26,6 +26,7 @@
             android:background = "@color/colorGreyBackground" >
 
             <TextView
+                android:id="@+id/tvCustomerName"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
                 android:layout_weight = "1"
@@ -37,6 +38,7 @@
                 android:text = "Customer Name"/>
 
             <TextView
+                android:id="@+id/tvDateTime"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
                 android:layout_weight = "1"
@@ -48,6 +50,7 @@
                 android:text = "Date/Time"/>
 
             <TextView
+                android:id="@+id/tvStatus"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
                 android:layout_weight = "1"
