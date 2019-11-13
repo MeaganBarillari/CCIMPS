@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BusinessHomeActivity extends AppCompatActivity {
@@ -120,17 +121,24 @@ public class BusinessHomeActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View mView, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(ctx);
-            View view = inflater.inflate(R.layout.activity_business_home, null, true);
-            TextView customerName = view.findViewById(R.id.tvCustomerName);
-            TextView dateTime = view.findViewById(R.id.tvDateTime);
-            TextView status = view.findViewById(R.id.tvStatus);
+            View view = mView;
 
-            Order order = orderList.get(position);
-            customerName.setText(order.getCustomerName());
-            dateTime.setText(order.getCreateDateTime());
-            status.setText(order.getStatus());
+            if(view == null) {
+                view = inflater.inflate(R.layout.row, parent, false);
+
+            }
+                    TextView customerName = view.findViewById(R.id.column1);
+                    TextView dateTime = view.findViewById(R.id.column2);
+                    TextView status = view.findViewById(R.id.column3);
+
+                    Order order = orderList.get(position);
+                    customerName.setText(order.getCustomerName());
+                    dateTime.setText(order.getCreateDateTime());
+                    status.setText(order.getStatus());
+
+
             return view;
         }
     }
@@ -177,7 +185,10 @@ public class BusinessHomeActivity extends AppCompatActivity {
                             System.out.println(array + "!");
                             for(int i = 0; i< array.length();i++){
                                 JSONObject orderObj = array.getJSONObject(i);
-                                Order o = new Order(orderObj.getString("businessID"), null, orderObj.getString("requestDate"), null, null, orderObj.getString("status"), null);
+
+                                String customerName = orderObj.getString("businessID");
+                                System.out.println(customerName);
+                                Order o = new Order(customerName, Integer.toString(i), orderObj.getString("requestDate"), Integer.toString(i), Integer.toString(i), orderObj.getString("status"), Integer.toString(i));
                                 orderList.add(o);
                             }
 
