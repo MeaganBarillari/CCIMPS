@@ -14,14 +14,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.supplier.SupplierInventoryInterface;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_supplier;
+import com.example.ccimp.ui.presenter.supplier.SupplierInventoryAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.ccimp.ui.presenter.supplier.SupplierInventoryPresenter;
 
-public class SupplierInventoryActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class SupplierInventoryActivity extends AppCompatActivity implements SupplierInventoryInterface.SupplierInventoryView {
 
     ListView listView;
     inventory_supplier inventory1 = new inventory_supplier("123", "312", "Beans", "200", "30");
-    inventory_supplier[] values = new inventory_supplier[]{inventory1};
+    private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    BottomNavigationView navigation;
+    private SupplierInventoryAdapter supplierInventoryAdapter;
+    private SupplierInventoryInterface.SupplierInventoryPresenter supplierInventoryPresenter;
 
     Button btnadditem;
     @Override
@@ -29,7 +38,11 @@ public class SupplierInventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_inventory);
 
+        // TODO: Use shared preferences for userID passed to request history activity
+        supplierInventoryPresenter = new SupplierInventoryPresenter(this, user.getUserID());
+
         btnadditem = findViewById(R.id.btnadditem);
+        navigation = findViewById(R.id.supplierNavigation);
 
         btnadditem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,60 +52,39 @@ public class SupplierInventoryActivity extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.supplier_inventory_listview);
-        CustomAdapter customAdapter = new CustomAdapter();
+        supplierInventoryPresenter.onViewCreate();
 
-        listView.setAdapter(customAdapter);
-
-        BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.supplier_navigation_home:
-                        Intent c = new Intent(SupplierInventoryActivity.this, SupplierHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_supplier_inventory:
-                        Intent d = new Intent(SupplierInventoryActivity.this,SupplierInventoryActivity.class);
-                        startActivity(d);
-                        break;
-                    case R.id.navigation_supplier_profile:
-                        Intent b = new Intent(SupplierInventoryActivity.this, SupplierProfileActivity.class);
-                        startActivity(b);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.supplier_navigation_home:
+                Intent c = new Intent(SupplierInventoryActivity.this, SupplierHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_supplier_inventory:
+                Intent d = new Intent(SupplierInventoryActivity.this,SupplierInventoryActivity.class);
+                startActivity(d);
+                break;
+            case R.id.navigation_supplier_profile:
+                Intent b = new Intent(SupplierInventoryActivity.this, SupplierProfileActivity.class);
+                startActivity(b);
+                break;
         }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowtwolines, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            column1.setText(values[position].getItemName());
-            column2.setText(values[position].getPrice());
-
-            return view;
-        }
+        return false;
     }
 
+    @Override
+    public void setupInventoryList(ArrayList<inventory_supplier> inventoryArrayList) {
+        supplierInventoryAdapter = new SupplierInventoryAdapter(this, R.layout.rowtwolines, inventoryArrayList);
+        listView.setAdapter(supplierInventoryAdapter);
+    }
 }
