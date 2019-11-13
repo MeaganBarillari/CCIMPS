@@ -13,14 +13,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.BusinessRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SupplierRequestsHistoryActivity extends AppCompatActivity {
 
     ListView listView;
-    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1", "2019/10/31", "Working");
-    Request[] values = new Request[]{request1};
+    BusinessRequest request1 = new BusinessRequest("Starbucks", "123", "231", "345", "200", "2019/11/1", "2019/10/31", "Working");
+    BusinessRequest[] values = new BusinessRequest[]{request1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Order;
-import com.example.ccimp.ui.model.Request;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerOrdersActivity extends AppCompatActivity {

@@ -1,10 +1,10 @@
 package com.example.ccimp.ui.model;
 
-public class Request {
+public class BusinessRequest {
 
     private String businessName, requestID, supplierID, businessID, price, needByDate, requestDate, status;
 
-    public Request(String businessName, String requestID, String supplierID, String businessID, String price, String needByDate, String requestDate, String status) {
+    public BusinessRequest(String businessName, String requestID, String supplierID, String businessID, String price, String needByDate, String requestDate, String status) {
         this.businessName = businessName;
         this.requestID = requestID;
         this.supplierID = supplierID;

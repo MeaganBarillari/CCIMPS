@@ -31,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BusinessHomeActivity extends AppCompatActivity {
@@ -64,7 +63,7 @@ public class BusinessHomeActivity extends AppCompatActivity {
 
         orderList = new ArrayList<>();
         showList();
-        System.out.println(orderList);
+
 
 
 
@@ -182,13 +181,11 @@ public class BusinessHomeActivity extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
                             JSONArray array = obj.getJSONArray("businessRequest");
-                            System.out.println(array + "!");
+
                             for(int i = 0; i< array.length();i++){
                                 JSONObject orderObj = array.getJSONObject(i);
 
-                                String customerName = orderObj.getString("businessID");
-                                System.out.println(customerName);
-                                Order o = new Order(customerName, Integer.toString(i), orderObj.getString("requestDate"), Integer.toString(i), Integer.toString(i), orderObj.getString("status"), Integer.toString(i));
+                                Order o = new Order(orderObj.getString("businessID"), Integer.toString(i), orderObj.getString("requestDate"), Integer.toString(i), Integer.toString(i), orderObj.getString("status"), Integer.toString(i));
                                 orderList.add(o);
                             }
 
