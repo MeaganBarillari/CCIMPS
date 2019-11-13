@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class SupplierInventoryActivity extends AppCompatActivity implements SupplierInventoryInterface.SupplierInventoryView {
 
     ListView listView;
-    inventory_supplier inventory1 = new inventory_supplier("123", "312", "Beans", "200", "30");
     private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     BottomNavigationView navigation;
     private SupplierInventoryAdapter supplierInventoryAdapter;
