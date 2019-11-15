@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     Spinner spinner;
     TextView tvSignup;
     LoginPresenter mLoginPresenter;
-    LoginView mLoginView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,27 +54,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         mLoginPresenter = new LoginModel(LoginActivity.this);
     }
 
-
-
-//    public void onLogin(View view) {
-//        String email = userEmail.getText().toString();
-//        String pass = password.getText().toString();
-//        String type = "login";
-//
-//        backgroundWorker bgworker = new backgroundWorker(this);
-//        bgworker.execute(type, email, pass);
-//    }
-
     @Override
     public void loginValidations(){
         Toast.makeText(getApplicationContext(), "Please enter email and password", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void loginSuccess(){
-        Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-    }
+    public void loginSuccess(){}
 
     @Override
     public void loginError(){

@@ -29,6 +29,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     Context context;
     String userLoginType;
+    String email;
     backgroundWorker (Context ctx) {
      context = ctx;
     }
@@ -40,6 +41,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
         String register_url = "http://shifanzhou.com/register.php";
         if(type.equals("login")) {
             try {
+                email = params[1];
                 String user_email = params[1];
                 String password = params[2];
                 String userType = params[3];
@@ -135,12 +137,15 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
         if(result.equals("login success")){
             if(userLoginType.equals("Customer")){
                 intent = new Intent(context, CustomerHomeActivity.class);
+                intent.putExtra("email", email);
                 context.startActivity(intent);
             }else if(userLoginType.equals("Business")){
                 intent = new Intent(context, BusinessHomeActivity.class);
+                intent.putExtra("email", email);
                 context.startActivity(intent);
             }else if(userLoginType.equals("Supplier")){
                 intent = new Intent(context, SupplierHomeActivity.class);
+                intent.putExtra("email", email);
                 context.startActivity(intent);
             }
         }

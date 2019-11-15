@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessHomeActivity extends AppCompatActivity {
-
+    String username;
     Button btnHistory;
     ListView listView;
     List<Order> orderList;
@@ -63,6 +63,13 @@ public class BusinessHomeActivity extends AppCompatActivity {
 
         orderList = new ArrayList<>();
         showList();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            username = bundle.getString("email");
+        }
+
+        System.out.println(username);
 
 
 
@@ -136,7 +143,6 @@ public class BusinessHomeActivity extends AppCompatActivity {
                     customerName.setText(order.getCustomerName());
                     dateTime.setText(order.getCreateDateTime());
                     status.setText(order.getStatus());
-
 
             return view;
         }
