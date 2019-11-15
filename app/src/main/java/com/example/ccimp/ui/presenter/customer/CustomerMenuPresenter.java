@@ -11,7 +11,7 @@ public class CustomerMenuPresenter implements CustomerMenuInterface.CustomerMenu
     CustomerMenuInterface.CustomerMenuView customerMenuView;
     ArrayList<inventory_business> inventoryArrayList;
     String userID;
-    inventory_business inventory1 = new inventory_business("123", "312", "Beans", "200", "30", "30");
+    inventory_business inventory1 = new inventory_business("coffee", "123", "Beans", "200", "30", "30");
 
     public CustomerMenuPresenter(CustomerMenuInterface.CustomerMenuView customerMenuView, String customerID){
         this.customerMenuView = customerMenuView;

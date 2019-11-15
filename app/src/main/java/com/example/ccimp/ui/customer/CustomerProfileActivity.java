@@ -48,7 +48,7 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
 
         customerProfilePresenter = new CustomerProfilePresenter(this, user.getUserID());
 
-        navigation = findViewById(R.id.businessNavigation);
+        navigation = findViewById(R.id.customerNavigation);
 
         userName = findViewById(R.id.user_profile_name);
         userEmail = findViewById(R.id.user_email);

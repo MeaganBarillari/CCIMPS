@@ -54,7 +54,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
             }
         });
 
-        navigation = findViewById(R.id.businessNavigation);
+        navigation = findViewById(R.id.customerNavigation);
 
         listView= findViewById(R.id.businessmenulist);
         customerMenuPresenter.onViewCreate();

@@ -40,7 +40,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerH
 
         customerHomePresenter = new CustomerHomePresenter(this, user.getUserID());
 
-        navigation = findViewById(R.id.businessNavigation);
+        navigation = findViewById(R.id.customerNavigation);
 
 
 
