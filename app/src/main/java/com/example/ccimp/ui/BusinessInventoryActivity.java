@@ -141,11 +141,13 @@ public class BusinessInventoryActivity extends AppCompatActivity {
             View view = mView;
 
             if(view == null) {
-                view = inflater.inflate(R.layout.rowtwolines, parent, false);
+                view = inflater.inflate(R.layout.rowfourlines, parent, false);
 
             }
             TextView itemName = view.findViewById(R.id.column1);
             TextView price = view.findViewById(R.id.column2);
+            TextView quantity = view.findViewById(R.id.column3);
+            TextView availableQuantity = view.findViewById(R.id.column4);
 
 
             Item item = itemList.get(position);
@@ -189,7 +191,7 @@ public class BusinessInventoryActivity extends AppCompatActivity {
     }
 
     private void showList() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getSupplierInventory.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
