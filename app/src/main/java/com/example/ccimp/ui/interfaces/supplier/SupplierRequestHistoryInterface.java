@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.request_info;
 
 import java.util.ArrayList;
 
@@ -13,8 +14,7 @@ public interface SupplierRequestHistoryInterface {
     interface SupplierRequestHistoryPresenter {
 
         void onViewCreate();
-        User Supplier(String supplierID);
-        ArrayList<Request> getRequestHistoryItems(String requestID);
+        ArrayList<Request> getRequestHistoryList(String requestID);
     }
 
     interface SupplierRequestHistoryView {

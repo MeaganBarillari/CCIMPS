@@ -1,5 +1,6 @@
 package com.example.ccimp.ui.interfaces.business;
 
+import android.content.Intent;
 import android.view.MenuItem;
 
 import com.example.ccimp.ui.model.Order;
@@ -20,6 +21,7 @@ public interface BusinessOrderDetailInterface {
     interface BusinessOrderDetailView {
 
         boolean callBusinessNavigation(MenuItem businessMenuItem);
+        Order getIntentData(Intent intent);
         void setupOrderItemList(ArrayList<order_info> orderItemArrayList);
         void setBusinessUser(User business);
     }

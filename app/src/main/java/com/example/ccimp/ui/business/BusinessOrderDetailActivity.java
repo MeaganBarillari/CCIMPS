@@ -50,27 +50,28 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
 
         // Gets order object and sets text view's based on request fields
         // returns the order object that we use to get the supplierID and get the orderItem Listview
-        tempOrder = getOrderObjectFromIntent();
+        Intent intent = getIntent();
+        tempOrder = getIntentData(intent);
         if(tempOrder != null){
             String businessID = tempOrder.getBusinessID();
 
             businessOrderDetailPresenter = new BusinessOrderDetailPresenter(this, businessID);
             businessOrderDetailPresenter.onViewCreate();
+
+            btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callBusinessNavigation(item);
+                }
+            });
         }
-
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callBusinessNavigation(item);
-            }
-        });
     }
 
     @Override
@@ -83,17 +84,18 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
                 break;
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessOrderDetailActivity.this, BusinessRequestsActivity.class);
-                a.putExtra("businessID", business.getUserID());
+                a.putExtra("business", business);
                 startActivity(a);
                 break;
             case R.id.navigation_inventory:
                 Intent b = new Intent(BusinessOrderDetailActivity.this, BusinessInventoryActivity.class);
-                b.putExtra("businessID", business.getUserID());
+                b.putExtra("business", business);
                 startActivity(b);
                 break;
             case R.id.navigation_business_profile:
                 Intent d = new Intent(BusinessOrderDetailActivity.this, BusinessProfileActivity.class);
-                d.putExtra("businessID", business.getUserID());
+                //Could probably just get away with passing the whole business user object
+                d.putExtra("business", business);
                 startActivity(d);
                 break;
         }
@@ -101,13 +103,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
     }
 
     @Override
-    public void setupOrderItemList(ArrayList<order_info> orderItemArrayList) {
-        businessOrderDetailAdapter = new BusinessOrderDetailAdapter(this, R.layout.row, orderItemArrayList);
-        orderItemListView.setAdapter(businessOrderDetailAdapter);
-    }
-
-    public Order getOrderObjectFromIntent(){
-        Intent intent = getIntent();
+    public Order getIntentData(Intent intent) {
         Order order = intent.getParcelableExtra("Order");
 
         if (order != null){
@@ -118,6 +114,12 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
             return order;
         }
         return null;
+    }
+
+    @Override
+    public void setupOrderItemList(ArrayList<order_info> orderItemArrayList) {
+        businessOrderDetailAdapter = new BusinessOrderDetailAdapter(this, R.layout.row, orderItemArrayList);
+        orderItemListView.setAdapter(businessOrderDetailAdapter);
     }
 
     @Override

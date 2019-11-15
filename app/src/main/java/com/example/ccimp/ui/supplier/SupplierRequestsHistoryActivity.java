@@ -39,7 +39,7 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
             navigation = findViewById(R.id.supplierNavigation);
 
             // Pass to presenter the userID so we can properly populate the history list from the supplierID
-            supplierRequestHistoryPresenter = new SupplierRequestHistoryPresenter(this, supplier.getUserID());
+            supplierRequestHistoryPresenter = new SupplierRequestHistoryPresenter(this, supplier);
 
             supplierRequestHistoryPresenter.onViewCreate();
 
@@ -62,7 +62,7 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent d = new Intent(SupplierRequestsHistoryActivity.this, SupplierInventoryActivity.class);
-                d.putExtra("supplierID", supplier);
+                d.putExtra("supplierID", supplier.getUserID());
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:

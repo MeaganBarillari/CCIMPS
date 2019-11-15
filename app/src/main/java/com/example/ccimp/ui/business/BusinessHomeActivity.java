@@ -34,7 +34,6 @@ public class BusinessHomeActivity extends AppCompatActivity implements BusinessH
     private ListView orderListView;
     private BusinessCurrentOrderAdapter businessCurrentOrderAdapter;
     private BusinessHomeInterface.BusinessHomePresenter businessHomePresenter;
-    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
     private User business;
 
     @Override
@@ -45,41 +44,42 @@ public class BusinessHomeActivity extends AppCompatActivity implements BusinessH
         // Get User information from Intent
         Intent intent = getIntent();
         businessEmail = getIntentData(intent);
+        if(businessEmail != null){
+            businessHomePresenter = new BusinessHomePresenter(this, businessEmail);
 
-        businessHomePresenter = new BusinessHomePresenter(this, businessEmail);
+            btnHistory = findViewById(R.id.btnHistory);
+            navigation= findViewById(R.id.businessNavigation);
+            orderListView = findViewById(R.id.orderlist);
 
-        btnHistory = findViewById(R.id.btnHistory);
-        navigation= findViewById(R.id.businessNavigation);
-        orderListView = findViewById(R.id.orderlist);
+            businessHomePresenter.onViewCreate();
 
-        businessHomePresenter.onViewCreate();
+            btnHistory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderHistoryActivity.class);
+                    intent.putExtra("business", business);
+                    startActivity(intent);
+                }
+            });
 
-        btnHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderHistoryActivity.class);
-                intent.putExtra("BusinessID", business.getUserID());
-                startActivity(intent);
-            }
-        });
+            // Get order object and pass it to OrderDetailActivity
+            orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Order  order = (Order) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
+                    intent.putExtra("Order", order);
+                    startActivity(intent);
+                }
+            });
 
-        // Get order object and pass it to OrderDetailActivity
-        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order  order = (Order) parent.getItemAtPosition(position);
-                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
-                intent.putExtra("Order", order);
-                startActivity(intent);
-            }
-        });
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callBusinessNavigation(item);
-            }
-        });
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callBusinessNavigation(item);
+                }
+            });
+        }
     }
 
     @Override
@@ -91,18 +91,18 @@ public class BusinessHomeActivity extends AppCompatActivity implements BusinessH
                 break;
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessHomeActivity.this, BusinessRequestsActivity.class);
-                a.putExtra("businessID", business.getUserID());
+                a.putExtra("business", business);
                 startActivity(a);
                 break;
             case R.id.navigation_inventory:
                 Intent b = new Intent(BusinessHomeActivity.this, BusinessInventoryActivity.class);
-                b.putExtra("businessID", business.getUserID());
+                b.putExtra("business", business);
                 startActivity(b);
                 break;
             case R.id.navigation_business_profile:
                 Intent d = new Intent(BusinessHomeActivity.this, BusinessProfileActivity.class);
                 //Could probably just get away with passing the whole business user object
-                d.putExtra("businessID", business.getUserID());
+                d.putExtra("business", business);
                 startActivity(d);
                 break;
         }

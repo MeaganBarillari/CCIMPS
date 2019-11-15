@@ -16,7 +16,7 @@ import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Order;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessOrderHistoryActivity extends AppCompatActivity {
+public class BusinessOrderHistoryActivity extends AppCompatActivity{
 
     ListView listView;
     Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");

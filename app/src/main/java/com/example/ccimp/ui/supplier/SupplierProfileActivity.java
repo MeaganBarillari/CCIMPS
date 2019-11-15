@@ -76,8 +76,6 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:
-//                Intent b = new Intent(SupplierProfileActivity.this,SupplierProfileActivity.class);
-//                startActivity(b);
                 break;
         }
         return false;
