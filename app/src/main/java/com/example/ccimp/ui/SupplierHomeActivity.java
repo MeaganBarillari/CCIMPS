@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -35,8 +36,9 @@ import java.util.List;
 public class SupplierHomeActivity extends AppCompatActivity {
     List<BusinessRequest> requestList;
     ListView listView;
-
+    String userEmail;
     Button btnSeehistory;
+    BusinessRequest[] values = new BusinessRequest[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,33 @@ public class SupplierHomeActivity extends AppCompatActivity {
 
         requestList = new ArrayList<>();
         showList();
-        System.out.println(requestList);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
+                intent.putExtra("businessName", values[position].getBusinessName());
+                intent.putExtra("requestID", values[position].getRequestID());
+                intent.putExtra("supplierID", values[position].getSupplierID());
+                intent.putExtra("businessID", values[position].getBusinessID());
+                intent.putExtra("price", values[position].getPrice());
+                intent.putExtra("needByDate", values[position].getNeedByDate());
+                intent.putExtra("requestDate", values[position].getRequestDate());
+                intent.putExtra("status", values[position].getStatus());
+                startActivity(intent);
+
+
+
+            }
+        });
+
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            userEmail = bundle.getString("email");
+        }
+
 
 
 
@@ -70,10 +98,12 @@ public class SupplierHomeActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_supplier_inventory:
                         Intent d = new Intent(SupplierHomeActivity.this,SupplierInventoryActivity.class);
+                        d.putExtra("email", userEmail);
                         startActivity(d);
                         break;
                     case R.id.navigation_supplier_profile:
                         Intent b = new Intent(SupplierHomeActivity.this,SupplierProfileActivity.class);
+                        b.putExtra("email", userEmail);
                         startActivity(b);
                         break;
                 }
@@ -158,6 +188,7 @@ public class SupplierHomeActivity extends AppCompatActivity {
                                 JSONObject orderObj = array.getJSONObject(i);
                                 BusinessRequest businessRequest = new BusinessRequest(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
                                 requestList.add(businessRequest);
+                                values[i] = businessRequest;
                             }
                             System.out.println(requestList.toString());
 

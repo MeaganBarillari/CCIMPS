@@ -24,8 +24,8 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
     ListView listView;
 
     Button btnChangeStatus;
-    Item item1 = new Item("123", "Beans", "300", "231", "3", "Black");
-    Item[] values = new Item[]{item1};
+//    Item item1 = new Item("123", "Beans", "300", "231", "3", "Black");
+//    Item[] values = new Item[]{item1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             businessName.setText(bundle.getString("businessName"));
             requestID.setText(bundle.getString("requestID"));
             status.setText(bundle.getString("status"));
-            totalPrice.setText(bundle.getString("totalPrice"));
+            totalPrice.setText(bundle.getString("price"));
         }
 
 
@@ -55,10 +55,10 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.requestiems);
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        listView.setAdapter(customAdapter);
+//        listView = findViewById(R.id.requestiems);
+//        CustomAdapter customAdapter = new CustomAdapter();
+//
+//        listView.setAdapter(customAdapter);
 
         BottomNavigationView navigation = findViewById(R.id.supplierNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -82,34 +82,34 @@ public class SupplierRequestDetailActivity extends AppCompatActivity {
             }
         });
     }
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getName());
-            column2.setText(values[position].getQuantity());
-            column3.setText(values[position].getPrice());
-
-            return view;
-        }
-    }
+//    class CustomAdapter extends BaseAdapter {
+//
+//        @Override
+//        public int getCount() {
+//            return values.length;
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            View view = getLayoutInflater().inflate(R.layout.row, null);
+//            TextView column1 = view.findViewById(R.id.column1);
+//            TextView column2 = view.findViewById(R.id.column2);
+//            TextView column3 = view.findViewById(R.id.column3);
+//            column1.setText(values[position].getName());
+//            column2.setText(values[position].getQuantity());
+//            column3.setText(values[position].getPrice());
+//
+//            return view;
+//        }
+//    }
 }

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessHomeActivity extends AppCompatActivity {
-    String username;
+    String userEmail;
     Button btnHistory;
     ListView listView;
     List<Order> orderList;
@@ -66,10 +66,10 @@ public class BusinessHomeActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            username = bundle.getString("email");
+            userEmail = bundle.getString("email");
         }
 
-        System.out.println(username);
+
 
 
 

@@ -12,6 +12,14 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public Item(String itemID, String supplierID, String name, String price, String customDetail){
+        this.itemID = itemID;
+        this.supplierID = supplierID;
+        this.name= name;
+        this.price = price;
+        this.customDetail = customDetail;
+    }
+
     public String getItemID() {
         return itemID;
     }

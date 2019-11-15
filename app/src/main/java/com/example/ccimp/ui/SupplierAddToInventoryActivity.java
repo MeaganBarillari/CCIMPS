@@ -63,7 +63,7 @@ public class SupplierAddToInventoryActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            String addItem_url = "http://shifanzhou.com/addItem.php";
+            String addItem_url = "http://shifanzhou.com/addToSupplierInventory.php";
                 try {
                     String itemName = params[0];
                     String price = params[1];

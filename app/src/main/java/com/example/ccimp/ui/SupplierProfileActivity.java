@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +14,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.ccimp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
 public class SupplierProfileActivity extends AppCompatActivity {
 
-
-
+    String userEmail;
+    TextView user_Email;
     Button btnlogout;
 
     @Override
@@ -24,7 +27,14 @@ public class SupplierProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_profile);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            userEmail = bundle.getString("email");
+        }
+
         btnlogout = findViewById(R.id.btnlogout);
+        user_Email = findViewById(R.id.user_email);
+        user_Email.setText(userEmail);
 
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
