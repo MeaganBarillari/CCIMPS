@@ -33,7 +33,7 @@ public class BusinessInventoryActivity extends AppCompatActivity implements Busi
 
 
     ListView listView;
-    private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     BottomNavigationView navigation;
     private BusinessInventoryAdapter businessInventoryAdapter;
     private BusinessInventoryInterface.BusinessInventoryPresenter businessInventoryPresenter;
