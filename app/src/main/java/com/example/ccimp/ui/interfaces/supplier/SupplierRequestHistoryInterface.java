@@ -18,5 +18,4 @@ public interface SupplierRequestHistoryInterface {
 
         void setupRequestHistoryList(ArrayList<Request> requestArrayList);
     }
-
 }

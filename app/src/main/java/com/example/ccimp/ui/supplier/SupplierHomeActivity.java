@@ -23,12 +23,11 @@ import java.util.ArrayList;
 
 public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
 
-    // TODO: Change to use shared preferences!
-    private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
-
     private Button btnseehistory;
     private ListView requestListView;
     BottomNavigationView navigation;
+    private User supplier;
+    private String supplierEmail;
     private SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
     private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
 
@@ -36,24 +35,27 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
 
-        // TODO: Use shared preferences for userID passed to request history activity
-        supplierHomePresenter = new SupplierHomePresenter(this, user.getUserID());
+        // Get User information from Intent
+        Intent intent = getIntent();
+        supplierEmail = getIntentData(intent);
+
+        supplierHomePresenter = new SupplierHomePresenter(this, supplierEmail);
 
         navigation = findViewById(R.id.supplierNavigation);
         btnseehistory = findViewById(R.id.btnHistory);
         requestListView = findViewById(R.id.current_requests_listview);
 
         // Will populate the request array list by calling to database and creating request objects
+        // as well as get the supplier supplier object we need to use for this account
         supplierHomePresenter.onViewCreate();
 
         // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
         // populating the listview will be handled by the SupplierRequestHistoryPresenter
-        // TODO: Use shared preferences for userID passed to request history activity
         btnseehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class);
-                intent.putExtra("SupplierID", user.getUserID());
+                intent.putExtra("SupplierID", supplier.getEmail());
                 startActivity(intent);
             }
         });
@@ -84,15 +86,17 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
-                Intent home = new Intent(SupplierHomeActivity.this, SupplierHomeActivity.class);
-                startActivity(home);
+                // They can't go to home, they are already on it
+                // TODO: MAKE SOME SORT OF TOAST THAT STATES THIS OR MAKE THE COLOR ON THE SELECTED ITEM CHANGE
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent inventory = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
+                inventory.putExtra("supplierID", supplier.getUserID());
                 startActivity(inventory);
                 break;
             case R.id.navigation_supplier_profile:
                 Intent profile = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
+                profile.putExtra("supplierID", supplier.getUserID());
                 startActivity(profile);
                 break;
         }
@@ -103,5 +107,15 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     public void setupRequestList(ArrayList<Request> requestList) {
         supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestList);
         requestListView.setAdapter(supplierCurrentRequestAdapter);
+    }
+
+    @Override
+    public String getIntentData(Intent intent) {
+        return intent.getStringExtra("supplierEmail");
+    }
+
+    @Override
+    public void setSupplierUser(User supplier) {
+        this.supplier = supplier;
     }
 }
