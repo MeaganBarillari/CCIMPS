@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.inventory_business;
-import com.example.ccimp.ui.model.inventory_supplier;
 
 import java.util.ArrayList;
 
