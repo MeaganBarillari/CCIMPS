@@ -14,8 +14,7 @@ public interface BusinessOrderHistoryInterface {
     }
 
     interface BusinessOrderHistoryView {
-        boolean callSupplierNavigation(MenuItem businessMenuItem);
-
+        boolean callBusinessNavigation(MenuItem businessMenuItem);
         void setupOrderHistoryList(ArrayList<Order> orderArrayList);
     }
 }

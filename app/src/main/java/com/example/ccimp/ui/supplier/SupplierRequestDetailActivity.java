@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,9 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierRequestDetailInterface;
-import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.Request;
-import com.example.ccimp.ui.model.inventory_supplier;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.request_info;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailPresenter;
@@ -30,8 +27,8 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     private TextView businessName, requestID, status, totalPrice;
     private ListView requestItemListView;
     BottomNavigationView navigation;
-    private String supplierID;
     private Request tempRequest;
+    private User supplier;
     private SupplierRequestDetailAdapter supplierRequestDetailAdapter;
     private SupplierRequestDetailInterface.SupplierRequestDetailPresenter supplierRequestDetailPresenter;
     Button btnChangeStatus;
@@ -51,27 +48,26 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
 
         // Gets request object and sets text view's based on request fields
         // returns the request object that we use to get the supplierID and get the requestItem Listview
-        tempRequest = getRequestObjectFromIntent();
+        Intent intent = getIntent();
+        tempRequest = getIntentData(intent);
         if(tempRequest != null){
-            supplierID = tempRequest.getSupplierID();
-
-            supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, supplierID);
+            supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
             supplierRequestDetailPresenter.onViewCreate();
+
+            btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callSupplierNavigation(item);
+                }
+            });
         }
-
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callSupplierNavigation(item);
-            }
-        });
     }
 
     @Override
@@ -79,14 +75,17 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
                 Intent c = new Intent(SupplierRequestDetailActivity.this, SupplierHomeActivity.class);
+                c.putExtra("userEmail", supplier.getEmail());
                 startActivity(c);
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent d = new Intent(SupplierRequestDetailActivity.this, SupplierInventoryActivity.class);
+                d.putExtra("supplierID", supplier.getUserID());
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:
                 Intent b = new Intent(SupplierRequestDetailActivity.this, SupplierProfileActivity.class);
+                b.putExtra("supplier", supplier);
                 startActivity(b);
                 break;
         }
@@ -94,13 +93,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void setupRequestItemList(ArrayList<request_info> requestItemArrayList) {
-        supplierRequestDetailAdapter = new SupplierRequestDetailAdapter(this, R.layout.row, requestItemArrayList);
-        requestItemListView.setAdapter(supplierRequestDetailAdapter);
-    }
-
-    public Request getRequestObjectFromIntent(){
-        Intent intent = getIntent();
+    public Request getIntentData(Intent intent) {
         Request request = intent.getParcelableExtra("Request");
 
         if (request != null){
@@ -112,4 +105,16 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         }
         return null;
     }
+
+    @Override
+    public void setSupplierUser(User supplier) {
+        this.supplier = supplier;
+    }
+
+    @Override
+    public void setupRequestItemList(ArrayList<request_info> requestItemArrayList) {
+        supplierRequestDetailAdapter = new SupplierRequestDetailAdapter(this, R.layout.row, requestItemArrayList);
+        requestItemListView.setAdapter(supplierRequestDetailAdapter);
+    }
+
 }

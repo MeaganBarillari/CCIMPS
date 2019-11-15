@@ -20,47 +20,46 @@ import com.example.ccimp.ui.presenter.supplier.SupplierProfilePresenter;
 
 public class SupplierProfileActivity extends AppCompatActivity implements SupplierProfileInterface.SupplierProfileView {
 
-
     TextView userName, userEmail, userMobile, userAddress;
     Button btnlogout;
     BottomNavigationView navigation;
+    private User supplier;
     SupplierProfileInterface.SupplierProfilePresenter supplierProfilePresenter;
-    private User user = new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_profile);
 
-        supplierProfilePresenter = new SupplierProfilePresenter(this, user.getUserID());
+        Intent intent = getIntent();
+        supplier = getIntentData(intent);
+        if(supplier != null){
 
-        btnlogout = findViewById(R.id.btn_logout);
+            supplierProfilePresenter = new SupplierProfilePresenter(this);
 
-        navigation = findViewById(R.id.supplierNavigation);
+            btnlogout = findViewById(R.id.btn_logout);
+            navigation = findViewById(R.id.supplierNavigation);
+            userName = findViewById(R.id.user_profile_name);
+            userEmail = findViewById(R.id.user_email);
+            userMobile = findViewById(R.id.user_mobile);
+            userAddress = findViewById(R.id.user_address);
 
-        userName = findViewById(R.id.user_profile_name);
-        userEmail = findViewById(R.id.user_email);
-        userMobile = findViewById(R.id.user_mobile);
-        userAddress = findViewById(R.id.user_address);
+            supplierProfilePresenter.onViewCreate();
 
-        supplierProfilePresenter.onViewCreate();
+            btnlogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(SupplierProfileActivity.this, MainActivity.class));
+                }
+            });
 
-        btnlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SupplierProfileActivity.this, MainActivity.class));
-            }
-        });
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callSupplierNavigation(item);
+                }
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callSupplierNavigation(item);
-            }
-
-        });
-
-
+            });
+        }
     }
 
     @Override
@@ -68,25 +67,39 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
                 Intent c = new Intent(SupplierProfileActivity.this, SupplierHomeActivity.class);
+                c.putExtra("userEmail", supplier.getEmail());
                 startActivity(c);
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent d = new Intent(SupplierProfileActivity.this, SupplierInventoryActivity.class);
+                d.putExtra("supplierID", supplier.getUserID());
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:
-                Intent b = new Intent(SupplierProfileActivity.this,SupplierProfileActivity.class);
-                startActivity(b);
+//                Intent b = new Intent(SupplierProfileActivity.this,SupplierProfileActivity.class);
+//                startActivity(b);
                 break;
         }
         return false;
     }
 
     @Override
-    public void setupProfile() {
-        userName.setText(user.getUsername());
-        userEmail.setText(user.getEmail());
-        userMobile.setText(user.getPhone());
-        userAddress.setText(user.getAddress());
+    public User getIntentData(Intent intent) {
+        User supplier = intent.getParcelableExtra("supplier");
+
+        if (supplier != null){
+            return supplier;
+        }
+        return null;
     }
+
+    @Override
+    public void setupProfile() {
+        userName.setText(supplier.getUsername());
+        userEmail.setText(supplier.getEmail());
+        userMobile.setText(supplier.getPhone());
+        userAddress.setText(supplier.getAddress());
+    }
+
+
 }

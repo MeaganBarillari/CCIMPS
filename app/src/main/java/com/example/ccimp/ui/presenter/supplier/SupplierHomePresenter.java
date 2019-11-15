@@ -17,9 +17,7 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
 
     public SupplierHomePresenter(SupplierHomeInterface.SupplierHomeView supplierHomeView, String supplierEmail){
         this.supplierHomeView = supplierHomeView;
-
         this.supplier = getSupplier(supplierEmail);
-
         requestArrayList = getCurrentRequest(this.supplier.getUserID());
     }
 
@@ -31,6 +29,7 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
 
     @Override
     public User getSupplier(String supplierEmail) {
+        //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
         return new User("123", "supplier", "supplier@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     }
 

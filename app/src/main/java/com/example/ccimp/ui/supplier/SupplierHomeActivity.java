@@ -38,47 +38,48 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         // Get User information from Intent
         Intent intent = getIntent();
         supplierEmail = getIntentData(intent);
+        if(supplierEmail != null){
+            supplierHomePresenter = new SupplierHomePresenter(this, supplierEmail);
 
-        supplierHomePresenter = new SupplierHomePresenter(this, supplierEmail);
+            navigation = findViewById(R.id.supplierNavigation);
+            btnseehistory = findViewById(R.id.btnHistory);
+            requestListView = findViewById(R.id.current_requests_listview);
 
-        navigation = findViewById(R.id.supplierNavigation);
-        btnseehistory = findViewById(R.id.btnHistory);
-        requestListView = findViewById(R.id.current_requests_listview);
+            // Will populate the request array list by calling to database and creating request objects
+            // as well as get the supplier supplier object we need to use for this account
+            supplierHomePresenter.onViewCreate();
 
-        // Will populate the request array list by calling to database and creating request objects
-        // as well as get the supplier supplier object we need to use for this account
-        supplierHomePresenter.onViewCreate();
+            // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
+            // populating the listview will be handled by the SupplierRequestHistoryPresenter
+            btnseehistory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class);
+                    intent.putExtra("supplier", supplier);
+                    startActivity(intent);
+                }
+            });
 
-        // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
-        // populating the listview will be handled by the SupplierRequestHistoryPresenter
-        btnseehistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestsHistoryActivity.class);
-                intent.putExtra("SupplierID", supplier.getEmail());
-                startActivity(intent);
-            }
-        });
+            // Get request object and pass it to RequestDetailActivity
+            requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Request  request = (Request) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
+                    intent.putExtra("Request", request);
+                    startActivity(intent);
+                }
+            });
 
-        // Get request object and pass it to RequestDetailActivity
-        requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Request  request = (Request) parent.getItemAtPosition(position);
-                Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                intent.putExtra("Request", request);
-                startActivity(intent);
-            }
-        });
+            // Handled in activity
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callSupplierNavigation(item);
+                }
 
-        // Handled in activity
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return callSupplierNavigation(item);
-            }
-
-        });
+            });
+        }
     }
 
     // Directs supplier to correct activity based on navigation selected
@@ -96,7 +97,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
                 break;
             case R.id.navigation_supplier_profile:
                 Intent profile = new Intent(SupplierHomeActivity.this, SupplierProfileActivity.class);
-                profile.putExtra("supplierID", supplier.getUserID());
+                profile.putExtra("supplier", supplier);
                 startActivity(profile);
                 break;
         }
@@ -111,7 +112,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
 
     @Override
     public String getIntentData(Intent intent) {
-        return intent.getStringExtra("supplierEmail");
+        return intent.getStringExtra("userEmail");
     }
 
     @Override

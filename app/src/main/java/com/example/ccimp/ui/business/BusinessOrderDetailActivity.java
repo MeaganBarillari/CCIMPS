@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,27 +12,51 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessOrderDetailInterface;
 import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.Order;
+import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.order_info;
+import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessOrderDetailPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessOrderDetailActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class BusinessOrderDetailActivity extends AppCompatActivity implements BusinessOrderDetailInterface.BusinessOrderDetailView {
 
     Button btnChangeStatus;
-    TextView customerName, totalPrice, customerID, orderStatus;
-    ListView listView;
+    TextView customerName, totalPrice, orderID, orderStatus;
+    BottomNavigationView navigation;
+    ListView orderItemListView;
+    Order tempOrder;
+    User business;
+    BusinessOrderDetailAdapter businessOrderDetailAdapter;
+    BusinessOrderDetailInterface.BusinessOrderDetailPresenter businessOrderDetailPresenter;
     Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
-    Item[] values = new Item[]{item1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_order_detail);
 
+        orderItemListView = findViewById(R.id.itemList);
+        navigation= findViewById(R.id.businessNavigation);
         btnChangeStatus = findViewById(R.id.btnChangeStatus);
         customerName = findViewById(R.id.customer_name);
-        customerID = findViewById(R.id.customer_number);
+        orderID = findViewById(R.id.customer_number);
         orderStatus = findViewById(R.id.request_status);
         totalPrice = findViewById(R.id.request_total_amount);
+
+        // Gets order object and sets text view's based on request fields
+        // returns the order object that we use to get the supplierID and get the orderItem Listview
+        tempOrder = getOrderObjectFromIntent();
+        if(tempOrder != null){
+            String businessID = tempOrder.getBusinessID();
+
+            businessOrderDetailPresenter = new BusinessOrderDetailPresenter(this, businessID);
+            businessOrderDetailPresenter.onViewCreate();
+        }
 
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,75 +65,63 @@ public class BusinessOrderDetailActivity extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.itemList);
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        listView.setAdapter(customAdapter);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            customerName.setText(bundle.getString("customerName"));
-            totalPrice.setText(bundle.getString("totalPrice"));
-            customerID.setText(bundle.getString("userID"));
-            orderStatus.setText(bundle.getString("status"));
-        }
-
-        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(BusinessOrderDetailActivity.this, BusinessHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessOrderDetailActivity.this, BusinessRequestsActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessOrderDetailActivity.this, BusinessInventoryActivity.class);
-                        startActivity(b);
-                        break;
-                    case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessOrderDetailActivity.this, BusinessProfileActivity.class);
-                        startActivity(d);
-                        break;
-                }
-                return false;
+                return callBusinessNavigation(item);
             }
         });
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callBusinessNavigation(MenuItem businessMenuItem) {
+        switch (businessMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(BusinessOrderDetailActivity.this, BusinessHomeActivity.class);
+                c.putExtra("businessID", business.getEmail());
+                startActivity(c);
+                break;
+            case R.id.navigation_requests:
+                Intent a = new Intent(BusinessOrderDetailActivity.this, BusinessRequestsActivity.class);
+                a.putExtra("businessID", business.getUserID());
+                startActivity(a);
+                break;
+            case R.id.navigation_inventory:
+                Intent b = new Intent(BusinessOrderDetailActivity.this, BusinessInventoryActivity.class);
+                b.putExtra("businessID", business.getUserID());
+                startActivity(b);
+                break;
+            case R.id.navigation_business_profile:
+                Intent d = new Intent(BusinessOrderDetailActivity.this, BusinessProfileActivity.class);
+                d.putExtra("businessID", business.getUserID());
+                startActivity(d);
+                break;
         }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getName());
-            column2.setText(values[position].getQuantity());
-            column3.setText(values[position].getPrice());
-
-            return view;
-        }
+        return false;
     }
 
+    @Override
+    public void setupOrderItemList(ArrayList<order_info> orderItemArrayList) {
+        businessOrderDetailAdapter = new BusinessOrderDetailAdapter(this, R.layout.row, orderItemArrayList);
+        orderItemListView.setAdapter(businessOrderDetailAdapter);
+    }
+
+    public Order getOrderObjectFromIntent(){
+        Intent intent = getIntent();
+        Order order = intent.getParcelableExtra("Order");
+
+        if (order != null){
+            customerName.setText(order.getCustomerName());
+            orderID.setText(order.getOrderID());
+            orderStatus.setText(order.getStatus());
+            totalPrice.setText(order.getTotalPrice());
+            return order;
+        }
+        return null;
+    }
+
+    @Override
+    public void setBusinessUser(User business) {
+        this.business = business;
+    }
 }
