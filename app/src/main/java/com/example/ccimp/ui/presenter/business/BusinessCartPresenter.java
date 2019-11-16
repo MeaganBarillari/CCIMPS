@@ -1,8 +1,6 @@
 package com.example.ccimp.ui.presenter.business;
 
 import com.example.ccimp.ui.interfaces.business.BusinessCartInterface;
-import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
-import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
 
 import java.util.ArrayList;
