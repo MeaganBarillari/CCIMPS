@@ -14,20 +14,36 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.business.BusinessHomeActivity;
+import com.example.ccimp.ui.business.BusinessInventoryActivity;
+import com.example.ccimp.ui.business.BusinessProfileActivity;
+import com.example.ccimp.ui.business.BusinessRequestsActivity;
+import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
+import com.example.ccimp.ui.interfaces.customer.CustomerMenuInterface;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
+import com.example.ccimp.ui.presenter.customer.CustomerMenuAdapter;
+import com.example.ccimp.ui.presenter.customer.CustomerMenuPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CustomerMenuActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CustomerMenuActivity extends AppCompatActivity implements CustomerMenuInterface.CustomerMenuView{
 
     Button btnCart;
     ListView listView;
-    inventory_business inventory1 = new inventory_business("Coffee", "132", "2", "30", "20", "200");
-    inventory_business[] values = new inventory_business[]{inventory1};
+    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    BottomNavigationView navigation;
+    private CustomerMenuAdapter customerMenuAdapter;
+    private CustomerMenuInterface.CustomerMenuPresenter customerMenuPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_menu);
+
+        customerMenuPresenter = new CustomerMenuPresenter(this, user.getUserID());
 
         btnCart = findViewById(R.id.btnCart);
 
@@ -38,59 +54,44 @@ public class CustomerMenuActivity extends AppCompatActivity {
             }
         });
 
+        navigation = findViewById(R.id.customerNavigation);
+
         listView= findViewById(R.id.businessmenulist);
-        CustomAdapter customAdapter = new CustomAdapter();
+        customerMenuPresenter.onViewCreate();
 
-        listView.setAdapter(customAdapter);
-
-        BottomNavigationView navigation = findViewById(R.id.customerNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(CustomerMenuActivity.this, CustomerHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_customer_order:
-                        Intent a = new Intent(CustomerMenuActivity.this, CustomerOrdersActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_customer_profile:
-                        Intent b = new Intent(CustomerMenuActivity.this, CustomerProfileActivity.class);
-                        startActivity(b);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
+
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(CustomerMenuActivity.this, CustomerHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_customer_order:
+                Intent a = new Intent(CustomerMenuActivity.this, CustomerOrdersActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_customer_profile:
+                Intent b = new Intent(CustomerMenuActivity.this, CustomerProfileActivity.class);
+                startActivity(b);
+                break;
         }
+        return false;
+    }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            column1.setText(values[position].getItemName());
-
-            return view;
-        }
+    @Override
+    public void setupInventoryList(ArrayList<inventory_business> inventoryArrayList) {
+        customerMenuAdapter = new CustomerMenuAdapter(this, R.layout.rowoneline, inventoryArrayList);
+        listView.setAdapter(customerMenuAdapter);
     }
 
 }
