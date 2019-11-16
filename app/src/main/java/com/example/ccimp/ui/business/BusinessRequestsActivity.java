@@ -91,5 +91,4 @@ public class BusinessRequestsActivity extends AppCompatActivity implements Busin
         businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(this, R.layout.row, requestsArrayList);
         listView2.setAdapter(businessHistoryRequestsAdapter);
     }
-
 }
