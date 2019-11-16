@@ -52,7 +52,7 @@ public class BusinessInventoryActivity extends AppCompatActivity implements Busi
         btnRequestItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessInventoryActivity.this, BusinessSupplierListActivity.class));
+                startActivity(new Intent(BusinessInventoryActivity.this, BusinessRequestFromSupplierActivity.class));
             }
         });
 
