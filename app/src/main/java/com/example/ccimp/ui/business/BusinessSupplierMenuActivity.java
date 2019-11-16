@@ -56,5 +56,4 @@ public class BusinessSupplierMenuActivity extends AppCompatActivity {
             }
         });
     }
-
 }

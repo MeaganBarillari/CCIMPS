@@ -1,6 +1,9 @@
 package com.example.ccimp.ui.model;
 
-public class Request {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Request implements Parcelable {
 
     private String businessName, requestID, supplierID, businessID, price, needByDate, requestDate, status;
 
@@ -14,6 +17,29 @@ public class Request {
         this.requestDate = requestDate;
         this.status = status;
     }
+
+    protected Request(Parcel in) {
+        businessName = in.readString();
+        requestID = in.readString();
+        supplierID = in.readString();
+        businessID = in.readString();
+        price = in.readString();
+        needByDate = in.readString();
+        requestDate = in.readString();
+        status = in.readString();
+    }
+
+    public static final Creator<Request> CREATOR = new Creator<Request>() {
+        @Override
+        public Request createFromParcel(Parcel in) {
+            return new Request(in);
+        }
+
+        @Override
+        public Request[] newArray(int size) {
+            return new Request[size];
+        }
+    };
 
     public String getBusinessName() {
         return businessName;
@@ -75,5 +101,22 @@ public class Request {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(businessName);
+        dest.writeString(requestID);
+        dest.writeString(supplierID);
+        dest.writeString(businessID);
+        dest.writeString(price);
+        dest.writeString(needByDate);
+        dest.writeString(requestDate);
+        dest.writeString(status);
     }
 }

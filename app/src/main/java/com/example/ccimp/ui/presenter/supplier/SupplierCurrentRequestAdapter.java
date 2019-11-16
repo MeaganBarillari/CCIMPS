@@ -48,5 +48,4 @@ public class SupplierCurrentRequestAdapter extends ArrayAdapter<Request> {
 
         return v;
     }
-
 }
