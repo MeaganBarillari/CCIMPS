@@ -14,14 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
+import com.example.ccimp.ui.interfaces.business.BusinessRequestPerSupplierInterface;
+import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class BusinessRequestPerSupplierActivity extends AppCompatActivity implements BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierView{
     Button btnBack, btnCart, btnFeedback;
     ListView listView;
-    inventory_supplier inventory1 = new inventory_supplier("123", "321", "Beans", "100", "3");
-    inventory_supplier[] values = new inventory_supplier[]{inventory1};
+    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    BottomNavigationView navigation;
+    private BusinessRequestPerSupplierAdapter businessRequestPerSupplierAdapter;
+    private BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierPresenter businessRequestPerSupplierPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,10 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btBack);
         btnCart = findViewById(R.id.btCart);
         btnFeedback = findViewById(R.id.btFeedback);
+
+        businessRequestPerSupplierPresenter = new BusinessRequestPerSupplierPresenter(this, user.getUserID());
+
+        navigation = findViewById(R.id.businessNavigation);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,63 +70,45 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.suppliermenu);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        businessRequestPerSupplierPresenter.onViewCreate();
 
-        listView.setAdapter(customAdapter);
-
-
-        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(BusinessRequestPerSupplierActivity.this, BusinessHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestsActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessRequestPerSupplierActivity.this, BusinessInventoryActivity.class);
-                        startActivity(b);
-                        break;
-                    case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessRequestPerSupplierActivity.this, BusinessProfileActivity.class);
-                        startActivity(d);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
+
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(BusinessRequestPerSupplierActivity.this, BusinessHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_requests:
+                Intent a = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestsActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_inventory:
+                Intent b = new Intent(BusinessRequestPerSupplierActivity.this, BusinessInventoryActivity.class);
+                startActivity(b);
+                break;
+            case R.id.navigation_business_profile:
+                Intent d = new Intent(BusinessRequestPerSupplierActivity.this, BusinessProfileActivity.class);
+                startActivity(d);
+                break;
         }
+        return false;
+    }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowoneline, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            column1.setText(values[position].getItemName());
-
-            return view;
-        }
+    @Override
+    public void setupInventoryList(ArrayList<inventory_supplier> inventoryArrayList) {
+        businessRequestPerSupplierAdapter = new BusinessRequestPerSupplierAdapter(this, R.layout.rowoneline, inventoryArrayList);
+        listView.setAdapter(businessRequestPerSupplierAdapter);
     }
 
 }

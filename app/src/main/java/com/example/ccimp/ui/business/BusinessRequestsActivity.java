@@ -13,117 +13,83 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
+import com.example.ccimp.ui.interfaces.business.BusinessRequestsInterface;
 import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.presenter.business.BusinessCurrentRequestsAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.ccimp.ui.presenter.business.BusinessRequestsPresenter;
 
-public class BusinessRequestsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class BusinessRequestsActivity extends AppCompatActivity implements BusinessRequestsInterface.BusinessRequestsView {
+
     ListView listView1, listView2;
-    Request request1 = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1", "2019/10/31", "Working");
-    Request[] values = new Request[]{request1};
+    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    BottomNavigationView navigation;
+    private BusinessCurrentRequestsAdapter businessCurrentRequestsAdapter;
+    private BusinessHistoryRequestsAdapter businessHistoryRequestsAdapter;
+    private BusinessRequestsInterface.BusinessRequestsPresenter businessRequestsPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_requests);
 
+        businessRequestsPresenter = new BusinessRequestsPresenter(this, user.getUserID());
+
+        navigation = findViewById(R.id.businessNavigation);
+
         listView1 = findViewById(R.id.current_request_listview);
 
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        listView1.setAdapter(customAdapter);
 
         listView2 = findViewById(R.id.previous_requests_listview);
 
-        CustomAdapter1 customAdapter1 = new CustomAdapter1();
+        businessRequestsPresenter.onViewCreate();
 
-        listView2.setAdapter(customAdapter1);
-
-
-
-        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(BusinessRequestsActivity.this, BusinessHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessRequestsActivity.this,BusinessRequestsActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessRequestsActivity.this, BusinessInventoryActivity.class);
-                        startActivity(b);
-                        break;
-                    case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessRequestsActivity.this, BusinessProfileActivity.class);
-                        startActivity(d);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(BusinessRequestsActivity.this, BusinessHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_requests:
+                Intent a = new Intent(BusinessRequestsActivity.this,BusinessRequestsActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_inventory:
+                Intent b = new Intent(BusinessRequestsActivity.this, BusinessInventoryActivity.class);
+                startActivity(b);
+                break;
+            case R.id.navigation_business_profile:
+                Intent d = new Intent(BusinessRequestsActivity.this, BusinessProfileActivity.class);
+                startActivity(d);
+                break;
         }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowtwolines, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            column1.setText(values[position].getRequestDate());
-            column2.setText(values[position].getStatus());
-
-            return view;
-        }
+        return false;
     }
 
-    class CustomAdapter1 extends BaseAdapter {
+    @Override
+    public void setupRequestsList(ArrayList<Request> requestsArrayList) {
+        businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(this, R.layout.rowtwolines, requestsArrayList);
+        listView1.setAdapter(businessCurrentRequestsAdapter);
 
-        @Override
-        public int getCount() {
-            return values.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getRequestID());
-            column2.setText(values[position].getRequestDate());
-            column3.setText(values[position].getStatus());
-
-            return view;
-        }
+        businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(this, R.layout.row, requestsArrayList);
+        listView2.setAdapter(businessHistoryRequestsAdapter);
     }
 
 }

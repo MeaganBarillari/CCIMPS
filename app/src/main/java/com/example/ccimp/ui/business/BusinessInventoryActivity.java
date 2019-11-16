@@ -14,21 +14,39 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
+import com.example.ccimp.ui.interfaces.supplier.SupplierInventoryInterface;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.model.inventory_supplier;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
+import com.example.ccimp.ui.presenter.supplier.SupplierInventoryAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryPresenter;
+import com.example.ccimp.ui.supplier.SupplierHomeActivity;
+import com.example.ccimp.ui.supplier.SupplierInventoryActivity;
+import com.example.ccimp.ui.supplier.SupplierProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessInventoryActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class BusinessInventoryActivity extends AppCompatActivity implements BusinessInventoryInterface.BusinessInventoryView {
 
 
     ListView listView;
-    inventory_business inventory1 = new inventory_business("Bread", "231", "312", "30", "20", "600");
-    inventory_business[] values = new inventory_business[]{inventory1};
+    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    BottomNavigationView navigation;
+    private BusinessInventoryAdapter businessInventoryAdapter;
+    private BusinessInventoryInterface.BusinessInventoryPresenter businessInventoryPresenter;
 
     Button btnRequestItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_inventory);
+
+        businessInventoryPresenter = new BusinessInventoryPresenter(this, user.getUserID());
+
+        navigation = findViewById(R.id.businessNavigation);
 
         btnRequestItems = findViewById(R.id.requestItem);
 
@@ -40,68 +58,45 @@ public class BusinessInventoryActivity extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.listitem);
+        businessInventoryPresenter.onViewCreate();
 
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        listView.setAdapter(customAdapter);
-
-        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(BusinessInventoryActivity.this, BusinessHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessInventoryActivity.this, BusinessRequestsActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessInventoryActivity.this,BusinessInventoryActivity.class);
-                        startActivity(b);
-                        break;
-                    case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessInventoryActivity.this, BusinessProfileActivity.class);
-                        startActivity(d);
-                        break;
-                }
-                return false;
+                return callSupplierNavigation(item);
             }
+
         });
+
     }
-    class CustomAdapter extends BaseAdapter {
 
-        @Override
-        public int getCount() {
-            return values.length;
+    @Override
+    public boolean callSupplierNavigation(MenuItem supplierMenuItem) {
+        switch (supplierMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(BusinessInventoryActivity.this, BusinessHomeActivity.class);
+                startActivity(c);
+                break;
+            case R.id.navigation_requests:
+                Intent a = new Intent(BusinessInventoryActivity.this, BusinessRequestsActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_inventory:
+                Intent b = new Intent(BusinessInventoryActivity.this,BusinessInventoryActivity.class);
+                startActivity(b);
+                break;
+            case R.id.navigation_business_profile:
+                Intent d = new Intent(BusinessInventoryActivity.this, BusinessProfileActivity.class);
+                startActivity(d);
+                break;
         }
+        return false;
+    }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.rowfourlines, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            TextView column4 = view.findViewById(R.id.column4);
-            column1.setText(values[position].getItemName());
-            column2.setText(values[position].getPrice());
-            column3.setText(values[position].getQuantity());
-            column4.setText(values[position].getAvailQuantity());
-
-            return view;
-        }
+    @Override
+    public void setupInventoryList(ArrayList<inventory_business> inventoryArrayList) {
+        businessInventoryAdapter = new BusinessInventoryAdapter(this, R.layout.rowfourlines, inventoryArrayList);
+        listView.setAdapter(businessInventoryAdapter);
     }
 
 }
