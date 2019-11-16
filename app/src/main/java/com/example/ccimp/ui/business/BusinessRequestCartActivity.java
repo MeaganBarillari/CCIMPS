@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,15 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.business.BusinessCartInterface;
-import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
-import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.User;
-import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
 import com.example.ccimp.ui.model.request_info;
 import com.example.ccimp.ui.presenter.business.BusinessCartAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessCartPresenter;
-import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
