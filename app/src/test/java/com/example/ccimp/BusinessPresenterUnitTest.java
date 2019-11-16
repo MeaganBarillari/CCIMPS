@@ -33,14 +33,15 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertNotNull;
 
-public class BusinessUnitTest {
+public class BusinessPresenterUnitTest {
 
     private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
 
 
     @Test
     public void testBusinessDetail(){
-       BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
+        BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
+
         BusinessOrderDetailPresenter businessOrderDetailPresenter = new BusinessOrderDetailPresenter(businessOrderDetailView, "businessID");
         businessOrderDetailPresenter.getBusiness("business Email");
     }
