@@ -46,20 +46,12 @@ public class BusinessRequestCartActivity extends AppCompatActivity implements Bu
 
         businessCartPresenter = new BusinessCartPresenter(this, user.getUserID());
 
-
         orderPrice = findViewById(R.id.order_price);
         orderPrice.setText(request1.getTotalPrice());
         btnsendrequest = findViewById(R.id.fab_customer_order);
-
-        btnsendrequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BusinessRequestCartActivity.this, BusinessRequestsActivity.class));
-            }
-        });
-
         navigation = findViewById(R.id.businessNavigation);
         listView = findViewById(R.id.business_checkout_listview);
+
         businessCartPresenter.onViewCreate();
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,6 +60,13 @@ public class BusinessRequestCartActivity extends AppCompatActivity implements Bu
                 return callSupplierNavigation(item);
             }
 
+        });
+
+        btnsendrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessRequestCartActivity.this, BusinessRequestsActivity.class));
+            }
         });
 
     }

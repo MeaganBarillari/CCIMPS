@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerOrdersActivity extends AppCompatActivity {
 
-    ListView listView1, listView2;
+    ListView currentOrdersListView, previousOrdersListView;
     Order order1 = new Order("Will", "12", "2019/10/31", "3", "6", "Ready", "3000");
     Order[] values = new Order[]{order1};
 
@@ -27,17 +27,17 @@ public class CustomerOrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
 
-        listView1 = findViewById(R.id.current_orders_listview);
+        currentOrdersListView = findViewById(R.id.current_orders_listview);
 
         CustomAdapter customAdapter = new CustomAdapter();
 
-        listView1.setAdapter(customAdapter);
+        currentOrdersListView.setAdapter(customAdapter);
 
-        listView2 = findViewById(R.id.previous_orders_listview);
+        previousOrdersListView = findViewById(R.id.previous_orders_listview);
 
         CustomAdapter1 customAdapter1 = new CustomAdapter1();
 
-        listView2.setAdapter(customAdapter1);
+        previousOrdersListView.setAdapter(customAdapter1);
 
 
         BottomNavigationView navigation = findViewById(R.id.customerNavigation);
