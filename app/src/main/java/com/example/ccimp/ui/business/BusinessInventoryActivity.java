@@ -31,7 +31,6 @@ import java.util.ArrayList;
 
 public class BusinessInventoryActivity extends AppCompatActivity implements BusinessInventoryInterface.BusinessInventoryView {
 
-
     ListView listView;
     private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     BottomNavigationView navigation;
@@ -98,5 +97,4 @@ public class BusinessInventoryActivity extends AppCompatActivity implements Busi
         businessInventoryAdapter = new BusinessInventoryAdapter(this, R.layout.rowfourlines, inventoryArrayList);
         listView.setAdapter(businessInventoryAdapter);
     }
-
 }

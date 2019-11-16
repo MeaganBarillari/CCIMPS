@@ -13,89 +13,88 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessOrderHistoryInterface;
 import com.example.ccimp.ui.model.Order;
+import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BusinessOrderHistoryActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    ListView listView;
-    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
-    //    Order order2 = new Order("Shifan", "2019/11/1", "2019/11/1", "Working", 1, "312", "123");
-//    Order order3 = new Order("Meagan", "2019/11/12", "2019/01/01", "Cooking", 1, "200", "123456");
-//    Order order4 = new Order("Brandon", "2019/12/1", "September", "Cancel", 1, "200", "123456");
-//    Order order5 = new Order("Nikolaj", "2019/10/31", "September", "Waiting", 1, "200", "123456");
-//    Order order6 = new Order("Lucille", "2019/01/13", "September", "Start", 1, "200", "123456");
-    Order[] values = new Order[]{order1};
+public class BusinessOrderHistoryActivity extends AppCompatActivity implements BusinessOrderHistoryInterface.BusinessOrderHistoryView {
 
-
+    private ListView orderListView;
+    private User business;
+    private BusinessOrderHistoryAdapter businessOrderHistoryAdapter;
+    private BusinessOrderHistoryInterface.BusinessOrderHistoryPresenter businessOrderHistoryPresenter;
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_order_history);
 
-        listView = findViewById(R.id.pastorders);
+        // Get business object from
+        Intent intent = getIntent();
+        business = getIntentData(intent);
+        if(business != null) {
+            orderListView = findViewById(R.id.pastorders);
+            navigation = findViewById(R.id.businessNavigation);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+            // Pass to presenter the userID so we can properly populate the history list from the business
+            businessOrderHistoryPresenter = new BusinessOrderHistoryPresenter(this, business);
 
-        listView.setAdapter(customAdapter);
+            businessOrderHistoryPresenter.onViewCreate();
 
-        BottomNavigationView navigation = findViewById(R.id.businessNavigation);
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent c = new Intent(BusinessOrderHistoryActivity.this, BusinessHomeActivity.class);
-                        startActivity(c);
-                        break;
-                    case R.id.navigation_requests:
-                        Intent a = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);
-                        startActivity(a);
-                        break;
-                    case R.id.navigation_inventory:
-                        Intent b = new Intent(BusinessOrderHistoryActivity.this, BusinessInventoryActivity.class);
-                        startActivity(b);
-                        break;
-                    case R.id.navigation_business_profile:
-                        Intent d = new Intent(BusinessOrderHistoryActivity.this, BusinessProfileActivity.class);
-                        startActivity(d);
-                        break;
+            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    return callBusinessNavigation(item);
                 }
-                return false;
-            }
-        });
-    }
-
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return values.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row, null);
-            TextView column1 = view.findViewById(R.id.column1);
-            TextView column2 = view.findViewById(R.id.column2);
-            TextView column3 = view.findViewById(R.id.column3);
-            column1.setText(values[position].getCustomerName());
-            column2.setText(values[position].getCreateDateTime());
-            column3.setText(values[position].getStatus());
-
-            return view;
+            });
         }
     }
 
+    @Override
+    public boolean callBusinessNavigation(MenuItem businessMenuItem) {
+        switch (businessMenuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent c = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);
+                c.putExtra("userEmail", business.getUserID());
+                startActivity(c);
+            case R.id.navigation_requests:
+                Intent a = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);
+                a.putExtra("business", business);
+                startActivity(a);
+                break;
+            case R.id.navigation_inventory:
+                Intent b = new Intent(BusinessOrderHistoryActivity.this, BusinessInventoryActivity.class);
+                b.putExtra("business", business);
+                startActivity(b);
+                break;
+            case R.id.navigation_business_profile:
+                Intent d = new Intent(BusinessOrderHistoryActivity.this, BusinessProfileActivity.class);
+                d.putExtra("business", business);
+                startActivity(d);
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public User getIntentData(Intent intent) {
+        User business = intent.getParcelableExtra("business");
+
+        if (business != null){
+            return business;
+        }
+        return null;
+    }
+
+    @Override
+    public void setupOrderHistoryList(ArrayList<Order> orderArrayList) {
+        businessOrderHistoryAdapter = new BusinessOrderHistoryAdapter(this, R.layout.row, orderArrayList);
+        orderListView.setAdapter(businessOrderHistoryAdapter);
+    }
 }
 

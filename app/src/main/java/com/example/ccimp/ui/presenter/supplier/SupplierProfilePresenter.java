@@ -5,11 +5,9 @@ import com.example.ccimp.ui.interfaces.supplier.SupplierProfileInterface;
 public class SupplierProfilePresenter implements SupplierProfileInterface.SupplierProfilePresenter {
 
     SupplierProfileInterface.SupplierProfileView supplierProfileView;
-    String userID;
 
-    public SupplierProfilePresenter(SupplierProfileInterface.SupplierProfileView supplierProfileView, String supplierID){
+    public SupplierProfilePresenter(SupplierProfileInterface.SupplierProfileView supplierProfileView){
         this.supplierProfileView = supplierProfileView;
-        this.userID = supplierID;
     }
 
     @Override

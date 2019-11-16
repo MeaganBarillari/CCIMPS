@@ -27,6 +27,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     Context context;
     String userLoginType;
+    String userEmail;
     public backgroundWorker(Context ctx) {
      context = ctx;
     }
@@ -67,6 +68,7 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.disconnect();
                 if(result.equals("login success")){
                     userLoginType = userType;
+                    userEmail = user_email;
                 }
                 return result;
             } catch (MalformedURLException e) {
@@ -133,12 +135,17 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
         if(result.equals("login success")){
             if(userLoginType.equals("Customer")){
                 intent = new Intent(context, CustomerHomeActivity.class);
+                intent.putExtra("userEmail", userEmail);
                 context.startActivity(intent);
+                ((LoginActivity)context).finish();
             }else if(userLoginType.equals("Business")){
                 intent = new Intent(context, BusinessHomeActivity.class);
+                intent.putExtra("userEmail", userEmail);
                 context.startActivity(intent);
+                ((LoginActivity)context).finish();
             }else if(userLoginType.equals("Supplier")){
                 intent = new Intent(context, SupplierHomeActivity.class);
+                intent.putExtra("userEmail", userEmail);
                 context.startActivity(intent);
                 ((LoginActivity)context).finish();
             }

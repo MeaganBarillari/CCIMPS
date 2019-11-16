@@ -20,7 +20,6 @@ import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 
 public class BusinessRequestFromSupplierActivity extends AppCompatActivity implements BusinessRequestFromSupplierInterface.BusinessRequestFromSupplierView {
@@ -55,11 +54,6 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
             }
 
         });
-
-
-
-
-
     }
 
     @Override
@@ -97,5 +91,4 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
         listView2.setAdapter(businessRequestSupplierAdapter);
 
     }
-
 }

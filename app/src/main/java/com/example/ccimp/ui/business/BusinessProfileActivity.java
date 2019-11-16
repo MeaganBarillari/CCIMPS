@@ -23,7 +23,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BusinessProfileActivity extends AppCompatActivity implements BusinessProfileInterface.BusinessProfileView{
 
-
     TextView userName, userEmail, userMobile, userAddress;
     Button btnLogout;
     BottomNavigationView navigation;

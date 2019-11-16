@@ -1,6 +1,9 @@
 package com.example.ccimp.ui.model;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
 
     private String userID;
     private String username;
@@ -19,6 +22,28 @@ public class User {
         this.phone = phone;
         this.address = address;
     }
+
+    protected User(Parcel in) {
+        userID = in.readString();
+        username = in.readString();
+        email = in.readString();
+        password = in.readString();
+        type = in.readString();
+        phone = in.readString();
+        address = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getUserID() {
         return userID;
@@ -74,5 +99,21 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userID);
+        dest.writeString(username);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(type);
+        dest.writeString(phone);
+        dest.writeString(address);
     }
 }
