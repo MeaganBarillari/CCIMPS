@@ -16,7 +16,6 @@ public interface SupplierRequestDetailInterface {
         void onViewCreate();
         User getSupplier(String supplierID);
         ArrayList<request_info> getCurrentRequestItems(String requestID);
-
     }
 
     interface SupplierRequestDetailView {
