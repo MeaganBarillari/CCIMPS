@@ -40,7 +40,7 @@ public class BusinessUnitTest {
 
     @Test
     public void testBusinessDetail(){
-       BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
+        BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
         BusinessOrderDetailPresenter businessOrderDetailPresenter = new BusinessOrderDetailPresenter(businessOrderDetailView, "businessID");
         businessOrderDetailPresenter.getBusiness("business Email");
     }
@@ -79,10 +79,10 @@ public class BusinessUnitTest {
 
     @Test
     public void testInventory(){
-        BusinessInventoryInterface.BusinessInventoryView businessInventoryActivity = new BusinessInventoryActivity();
-        BusinessInventoryPresenter businessInventoryPresenter = new BusinessInventoryPresenter(businessInventoryActivity, "business ID");
+        BusinessInventoryInterface.BusinessInventoryView businessInventoryView = new BusinessInventoryActivity();
+        BusinessInventoryPresenter businessInventoryPresenter = new BusinessInventoryPresenter(businessInventoryView, "business ID");
 
-        assertNotNull(businessInventoryActivity);
+        assertNotNull(businessInventoryView);
         assertNotNull(businessInventoryPresenter);
     }
 
