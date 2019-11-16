@@ -32,8 +32,8 @@ public class SupplierInventoryPresenter implements SupplierInventoryInterface.Su
 
     @Override
     public ArrayList<inventory_supplier> getInventoryItems(String supplierID) {
-        ArrayList<inventory_supplier> list = new ArrayList<inventory_supplier>();
-        inventoryArrayList.add(inventory1);
+        ArrayList<inventory_supplier> list = new ArrayList<>();
+        list.add(inventory1);
         return list;
     }
 }
