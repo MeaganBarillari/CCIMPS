@@ -13,8 +13,8 @@ public interface CustomerHomeInterface {
 
     interface CustomerHomePresenter{
         void onViewCreate();
-        User getSupplier(String supplierEmail);
-        ArrayList<User> getBusinessList();
+        //User getSupplier(String supplierEmail);
+        //ArrayList<User> getBusinessList();
     }
 
     interface CustomerHomeView{
