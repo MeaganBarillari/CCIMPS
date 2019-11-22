@@ -8,7 +8,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHomePresenter {
-
     private SupplierHomeInterface.SupplierHomeView supplierHomeView;
     private ArrayList<Request> requestArrayList;
     private User supplier;
