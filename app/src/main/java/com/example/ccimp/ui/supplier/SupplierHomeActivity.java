@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierHomePresenter;
@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
 
-    Button btnseehistory;
-    ListView requestListView;
+    private Button btnseehistory;
+    private ListView requestListView;
     BottomNavigationView navigation;
-    User supplier;
-    String supplierEmail;
-    SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
-    SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
+    private User supplier;
+    private String supplierEmail;
+    private SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
+    private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +64,9 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    BusinessRequest businessRequest = (BusinessRequest) parent.getItemAtPosition(position);
+                    Request  request = (Request) parent.getItemAtPosition(position);
                     Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                    intent.putExtra("BusinessRequest", businessRequest);
+                    intent.putExtra("Request", request);
                     startActivity(intent);
                 }
             });
@@ -105,8 +105,8 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     }
 
     // Called by presenter
-    public void setupRequestList(ArrayList<BusinessRequest> businessRequestList) {
-        supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, businessRequestList);
+    public void setupRequestList(ArrayList<Request> requestList) {
+        supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestList);
         requestListView.setAdapter(supplierCurrentRequestAdapter);
     }
 

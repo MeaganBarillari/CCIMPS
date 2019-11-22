@@ -3,7 +3,7 @@ package com.example.ccimp.ui.interfaces.supplier;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 
 import java.util.ArrayList;
@@ -16,13 +16,13 @@ public interface SupplierHomeInterface {
 
         User getSupplier(String supplierEmail);
 
-        ArrayList<BusinessRequest> getCurrentRequest(String supplierID);
+        ArrayList<Request> getCurrentRequest(String supplierID);
     }
 
     interface SupplierHomeView {
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-        void setupRequestList(ArrayList<BusinessRequest> businessRequestArrayList);
+        void setupRequestList(ArrayList<Request> requestArrayList);
 
         String getIntentData(Intent intent);
 

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierRequestDetailInterface;
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.request_info;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
@@ -27,7 +27,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     private TextView businessName, requestID, status, totalPrice;
     private ListView requestItemListView;
     BottomNavigationView navigation;
-    private BusinessRequest tempBusinessRequest;
+    private Request tempRequest;
     private User supplier;
     private SupplierRequestDetailAdapter supplierRequestDetailAdapter;
     private SupplierRequestDetailInterface.SupplierRequestDetailPresenter supplierRequestDetailPresenter;
@@ -49,9 +49,9 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         // Gets request object and sets text view's based on request fields
         // returns the request object that we use to get the supplierID and get the requestItem Listview
         Intent intent = getIntent();
-        tempBusinessRequest = getIntentData(intent);
-        if(tempBusinessRequest != null){
-            supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempBusinessRequest);
+        tempRequest = getIntentData(intent);
+        if(tempRequest != null){
+            supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
             supplierRequestDetailPresenter.onViewCreate();
 
             btnChangeStatus.setOnClickListener(new View.OnClickListener() {
@@ -93,15 +93,15 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public BusinessRequest getIntentData(Intent intent) {
-        BusinessRequest businessRequest = intent.getParcelableExtra("BusinessRequest");
+    public Request getIntentData(Intent intent) {
+        Request request = intent.getParcelableExtra("Request");
 
-        if (businessRequest != null){
-            businessName.setText(businessRequest.getBusinessName());
-            requestID.setText(businessRequest.getRequestID());
-            status.setText(businessRequest.getStatus());
-            totalPrice.setText(businessRequest.getPrice());
-            return businessRequest;
+        if (request != null){
+            businessName.setText(request.getBusinessName());
+            requestID.setText(request.getRequestID());
+            status.setText(request.getStatus());
+            totalPrice.setText(request.getPrice());
+            return request;
         }
         return null;
     }

@@ -10,8 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestFromSupplierInterface;
+import com.example.ccimp.ui.interfaces.business.BusinessRequestsInterface;
 import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.presenter.business.BusinessCurrentRequestsAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;

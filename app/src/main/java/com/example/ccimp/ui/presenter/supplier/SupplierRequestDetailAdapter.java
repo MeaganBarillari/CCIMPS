@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.inventory_supplier;
 import com.example.ccimp.ui.model.request_info;
 
 import java.util.ArrayList;

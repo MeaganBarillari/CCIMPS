@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierRequestHistoryInterface;
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestHistoryAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestHistoryPresenter;
@@ -85,8 +85,8 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
     }
 
     @Override
-    public void setupRequestHistoryList(ArrayList<BusinessRequest> businessRequestArrayList) {
-        supplierRequestHistoryAdapter = new SupplierRequestHistoryAdapter(this, R.layout.row, businessRequestArrayList);
+    public void setupRequestHistoryList(ArrayList<Request> requestArrayList) {
+        supplierRequestHistoryAdapter = new SupplierRequestHistoryAdapter(this, R.layout.row, requestArrayList);
         requestListView.setAdapter(supplierRequestHistoryAdapter);
     }
 }

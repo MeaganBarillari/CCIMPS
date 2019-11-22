@@ -26,14 +26,4 @@ public class CustomerHomePresenter implements CustomerHomeInterface.CustomerHome
     public void onViewCreate() {
         customerHomeView.setupBusinessList(userArrayList);
     }
-
-    @Override
-    public User getSupplier(String supplierEmail) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<User> getBusinessList() {
-        return null;
-    }
 }

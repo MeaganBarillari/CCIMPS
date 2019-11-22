@@ -11,7 +11,7 @@ import com.example.ccimp.ui.business.BusinessRequestFromSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestPerSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestsActivity;
 import com.example.ccimp.ui.model.Order;
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
@@ -36,7 +36,7 @@ public class BusinessAdapterUnitTest {
 
     ArrayList<inventory_supplier> inventoryArrayList;
     ArrayList<Order> orderArrayList;
-    ArrayList<BusinessRequest> businessRequestArrayList;
+    ArrayList<Request> requestArrayList;
     ArrayList<inventory_business> inventoryBusinessArrayList;
     ArrayList<order_info> orderItemArrayList;
     ArrayList<User> UserArrayList;
@@ -68,7 +68,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void currentRequestsTest(){
         BusinessRequestsActivity businessRequestsActivity = new BusinessRequestsActivity();
-        BusinessCurrentRequestsAdapter businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(businessRequestsActivity, R.layout.rowtwolines, businessRequestArrayList);
+        BusinessCurrentRequestsAdapter businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(businessRequestsActivity, R.layout.rowtwolines, requestArrayList);
 
         try{
             View testView = businessCurrentRequestsAdapter.getView(0, null, null);
@@ -80,7 +80,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void historyRequestsTest(){
         BusinessRequestsActivity businessRequestsActivity = new BusinessRequestsActivity();
-        BusinessHistoryRequestsAdapter businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(businessRequestsActivity, R.layout.row, businessRequestArrayList);
+        BusinessHistoryRequestsAdapter businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(businessRequestsActivity, R.layout.row, requestArrayList);
 
         try{
             View testView = businessHistoryRequestsAdapter.getView(0, null, null);

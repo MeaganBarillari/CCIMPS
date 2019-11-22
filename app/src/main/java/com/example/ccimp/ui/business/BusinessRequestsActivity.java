@@ -3,17 +3,24 @@ package com.example.ccimp.ui.business;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestsInterface;
-import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.presenter.business.BusinessCurrentRequestsAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.ccimp.ui.presenter.business.BusinessRequestsPresenter;
 
@@ -77,7 +84,7 @@ public class BusinessRequestsActivity extends AppCompatActivity implements Busin
     }
 
     @Override
-    public void setupRequestsList(ArrayList<BusinessRequest> requestsArrayList) {
+    public void setupRequestsList(ArrayList<Request> requestsArrayList) {
         businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(this, R.layout.rowtwolines, requestsArrayList);
         listView1.setAdapter(businessCurrentRequestsAdapter);
 
