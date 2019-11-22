@@ -3,11 +3,11 @@ package com.example.ccimp.ui.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Request implements Parcelable {
+public class BusinessRequest implements Parcelable {
 
     private String businessName, requestID, supplierID, businessID, price, needByDate, requestDate, status;
 
-    public Request(String businessName, String requestID, String supplierID, String businessID, String price, String needByDate, String requestDate, String status) {
+    public BusinessRequest(String businessName, String requestID, String supplierID, String businessID, String price, String needByDate, String requestDate, String status) {
         this.businessName = businessName;
         this.requestID = requestID;
         this.supplierID = supplierID;
@@ -18,7 +18,7 @@ public class Request implements Parcelable {
         this.status = status;
     }
 
-    protected Request(Parcel in) {
+    protected BusinessRequest(Parcel in) {
         businessName = in.readString();
         requestID = in.readString();
         supplierID = in.readString();
@@ -29,15 +29,15 @@ public class Request implements Parcelable {
         status = in.readString();
     }
 
-    public static final Creator<Request> CREATOR = new Creator<Request>() {
+    public static final Creator<BusinessRequest> CREATOR = new Creator<BusinessRequest>() {
         @Override
-        public Request createFromParcel(Parcel in) {
-            return new Request(in);
+        public BusinessRequest createFromParcel(Parcel in) {
+            return new BusinessRequest(in);
         }
 
         @Override
-        public Request[] newArray(int size) {
-            return new Request[size];
+        public BusinessRequest[] newArray(int size) {
+            return new BusinessRequest[size];
         }
     };
 
