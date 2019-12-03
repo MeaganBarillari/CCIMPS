@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
-import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.BusinessRequest;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierHomePresenter;
@@ -64,9 +64,9 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Request  request = (Request) parent.getItemAtPosition(position);
+                    BusinessRequest businessRequest = (BusinessRequest) parent.getItemAtPosition(position);
                     Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                    intent.putExtra("Request", request);
+                    intent.putExtra("BusinessRequest", businessRequest);
                     startActivity(intent);
                 }
             });
@@ -105,7 +105,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     }
 
     // Called by presenter
-    public void setupRequestList(ArrayList<Request> requestList) {
+    public void setupRequestList(ArrayList<BusinessRequest> requestList) {
         supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(this, R.layout.row, requestList);
         requestListView.setAdapter(supplierCurrentRequestAdapter);
     }

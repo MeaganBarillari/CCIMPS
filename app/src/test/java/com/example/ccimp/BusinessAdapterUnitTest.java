@@ -10,8 +10,8 @@ import com.example.ccimp.ui.business.BusinessRequestCartActivity;
 import com.example.ccimp.ui.business.BusinessRequestFromSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestPerSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestsActivity;
+import com.example.ccimp.ui.model.BusinessRequest;
 import com.example.ccimp.ui.model.Order;
-import com.example.ccimp.ui.model.Request;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
@@ -36,7 +36,7 @@ public class BusinessAdapterUnitTest {
 
     ArrayList<inventory_supplier> inventoryArrayList;
     ArrayList<Order> orderArrayList;
-    ArrayList<Request> requestArrayList;
+    ArrayList<BusinessRequest> requestArrayList;
     ArrayList<inventory_business> inventoryBusinessArrayList;
     ArrayList<order_info> orderItemArrayList;
     ArrayList<User> UserArrayList;
