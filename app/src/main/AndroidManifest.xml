@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.supplier.SupplierAddToInventory"></activity>
         <activity android:name=".ui.business.BusinessOrderHistoryActivity" />
         <activity android:name=".ui.supplier.SupplierRequestsHistoryActivity" />
         <activity
@@ -32,7 +33,7 @@
         <activity android:name=".ui.business.BusinessInventoryActivity" />
         <activity android:name=".ui.business.BusinessOrderDetailActivity" />
         <activity android:name=".ui.business.BusinessProfileActivity" />
-        <activity android:name=".ui.supplier.SupplierInventoryActivity"/>
+        <activity android:name=".ui.supplier.SupplierInventoryActivity" />
         <activity android:name=".ui.business.BusinessRequestCartActivity" />
         <activity android:name=".ui.business.BusinessRequestFromSupplierActivity" />
         <activity android:name=".ui.business.BusinessRequestPerSupplierActivity" />

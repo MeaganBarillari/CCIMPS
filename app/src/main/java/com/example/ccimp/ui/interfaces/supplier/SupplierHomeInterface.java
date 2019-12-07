@@ -22,7 +22,7 @@ public interface SupplierHomeInterface {
     interface SupplierHomeView {
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-        void setupRequestList(ArrayList<BusinessRequest> requestArrayList);
+        void setupRequestList();
 
         String getIntentData(Intent intent);
 

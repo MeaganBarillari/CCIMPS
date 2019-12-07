@@ -17,10 +17,12 @@ import java.util.ArrayList;
 
 public class SupplierCurrentRequestAdapter extends ArrayAdapter<BusinessRequest> {
     private ArrayList<BusinessRequest> requestArrayList;
+    private Context ctx;
 
-    public SupplierCurrentRequestAdapter(@NonNull Context context, int resourceId, ArrayList<BusinessRequest> requestArrayList) {
-        super(context,resourceId,requestArrayList);
+    public SupplierCurrentRequestAdapter(ArrayList<BusinessRequest> requestArrayList, Context context) {
+        super(context, R.layout.activity_supplier_home, requestArrayList);
         this.requestArrayList = requestArrayList;
+        this.ctx = context;
 
     }
 

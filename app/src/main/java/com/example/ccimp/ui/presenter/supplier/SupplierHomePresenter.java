@@ -21,7 +21,6 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
 
     @Override
     public void onViewCreate() {
-        supplierHomeView.setupRequestList(requestArrayList);
         supplierHomeView.setSupplierUser(supplier);
     }
 
