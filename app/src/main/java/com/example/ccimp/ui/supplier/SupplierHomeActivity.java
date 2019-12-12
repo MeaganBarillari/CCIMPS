@@ -59,6 +59,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             requestListView = findViewById(R.id.current_requests_listview);
             requestList = new ArrayList<>();
             setupRequestList();
+            System.out.println(requestList);
 
 
             // Will populate the request array list by calling to database and creating request objects
@@ -143,8 +144,10 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
                                 if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
                                     requestList.add(businessRequest);
                                     for(int j = 0 ; j < values.length; j++) {
-                                        if(values[j] == null)
+                                        if(values[j] == null) {
                                             values[j] = businessRequest;
+                                            break;
+                                        }
                                     }
                                 }
                             }

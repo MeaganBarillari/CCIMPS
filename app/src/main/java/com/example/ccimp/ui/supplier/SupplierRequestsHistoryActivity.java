@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -39,6 +41,7 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
     private SupplierRequestHistoryInterface.SupplierRequestHistoryPresenter supplierRequestHistoryPresenter;
     private User supplier;
     ArrayList<BusinessRequest> requestList;
+    private  BusinessRequest[] values = new BusinessRequest[10000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,23 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
         requestListView = findViewById(R.id.previous_requests_listview);
         requestList = new ArrayList<>();
         setupRequestHistoryList();
+
+
+        requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SupplierRequestsHistoryActivity.this, SupplierRequestDetailActivity.class);
+                intent.putExtra("supplier", supplier);
+                intent.putExtra("businessName", values[position].getBusinessName());
+                intent.putExtra("requestID", values[position].getRequestID());
+                intent.putExtra("businessID", values[position].getBusinessID());
+                intent.putExtra("price", values[position].getPrice());
+                intent.putExtra("needByDate", values[position].getNeedByDate());
+                intent.putExtra("requestDate", values[position].getRequestDate());
+                intent.putExtra("status", values[position].getStatus());
+                startActivity(intent);
+            }
+        });
 
         navigation = findViewById(R.id.supplierNavigation);
 
@@ -115,6 +135,12 @@ public class SupplierRequestsHistoryActivity extends AppCompatActivity implement
                                 BusinessRequest businessRequest = new BusinessRequest(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
                                 if(businessRequest.getSupplierID().equals(supplier.getUserID()) &&  (businessRequest.getStatus().equals("Complete"))){
                                     requestList.add(businessRequest);
+                                    for(int j = 0; j < values.length; j++) {
+                                        if(values[j] == null) {
+                                            values[j] = businessRequest;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                             SupplierRequestHistoryAdapter adapter = new SupplierRequestHistoryAdapter(requestList, getApplicationContext());

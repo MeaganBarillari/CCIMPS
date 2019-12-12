@@ -20,6 +20,6 @@ public interface CustomerMenuInterface {
         boolean callCustomerNavigation(MenuItem customerMenuItem);
         String getIntentBusinessID(Intent intent);
         User getIntentCustomerObject(Intent intent);
-        void setupInventoryList(ArrayList<inventory_business> inventoryArrayList);
+        void setupInventoryList();
     }
 }
