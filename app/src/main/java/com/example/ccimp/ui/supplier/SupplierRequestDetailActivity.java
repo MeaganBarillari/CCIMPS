@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,6 +41,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     private TextView businessName, requestID, status, totalPrice;
     private ListView requestItemListView;
     BottomNavigationView navigation;
+    Spinner spinner;
     private User supplier;
 //    private SupplierRequestDetailAdapter supplierRequestDetailAdapter;
 //    private SupplierRequestDetailInterface.SupplierRequestDetailPresenter supplierRequestDetailPresenter;
@@ -60,7 +62,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         setupRequestItemList();
 
         String[] items = new String[] {"Decline", "Accept", "Complete", "Ready", "In Progress"};
-        Spinner spinner = (Spinner) findViewById(R.id.changestatus);
+        spinner = (Spinner) findViewById(R.id.changestatus);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -69,8 +71,8 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         // Gets request object and sets text view's based on request fields
         // returns the request object that we use to get the supplierID and get the requestItem Listview
         Intent intent = getIntent();
-
         Bundle bundle = getIntent().getExtras();
+
         supplier = intent.getParcelableExtra("supplier");
         businessName.setText(bundle.getString("businessName"));
         requestID.setText(bundle.getString("requestID"));
@@ -81,7 +83,6 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
 //        supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
 //        supplierRequestDetailPresenter.onViewCreate();
 
-
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -89,6 +90,17 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
             }
         });
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
     }
 
     @Override
