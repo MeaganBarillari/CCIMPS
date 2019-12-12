@@ -37,6 +37,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
     ListView orderItemListView;
     Order tempOrder;
     User business;
+    Spinner spinner;
     BusinessOrderDetailAdapter businessOrderDetailAdapter;
     BusinessOrderDetailInterface.BusinessOrderDetailPresenter businessOrderDetailPresenter;
     Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
@@ -54,7 +55,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         totalPrice = findViewById(R.id.request_total_amount);
 
         String[] items = new String[] {"Decline", "Accept", "Complete", "Ready", "In Progress"};
-        Spinner spinner = (Spinner) findViewById(R.id.changestatus);
+        spinner = (Spinner) findViewById(R.id.changestatus);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,6 +82,18 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     return callBusinessNavigation(item);
+                }
+            });
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // your code here
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
                 }
             });
         }

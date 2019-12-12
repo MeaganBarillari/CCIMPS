@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,7 +94,9 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
+                Toast.makeText(parentView.getContext(),
+                        "OnItemSelectedListener : " + parentView.getItemAtPosition(position).toString(),
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
