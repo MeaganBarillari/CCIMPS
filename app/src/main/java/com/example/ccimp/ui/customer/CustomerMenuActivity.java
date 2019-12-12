@@ -11,13 +11,24 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.customer.CustomerMenuInterface;
+import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.presenter.customer.CustomerMenuAdapter;
 import com.example.ccimp.ui.presenter.customer.CustomerMenuPresenter;
+import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,43 +48,45 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_menu);
 
-        Intent intent = getIntent();
-        businessID = getIntentBusinessID(intent);
-        customer = getIntentCustomerObject(intent);
-        if(businessID != null){
-            customerMenuPresenter = new CustomerMenuPresenter(this, businessID);
+        final Intent intent = getIntent();
+        businessID = intent.getParcelableExtra("businessID");
+        customer = intent.getParcelableExtra("customer");
 
-            btnCart = findViewById(R.id.btnCart);
-            navigation = findViewById(R.id.customerNavigation);
-            businessMenuListView = findViewById(R.id.businessmenulist);
+        //customerMenuPresenter = new CustomerMenuPresenter(this, businessID);
 
-            customerMenuPresenter.onViewCreate();
+        btnCart = findViewById(R.id.btnCart);
+        navigation = findViewById(R.id.customerNavigation);
+        businessMenuListView = findViewById(R.id.businessmenulist);
 
-            btnCart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent cart = new Intent(CustomerMenuActivity.this, CustomerOrderCartActivity.class);
-                    startActivity(cart);
-                }
-            });
+       // customerMenuPresenter.onViewCreate();
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cart = new Intent(CustomerMenuActivity.this, CustomerOrderCartActivity.class);
+                cart.putExtra("businessID", businessID);
+                cart.putExtra("customer", customer);
+                startActivity(cart);
+            }
+        });
 
 
-            businessMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    inventory_business  item = (inventory_business) parent.getItemAtPosition(position);
-                    addItemToCart(item);
-                }
-            });
+        businessMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                inventory_business  item = (inventory_business) parent.getItemAtPosition(position);
+                addItemToCart(item);
+            }
+        });
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callCustomerNavigation(item);
-                }
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callCustomerNavigation(item);
+            }
 
-            });
-        }
+        });
+
     }
 
     @Override
@@ -100,23 +113,53 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
 
     @Override
     public String getIntentBusinessID(Intent intent) {
-        return intent.getStringExtra("businessID");
-    }
-
-    @Override
-    public User getIntentCustomerObject(Intent intent) {
-        User customer = intent.getParcelableExtra("customer");
-
-        if (customer != null){
-            return customer;
-        }
         return null;
     }
 
     @Override
-    public void setupInventoryList(ArrayList<inventory_business> inventoryArrayList) {
-        customerMenuAdapter = new CustomerMenuAdapter(this, R.layout.rowoneline, inventoryArrayList);
-        businessMenuListView.setAdapter(customerMenuAdapter);
+    public User getIntentCustomerObject(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void setupInventoryList() {
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try{
+//                            JSONObject obj = new JSONObject(response);
+//                            JSONArray array = obj.getJSONArray("businessInventory");
+//                            for(int i = 0; i< array.length();i++){
+//                                JSONObject orderObj = array.getJSONObject(i);
+//                                inventory_business item = new inventory_business(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
+//                                if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
+//                                    requestList.add(businessRequest);
+//                                    for(int j = 0 ; j < values.length; j++) {
+//                                        if(values[j] == null) {
+//                                            values[j] = businessRequest;
+//                                            break;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            SupplierCurrentRequestAdapter adapter = new SupplierCurrentRequestAdapter(requestList, getApplicationContext());
+//                            requestListView.setAdapter(adapter);
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }){
+//
+//        };
+//        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
     public void addItemToCart(inventory_business item){
