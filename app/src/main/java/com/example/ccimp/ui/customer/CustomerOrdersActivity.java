@@ -51,9 +51,9 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                         startActivity(c);
                         break;
                     case R.id.navigation_customer_order:
-                        Intent a = new Intent(CustomerOrdersActivity.this,CustomerOrdersActivity.class);
-                        a.putExtra("customer", customer);
-                        startActivity(a);
+//                        Intent a = new Intent(CustomerOrdersActivity.this,CustomerOrdersActivity.class);
+//                        a.putExtra("customer", customer);
+//                        startActivity(a);
                         break;
                     case R.id.navigation_customer_profile:
                         Intent b = new Intent(CustomerOrdersActivity.this, CustomerProfileActivity.class);
