@@ -15,6 +15,7 @@
     <string name="title_profile">Profile</string>
     <string name="business_menu">Business Menu</string>
     <string name="menu">Menu</string>
+    <string name="changestatus">Change Status</string>
 
     <string-array name="userTypes">
         <item>Customer</item>

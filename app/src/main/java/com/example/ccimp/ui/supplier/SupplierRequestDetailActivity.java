@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,13 +52,19 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
 
         requestItemListView = findViewById(R.id.requestiems);
         navigation = findViewById(R.id.supplierNavigation);
-        btnChangeStatus = findViewById(R.id.btnChangeStatus);
         businessName = findViewById(R.id.business_name);
         requestID = findViewById(R.id.request_number);
         status = findViewById(R.id.request_status);
         totalPrice = findViewById(R.id.totalPrice);
         itemList = new ArrayList<>();
         setupRequestItemList();
+
+        String[] items = new String[] {"Decline", "Accept", "Complete", "Ready", "In Progress"};
+        Spinner spinner = (Spinner) findViewById(R.id.changestatus);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         // Gets request object and sets text view's based on request fields
         // returns the request object that we use to get the supplierID and get the requestItem Listview
@@ -73,12 +81,6 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
 //        supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
 //        supplierRequestDetailPresenter.onViewCreate();
 
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
