@@ -11,26 +11,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.supplier.SupplierRequestDetailInterface;
 import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.request_info;
+import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class SupplierRequestDetailActivity extends AppCompatActivity implements SupplierRequestDetailInterface.SupplierRequestDetailView {
 
+    ArrayList<request_info> itemList;
     private TextView businessName, requestID, status, totalPrice;
     private ListView requestItemListView;
     BottomNavigationView navigation;
-    private BusinessRequest tempRequest;
     private User supplier;
-    private SupplierRequestDetailAdapter supplierRequestDetailAdapter;
-    private SupplierRequestDetailInterface.SupplierRequestDetailPresenter supplierRequestDetailPresenter;
+//    private SupplierRequestDetailAdapter supplierRequestDetailAdapter;
+//    private SupplierRequestDetailInterface.SupplierRequestDetailPresenter supplierRequestDetailPresenter;
     Button btnChangeStatus;
 
     @Override
@@ -45,29 +55,38 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         requestID = findViewById(R.id.request_number);
         status = findViewById(R.id.request_status);
         totalPrice = findViewById(R.id.totalPrice);
+        itemList = new ArrayList<>();
+        setupRequestItemList();
 
         // Gets request object and sets text view's based on request fields
         // returns the request object that we use to get the supplierID and get the requestItem Listview
         Intent intent = getIntent();
-        tempRequest = getIntentData(intent);
-        if(tempRequest != null){
-            supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
-            supplierRequestDetailPresenter.onViewCreate();
 
-            btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        Bundle bundle = getIntent().getExtras();
+        supplier = intent.getParcelableExtra("supplier");
+        businessName.setText(bundle.getString("businessName"));
+        requestID.setText(bundle.getString("requestID"));
 
-                }
-            });
+        status.setText(bundle.getString("status"));
+        totalPrice.setText(bundle.getString("price"));
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callSupplierNavigation(item);
-                }
-            });
-        }
+//        supplierRequestDetailPresenter = new SupplierRequestDetailPresenter(this, tempRequest);
+//        supplierRequestDetailPresenter.onViewCreate();
+
+        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callSupplierNavigation(item);
+            }
+        });
+
     }
 
     @Override
@@ -75,12 +94,12 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
                 Intent c = new Intent(SupplierRequestDetailActivity.this, SupplierHomeActivity.class);
-                c.putExtra("userEmail", supplier.getEmail());
+                c.putExtra("supplier", supplier);
                 startActivity(c);
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent d = new Intent(SupplierRequestDetailActivity.this, SupplierInventoryActivity.class);
-                d.putExtra("supplierID", supplier.getUserID());
+                d.putExtra("supplier", supplier);
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:
@@ -94,16 +113,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
 
     @Override
     public BusinessRequest getIntentData(Intent intent) {
-        BusinessRequest businessRequest = intent.getParcelableExtra("BusinessRequest");
-
-        if (businessRequest != null){
-            businessName.setText(businessRequest.getBusinessName());
-            requestID.setText(businessRequest.getRequestID());
-            status.setText(businessRequest.getStatus());
-            totalPrice.setText(businessRequest.getPrice());
-            return businessRequest;
-        }
-        return null;
+     return null;
     }
 
     @Override
@@ -112,9 +122,38 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void setupRequestItemList(ArrayList<request_info> requestItemArrayList) {
-        supplierRequestDetailAdapter = new SupplierRequestDetailAdapter(this, R.layout.row, requestItemArrayList);
-        requestItemListView.setAdapter(supplierRequestDetailAdapter);
+    public void setupRequestItemList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getRequestInfo.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("request_info");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                request_info item = new request_info(orderObj.getString("requestId"), orderObj.getString("itemName"), orderObj.getString("quantity"), orderObj.getString("price"));
+                                if(item.getRequestid().equals(requestID.getText())){
+                                    itemList.add(item);
+                                }
+                            }
+
+                            SupplierRequestDetailAdapter adapter = new SupplierRequestDetailAdapter(itemList, getApplicationContext());
+                            requestItemListView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
 }

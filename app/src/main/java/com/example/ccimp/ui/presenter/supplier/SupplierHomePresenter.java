@@ -21,7 +21,7 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
 
     @Override
     public void onViewCreate() {
-        supplierHomeView.setSupplierUser(supplier);
+
     }
 
     @Override
@@ -33,8 +33,6 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
     @Override
     public ArrayList<BusinessRequest> getCurrentRequest(String supplierID) {
         ArrayList<BusinessRequest> list = new ArrayList<BusinessRequest>();
-        //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
-        list.add(businessRequest);
         return list;
     }
 }

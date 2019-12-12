@@ -76,12 +76,11 @@
         <ListView
             android:id="@+id/supplier_inventory_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="444dp"
+            android:background="@color/colorGreyBackground"
             android:divider="@color/colorWhite"
             android:dividerHeight="10.0sp"
-            android:background="@color/colorGreyBackground"
-            android:textColor="@color/colorBlack">
-        </ListView>
+            android:textColor="@color/colorBlack"></ListView>
 
     </LinearLayout>
 

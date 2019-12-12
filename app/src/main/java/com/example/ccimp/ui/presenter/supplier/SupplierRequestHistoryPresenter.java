@@ -10,8 +10,7 @@ public class SupplierRequestHistoryPresenter implements SupplierRequestHistoryIn
 
     SupplierRequestHistoryInterface.SupplierRequestHistoryView supplierRequestHistoryView;
     ArrayList<BusinessRequest> requestArrayList;
-    BusinessRequest businessRequest1 = new BusinessRequest("Starbucks", "123", "231", "345", "200", "2019/11/1",
-            "2019/10/31", "Working");
+
 
     public SupplierRequestHistoryPresenter(SupplierRequestHistoryInterface.SupplierRequestHistoryView supplierRequestHistoryView, User supplier){
         this.supplierRequestHistoryView = supplierRequestHistoryView;
@@ -20,14 +19,12 @@ public class SupplierRequestHistoryPresenter implements SupplierRequestHistoryIn
 
     @Override
     public void onViewCreate() {
-        supplierRequestHistoryView.setupRequestHistoryList(requestArrayList);
     }
 
     @Override
     public ArrayList<BusinessRequest> getRequestHistoryList(String requestID) {
         ArrayList<BusinessRequest> list = new ArrayList<BusinessRequest>();
         // TODO: Will need to be replaced by a call to another function that populates the list from the model based off of the supplierID
-        list.add(businessRequest1);
         return list;
     }
 }

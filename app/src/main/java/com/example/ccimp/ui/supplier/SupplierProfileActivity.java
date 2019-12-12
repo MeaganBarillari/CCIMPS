@@ -32,8 +32,6 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
 
         Intent intent = getIntent();
         supplier = getIntentData(intent);
-        if(supplier != null){
-
             supplierProfilePresenter = new SupplierProfilePresenter(this);
 
             btnlogout = findViewById(R.id.btn_logout);
@@ -59,7 +57,6 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
                 }
 
             });
-        }
     }
 
     @Override
@@ -67,12 +64,12 @@ public class SupplierProfileActivity extends AppCompatActivity implements Suppli
         switch (supplierMenuItem.getItemId()) {
             case R.id.supplier_navigation_home:
                 Intent c = new Intent(SupplierProfileActivity.this, SupplierHomeActivity.class);
-                c.putExtra("userEmail", supplier.getEmail());
+                c.putExtra("supplier", supplier);
                 startActivity(c);
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent d = new Intent(SupplierProfileActivity.this, SupplierInventoryActivity.class);
-                d.putExtra("supplierID", supplier.getUserID());
+                d.putExtra("supplier", supplier);
                 startActivity(d);
                 break;
             case R.id.navigation_supplier_profile:

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.User;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +27,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class SupplierAddToInventory extends AppCompatActivity {
-
+    private User supplier;
     EditText etItemName, etPrice;
     Button btn_addItem;
 
@@ -39,11 +40,14 @@ public class SupplierAddToInventory extends AppCompatActivity {
         etPrice = findViewById(R.id.input_price);
         btn_addItem = findViewById(R.id.btn_addItem);
 
+        Intent intent = getIntent();
+        supplier = intent.getParcelableExtra("supplier");
+
         btn_addItem.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 String itemName = etItemName.getText().toString();
                 String price = etPrice.getText().toString();
-                String supplierID = "13";
+                String supplierID = supplier.getUserID();
                 String customDetail = itemName;
                 backgroundWorker bgWorker = new backgroundWorker(SupplierAddToInventory.this);
                 bgWorker.execute(itemName, price, supplierID, customDetail);
@@ -114,9 +118,8 @@ public class SupplierAddToInventory extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            alertDialog.setMessage(result);
-            alertDialog.show();
-            Intent intent = new Intent(SupplierAddToInventory.this, SupplierHomeActivity.class);
+            Intent intent = new Intent(SupplierAddToInventory.this, SupplierInventoryActivity.class);
+            intent.putExtra("supplier", supplier);
             startActivity(intent);
         }
 

@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
@@ -37,21 +38,24 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
     private Button btnseehistory;
     private ListView requestListView;
     BottomNavigationView navigation;
-    private User supplier;
-    private String supplierEmail;
-    private SupplierCurrentRequestAdapter supplierCurrentRequestAdapter;
-    private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
-    private BusinessRequest[] values = new BusinessRequest[1000];
+    private static User supplier;
+
+
+//    private SupplierHomeInterface.SupplierHomePresenter supplierHomePresenter;
+    private BusinessRequest[] values = new BusinessRequest[10000];
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_home);
 
         // Get User information from Intent
-        Intent intent = getIntent();
-        supplierEmail = getIntentData(intent);
-        if(supplierEmail != null){
-            supplierHomePresenter = new SupplierHomePresenter(this, supplierEmail);
+//        Intent intent = getIntent();
+//        supplierEmail = getIntentData(intent);
+
+            Intent intent = getIntent();
+            supplier = intent.getParcelableExtra("supplier");
+
+            //supplierHomePresenter = new SupplierHomePresenter(this, supplierEmail);
 
             navigation = findViewById(R.id.supplierNavigation);
             btnseehistory = findViewById(R.id.btnHistory);
@@ -59,9 +63,10 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             requestList = new ArrayList<>();
             setupRequestList();
 
+
             // Will populate the request array list by calling to database and creating request objects
             // as well as get the supplier supplier object we need to use for this account
-            supplierHomePresenter.onViewCreate();
+//            supplierHomePresenter.onViewCreate();
 
             // Listens for a click on the see history button, simply passes along the supplierID to that acitivity,
             // populating the listview will be handled by the SupplierRequestHistoryPresenter
@@ -78,9 +83,15 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
             requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    BusinessRequest businessRequest = (BusinessRequest) parent.getItemAtPosition(position);
                     Intent intent = new Intent(SupplierHomeActivity.this, SupplierRequestDetailActivity.class);
-                    intent.putExtra("BusinessRequest", businessRequest);
+                    intent.putExtra("supplier", supplier);
+                    intent.putExtra("businessName", values[position].getBusinessName());
+                    intent.putExtra("requestID", values[position].getRequestID());
+                    intent.putExtra("businessID", values[position].getBusinessID());
+                    intent.putExtra("price", values[position].getPrice());
+                    intent.putExtra("needByDate", values[position].getNeedByDate());
+                    intent.putExtra("requestDate", values[position].getRequestDate());
+                    intent.putExtra("status", values[position].getStatus());
                     startActivity(intent);
                 }
             });
@@ -93,7 +104,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
                 }
 
             });
-        }
+
     }
 
     // Directs supplier to correct activity based on navigation selected
@@ -106,7 +117,7 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
                 break;
             case R.id.navigation_supplier_inventory:
                 Intent inventory = new Intent(SupplierHomeActivity.this, SupplierInventoryActivity.class);
-                inventory.putExtra("supplierID", supplier.getUserID());
+                inventory.putExtra("supplier", supplier);
                 startActivity(inventory);
                 break;
             case R.id.navigation_supplier_profile:
@@ -132,8 +143,13 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
                             for(int i = 0; i< array.length();i++){
                                 JSONObject orderObj = array.getJSONObject(i);
                                 BusinessRequest businessRequest = new BusinessRequest(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
-                                requestList.add(businessRequest);
-                                values[i] = businessRequest;
+                                if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
+                                    requestList.add(businessRequest);
+                                    for(int j = 0 ; j < values.length; j++) {
+                                        if(values[j] == null)
+                                            values[j] = businessRequest;
+                                    }
+                                }
                             }
 
                             SupplierCurrentRequestAdapter adapter = new SupplierCurrentRequestAdapter(requestList, getApplicationContext());
@@ -159,8 +175,12 @@ public class SupplierHomeActivity extends AppCompatActivity implements SupplierH
         return intent.getStringExtra("userEmail");
     }
 
+    private void setUser(User user){
+        supplier = user;
+        System.out.println(supplier);
+    }
+
     @Override
-    public void setSupplierUser(User supplier) {
-        this.supplier = supplier;
+    public void setSupplierUser() {
     }
 }

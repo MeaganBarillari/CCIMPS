@@ -13,8 +13,6 @@ public class SupplierRequestDetailPresenter implements SupplierRequestDetailInte
     ArrayList<request_info> requestItemArrayList;
     String requestID;
     User supplier;
-    request_info request_info1 = new request_info("123", "123", "3", "$300");
-    request_info request_info2 = new request_info("123", "124", "1", "$15");
 
     public SupplierRequestDetailPresenter(SupplierRequestDetailInterface.SupplierRequestDetailView supplierRequestDetailView, BusinessRequest businessRequest){
         this.supplierRequestDetailView = supplierRequestDetailView;
@@ -26,8 +24,6 @@ public class SupplierRequestDetailPresenter implements SupplierRequestDetailInte
     @Override
     public void onViewCreate()
     {
-        supplierRequestDetailView.setupRequestItemList(requestItemArrayList);
-        supplierRequestDetailView.setSupplierUser(supplier);
     }
 
     @Override
@@ -40,8 +36,6 @@ public class SupplierRequestDetailPresenter implements SupplierRequestDetailInte
     public ArrayList<request_info> getCurrentRequestItems(String requestID) {
         ArrayList<request_info> list = new ArrayList<request_info>();
         //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
-        list.add(request_info1);
-        list.add(request_info2);
         return list;
     }
 

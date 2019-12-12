@@ -19,6 +19,6 @@ public interface SupplierRequestHistoryInterface {
     interface SupplierRequestHistoryView {
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
         User getIntentData(Intent intent);
-        void setupRequestHistoryList(ArrayList<BusinessRequest> requestHistoryArrayList);
+        void setupRequestHistoryList();
     }
 }

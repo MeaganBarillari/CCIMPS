@@ -23,6 +23,6 @@ public interface SupplierRequestDetailInterface {
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
         BusinessRequest getIntentData(Intent intent);
         void setSupplierUser(User supplier);
-        void setupRequestItemList(ArrayList<request_info> requestItemArrayList);
+        void setupRequestItemList();
     }
 }

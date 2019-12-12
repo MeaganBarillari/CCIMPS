@@ -26,6 +26,6 @@ public interface SupplierHomeInterface {
 
         String getIntentData(Intent intent);
 
-        void setSupplierUser(User supplier);
+        void setSupplierUser();
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 public interface LoginInterface {
 
     interface LoginPresenter {
-        void performLogin(String type, String userEmail, String password,String userType, Context context);
+        void performLogin(String type, String userEmail, String password, Context context);
     }
 
     interface LoginView {
