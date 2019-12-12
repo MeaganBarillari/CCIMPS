@@ -15,11 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.order_info;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerOrderCartActivity extends AppCompatActivity {
 
+    User customer;
     ListView listView;
     Button btnCustomerorder;
     TextView businessName, totalPrice;
@@ -32,6 +34,8 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order_cart);
 
+        Intent intent = getIntent();
+        customer = intent.getParcelableExtra("customer");
         btnCustomerorder = findViewById(R.id.fab_customer_order);
         businessName = findViewById(R.id.BusinessName);
         totalPrice = findViewById(R.id.order_pric);
@@ -59,14 +63,17 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent c = new Intent(CustomerOrderCartActivity.this, CustomerHomeActivity.class);
+                        c.putExtra("customer", customer);
                         startActivity(c);
                         break;
                     case R.id.navigation_customer_order:
                         Intent a = new Intent(CustomerOrderCartActivity.this,CustomerOrdersActivity.class);
+                        a.putExtra("customer", customer);
                         startActivity(a);
                         break;
                     case R.id.navigation_customer_profile:
                         Intent b = new Intent(CustomerOrderCartActivity.this, CustomerProfileActivity.class);
+                        b.putExtra("customer", customer);
                         startActivity(b);
                         break;
                 }
