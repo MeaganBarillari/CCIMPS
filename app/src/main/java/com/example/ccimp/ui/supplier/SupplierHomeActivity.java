@@ -21,7 +21,6 @@ import com.example.ccimp.ui.model.BusinessRequest;
 import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
-import com.example.ccimp.ui.presenter.supplier.SupplierHomePresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -29,8 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SupplierHomeActivity extends AppCompatActivity implements SupplierHomeInterface.SupplierHomeView {
 

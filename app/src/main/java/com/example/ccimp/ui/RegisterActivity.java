@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
                 String rePassword = etRePassword.getText().toString();
                 String userType = spinner.getSelectedItem().toString();
                 String type = "register";
-                mRegisterPresenter.performSignup(type,username, email, address, phone, password, rePassword, userType, RegisterActivity.this);
+                mRegisterPresenter.performSignup(type, username, email, address, phone, password, rePassword, userType, RegisterActivity.this);
             }
         });
 
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
     @Override
     public void signupValidations(){
-        Toast.makeText(getApplicationContext(), "Please enter all fields", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "You must enter all fields in order to signup", Toast.LENGTH_LONG).show();
     }
 
     @Override

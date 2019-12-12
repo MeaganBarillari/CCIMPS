@@ -147,7 +147,10 @@ public class backgroundWorker extends AsyncTask<String,Void,String> {
                                 JSONArray array = obj.getJSONArray("user");
                                 for(int i = 0; i< array.length();i++) {
                                     JSONObject orderObj = array.getJSONObject(i);
-                                    User user = new User(orderObj.getString("userId"), orderObj.getString("username"), orderObj.getString("email"), orderObj.getString("password"), orderObj.getString("type"), orderObj.getString("phone"), orderObj.getString("address"));
+                                    User user = new User(orderObj.getString("userId"), orderObj.getString("username"),
+                                            orderObj.getString("email"), orderObj.getString("password"),
+                                            orderObj.getString("type"), orderObj.getString("phone"),
+                                            orderObj.getString("address"));
 
                                     if (user.getEmail().equals(userEmail)) {
                                         if(user.getType().equals("Customer")){

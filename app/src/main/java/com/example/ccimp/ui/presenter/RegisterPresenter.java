@@ -1,6 +1,7 @@
 package com.example.ccimp.ui.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.ccimp.ui.interfaces.RegisterInterface;
 import com.example.ccimp.ui.model.backgroundWorker;
@@ -14,8 +15,10 @@ public class RegisterPresenter implements RegisterInterface.RegisterPresenter {
 
     @Override
     public void performSignup(String type, String username, String email, String address, String phone, String password, String rePassword, String userType, Context context){
-        if(!password.equals(rePassword)){
-            mRegisterView.pwdUnmatch();
+
+        if(!validate(username,email,address,phone,password,rePassword,userType)){
+            mRegisterView.signupValidations();
+            return;
         }
         else {
             backgroundWorker bgWorker = new backgroundWorker(context);
@@ -30,5 +33,16 @@ public class RegisterPresenter implements RegisterInterface.RegisterPresenter {
 
         }
 
+    }
+
+    public boolean validate(String username, String email, String address, String phone, String password, String rePassword, String userType){
+        boolean valid = true;
+
+        if(password.isEmpty() || username.isEmpty() || email.isEmpty() ||
+            address.isEmpty() || phone.isEmpty() || rePassword.isEmpty() ||
+            userType.isEmpty()){
+            valid = false;
+        }
+        return valid;
     }
 }
