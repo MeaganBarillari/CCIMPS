@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class CustomerMenuAdapter extends ArrayAdapter<inventory_business> {
     private ArrayList<inventory_business> inventoryArrayList;
 
-    public CustomerMenuAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_business> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
+    public CustomerMenuAdapter(ArrayList<inventory_business> inventoryArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_customer_menu,inventoryArrayList);
         this.inventoryArrayList = inventoryArrayList;
     }
 

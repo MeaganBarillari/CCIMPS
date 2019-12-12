@@ -42,6 +42,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
     BottomNavigationView navigation;
     private CustomerMenuAdapter customerMenuAdapter;
     private CustomerMenuInterface.CustomerMenuPresenter customerMenuPresenter;
+    private inventory_business[] values = new inventory_business[10000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,8 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         setContentView(R.layout.activity_customer_menu);
 
         final Intent intent = getIntent();
-        businessID = intent.getParcelableExtra("businessID");
+        businessID = intent.getStringExtra("businessID");
+        System.out.println(businessID);
         customer = intent.getParcelableExtra("customer");
 
         //customerMenuPresenter = new CustomerMenuPresenter(this, businessID);
@@ -57,6 +59,8 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         btnCart = findViewById(R.id.btnCart);
         navigation = findViewById(R.id.customerNavigation);
         businessMenuListView = findViewById(R.id.businessmenulist);
+        selectedInventoryBusiness = new ArrayList<>();
+        setupInventoryList();
 
        // customerMenuPresenter.onViewCreate();
 
@@ -123,43 +127,47 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
 
     @Override
     public void setupInventoryList() {
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try{
-//                            JSONObject obj = new JSONObject(response);
-//                            JSONArray array = obj.getJSONArray("businessInventory");
-//                            for(int i = 0; i< array.length();i++){
-//                                JSONObject orderObj = array.getJSONObject(i);
-//                                inventory_business item = new inventory_business(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
-//                                if(item){
-//                                    requestList.add(businessRequest);
-//                                    for(int j = 0 ; j < values.length; j++) {
-//                                        if(values[j] == null) {
-//                                            values[j] = businessRequest;
-//                                            break;
-//                                        }
-//                                    }
-//                                }
-//                            }
-//
-//                            SupplierCurrentRequestAdapter adapter = new SupplierCurrentRequestAdapter(requestList, getApplicationContext());
-//                            requestListView.setAdapter(adapter);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }){
-//
-//        };
-//        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("businessInventory");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                inventory_business item = new inventory_business(orderObj.getString("name"),orderObj.getString("businessID"),  orderObj.getString("itemID"), orderObj.getString("quantity"), orderObj.getString("available quantity"), orderObj.getString("price"));
+                                System.out.println(item.getBusinessID());
+
+                                if(item.getBusinessID().equals(businessID)){
+                                    System.out.println(businessID);
+                                    selectedInventoryBusiness.add(item);
+
+                                    for(int j = 0 ; j < values.length; j++) {
+                                        if(values[j] == null) {
+                                            values[j] = item;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            CustomerMenuAdapter adapter = new CustomerMenuAdapter(selectedInventoryBusiness, getApplicationContext());
+                            businessMenuListView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
     public void addItemToCart(inventory_business item){
