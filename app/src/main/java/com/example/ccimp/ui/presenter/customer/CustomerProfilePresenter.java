@@ -13,6 +13,6 @@ public class CustomerProfilePresenter implements CustomerProfileInterface.Custom
 
     @Override
     public void onViewCreate() {
-        customerProfileView.setupProfile();
+        //customerProfileView.setupProfile();
     }
 }

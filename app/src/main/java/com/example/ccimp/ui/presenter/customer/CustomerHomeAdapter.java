@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class CustomerHomeAdapter extends ArrayAdapter<User> {
     private ArrayList<User> userArrayList;
 
-    public CustomerHomeAdapter(@NonNull Context context, int resourceId, ArrayList<User> userArrayList) {
-        super(context,resourceId,userArrayList);
+    public CustomerHomeAdapter(ArrayList<User> userArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_customer_home,userArrayList);
         this.userArrayList = userArrayList;
     }
 

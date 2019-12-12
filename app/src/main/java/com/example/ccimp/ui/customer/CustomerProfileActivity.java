@@ -36,35 +36,34 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
         setContentView(R.layout.activity_customer_profile);
 
         Intent intent = getIntent();
-        user = getIntentData(intent);
-        if(user != null){
+        user = intent.getParcelableExtra("customer");
 
-            customerProfilePresenter = new CustomerProfilePresenter(this);
+        //customerProfilePresenter = new CustomerProfilePresenter(this);
 
-            navigation = findViewById(R.id.customerNavigation);
-            btnlogout = findViewById(R.id.btn_logout);
-            userName = findViewById(R.id.user_profile_name);
-            userEmail = findViewById(R.id.user_email);
-            userMobile = findViewById(R.id.user_mobile);
-            userAddress = findViewById(R.id.user_address);
+        navigation = findViewById(R.id.customerNavigation);
+        btnlogout = findViewById(R.id.btn_logout);
+        userName = findViewById(R.id.user_profile_name);
+        userEmail = findViewById(R.id.user_email);
+        userMobile = findViewById(R.id.user_mobile);
+        userAddress = findViewById(R.id.user_address);
 
-            customerProfilePresenter.onViewCreate();
+        //customerProfilePresenter.onViewCreate();
+        setupProfile();
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callSupplierNavigation(item);
-                }
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callSupplierNavigation(item);
+            }
 
-            });
+        });
 
-            btnlogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(CustomerProfileActivity.this, MainActivity.class));
-                }
-            });
-        }
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerProfileActivity.this, MainActivity.class));
+            }
+        });
 
 
     }
@@ -74,12 +73,12 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(CustomerProfileActivity.this, CustomerHomeActivity.class);
-                c.putExtra("userEmail", user.getEmail());
+                c.putExtra("customer", user);
                 startActivity(c);
                 break;
             case R.id.navigation_customer_order:
                 Intent a = new Intent(CustomerProfileActivity.this, CustomerOrdersActivity.class);
-                a.putExtra("supplier", user);
+                a.putExtra("customer", user);
                 startActivity(a);
                 break;
             case R.id.navigation_customer_profile:
@@ -90,11 +89,6 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
 
     @Override
     public User getIntentData(Intent intent) {
-        User supplier = intent.getParcelableExtra("supplier");
-
-        if (supplier != null){
-            return supplier;
-        }
         return null;
     }
 

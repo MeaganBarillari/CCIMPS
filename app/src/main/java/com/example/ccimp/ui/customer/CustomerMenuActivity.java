@@ -81,7 +81,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         switch (customerMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(CustomerMenuActivity.this, CustomerHomeActivity.class);
-                c.putExtra("userEmail", customer.getEmail());
+                c.putExtra("customer", customer);
                 startActivity(c);
                 break;
             case R.id.navigation_customer_order:

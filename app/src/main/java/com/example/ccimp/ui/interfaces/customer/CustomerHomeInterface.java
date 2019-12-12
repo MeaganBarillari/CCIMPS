@@ -20,6 +20,6 @@ public interface CustomerHomeInterface {
         boolean callCustomerNavigation(MenuItem customerMenuItem);
         String getIntentData(Intent intent);
         void setCustomerUser(User customer);
-        void setupBusinessList(ArrayList<User> userArrayList);
+        void setupBusinessList();
     }
 }
