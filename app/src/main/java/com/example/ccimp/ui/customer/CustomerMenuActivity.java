@@ -133,7 +133,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
 //                            for(int i = 0; i< array.length();i++){
 //                                JSONObject orderObj = array.getJSONObject(i);
 //                                inventory_business item = new inventory_business(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
-//                                if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
+//                                if(item){
 //                                    requestList.add(businessRequest);
 //                                    for(int j = 0 ; j < values.length; j++) {
 //                                        if(values[j] == null) {
