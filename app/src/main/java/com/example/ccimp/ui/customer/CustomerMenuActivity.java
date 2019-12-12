@@ -123,43 +123,43 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
 
     @Override
     public void setupInventoryList() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-                            JSONArray array = obj.getJSONArray("businessInventory");
-                            for(int i = 0; i< array.length();i++){
-                                JSONObject orderObj = array.getJSONObject(i);
-                                inventory_business item = new inventory_business(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
-                                if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
-                                    requestList.add(businessRequest);
-                                    for(int j = 0 ; j < values.length; j++) {
-                                        if(values[j] == null) {
-                                            values[j] = businessRequest;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            SupplierCurrentRequestAdapter adapter = new SupplierCurrentRequestAdapter(requestList, getApplicationContext());
-                            requestListView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-
-        };
-        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessInventory.php",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try{
+//                            JSONObject obj = new JSONObject(response);
+//                            JSONArray array = obj.getJSONArray("businessInventory");
+//                            for(int i = 0; i< array.length();i++){
+//                                JSONObject orderObj = array.getJSONObject(i);
+//                                inventory_business item = new inventory_business(orderObj.getString("businessName"),orderObj.getString("requestID"),  orderObj.getString("supplierID"), orderObj.getString("businessID"), orderObj.getString("price"), orderObj.getString("needByDate"), orderObj.getString("requestDate"), orderObj.getString("status"));
+//                                if(businessRequest.getSupplierID().equals(supplier.getUserID()) && ! (businessRequest.getStatus().equals("Complete"))){
+//                                    requestList.add(businessRequest);
+//                                    for(int j = 0 ; j < values.length; j++) {
+//                                        if(values[j] == null) {
+//                                            values[j] = businessRequest;
+//                                            break;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            SupplierCurrentRequestAdapter adapter = new SupplierCurrentRequestAdapter(requestList, getApplicationContext());
+//                            requestListView.setAdapter(adapter);
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }){
+//
+//        };
+//        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
     public void addItemToCart(inventory_business item){
