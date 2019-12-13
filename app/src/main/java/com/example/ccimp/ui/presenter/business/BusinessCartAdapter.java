@@ -46,7 +46,7 @@ public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
             supplier.setText(inventorySupplier.getSupplierID());
         }
         if (Q != null){
-            Q.setText(inventorySupplier.getQuantity());
+            Q.setText("1");
         }
         if (price != null){
             price.setText(inventorySupplier.getPrice());
