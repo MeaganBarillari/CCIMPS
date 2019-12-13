@@ -24,17 +24,10 @@ public class LoginActivityInstrumentedTest {
 
     @Test
     public void enterEmailCorrect(){
-        onView(withId(R.id.input_email)).perform(typeText("test"), closeSoftKeyboard());
+        onView(withId(R.id.input_email)).perform(typeText("business@ccimp.com"), closeSoftKeyboard());
         onView(withId(R.id.input_password)).perform(typeText("123"), closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
         onView(withId(R.id.customerNavigation)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void enterEmailIncorrect(){
-        onView(withId(R.id.input_email)).perform(typeText("test"), closeSoftKeyboard());
-        onView(withId(R.id.input_password)).perform(typeText("1234"), closeSoftKeyboard());
-        onView(withId(R.id.btn_login)).perform(click());
-        onView(withId(R.id.btn_login)).check(matches(isDisplayed()));
-    }
 }
