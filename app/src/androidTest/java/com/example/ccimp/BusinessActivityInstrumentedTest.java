@@ -17,7 +17,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 public class BusinessActivityInstrumentedTest {
 
-    //change 6
+    //change 7
     @Rule
     public ActivityScenarioRule<LoginActivity> login = new ActivityScenarioRule<>(LoginActivity.class);
 
