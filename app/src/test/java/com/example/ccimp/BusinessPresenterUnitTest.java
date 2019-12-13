@@ -30,16 +30,6 @@ public class BusinessPresenterUnitTest {
 
     private User user = new User("12", "business", "business@gmail.com", "123", "Business", "2533205453", "123 W Wash");
 
-/**
-    @Test
-    public void testBusinessDetail(){
-        BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
-        BusinessOrderDetailPresenter businessOrderDetailPresenter = new BusinessOrderDetailPresenter(businessOrderDetailView, "12");
-
-        assertNotNull(businessOrderDetailPresenter);
-        assertNotNull(businessOrderDetailView);
-    }
-**/
     @Test
     public void testCart(){
         BusinessCartInterface.BusinessCartView businessCartView = new BusinessRequestCartActivity();
@@ -58,15 +48,7 @@ public class BusinessPresenterUnitTest {
         assertNotNull(businessProfilePresenter);
         assertNotNull(businessProfileView);
     }
-/**
-    @Test
-    public void testHome(){
-        BusinessHomeActivity businessHomeView = new BusinessHomeActivity();
-        BusinessHomePresenter businessHomePresenter = new BusinessHomePresenter(businessHomeView, "business@ccimp.com");
-        assertNotNull(businessHomePresenter);
-        assertNotNull(businessHomeView);
-    }
-**/
+
     @Test
     public void testInventory(){
         BusinessInventoryInterface.BusinessInventoryView businessInventoryView = new BusinessInventoryActivity();

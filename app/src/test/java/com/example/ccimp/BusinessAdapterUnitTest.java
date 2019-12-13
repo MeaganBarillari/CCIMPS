@@ -11,6 +11,7 @@ import com.example.ccimp.ui.business.BusinessRequestFromSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestPerSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestsActivity;
 import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
@@ -23,6 +24,7 @@ import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
 
@@ -40,6 +42,7 @@ public class BusinessAdapterUnitTest {
     ArrayList<inventory_business> inventoryBusinessArrayList;
     ArrayList<order_info> orderItemArrayList;
     ArrayList<User> UserArrayList;
+    ArrayList<Item> ItemArrayList;
 
     @Test
     public void cartTest(){
@@ -125,13 +128,17 @@ public class BusinessAdapterUnitTest {
         catch(RuntimeException e){}
     }
 
-    /**
     @Test
     public void requestFromMenuTest(){
         BusinessRequestFromSupplierActivity businessRequestFromSupplierActivity = new BusinessRequestFromSupplierActivity();
-        BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, UserArrayList);
+        BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, ItemArrayList);
+
+        try{
+            View testView = businessRequestFromMenuAdapter.getView(0, null, null);
+            assertNotNull(testView);
+        }
+        catch(RuntimeException e){}
     }
-     **/
 
     @Test
     public void requestPerSupplierTest(){
