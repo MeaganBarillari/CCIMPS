@@ -24,7 +24,6 @@ import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryAdapter;
-import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
 
@@ -47,7 +46,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void cartTest(){
         BusinessRequestCartActivity businessRequestCartActivity = new BusinessRequestCartActivity();
-        BusinessCartAdapter businessCartAdapter = new BusinessCartAdapter(businessRequestCartActivity, R.layout.rowfourlines, inventoryArrayList);
+        BusinessCartAdapter businessCartAdapter = new BusinessCartAdapter(inventoryArrayList, businessRequestCartActivity);
         try {
             View testView = businessCartAdapter.getView(0, null, null);
             assertNotNull(testView);
@@ -128,17 +127,6 @@ public class BusinessAdapterUnitTest {
         catch(RuntimeException e){}
     }
 
-    @Test
-    public void requestFromMenuTest(){
-        BusinessRequestFromSupplierActivity businessRequestFromSupplierActivity = new BusinessRequestFromSupplierActivity();
-        BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, ItemArrayList);
-
-        try{
-            View testView = businessRequestFromMenuAdapter.getView(0, null, null);
-            assertNotNull(testView);
-        }
-        catch(RuntimeException e){}
-    }
 
     @Test
     public void requestPerSupplierTest(){
@@ -155,7 +143,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void requestSupplierTest(){
         BusinessRequestFromSupplierActivity businessRequestFromSupplierActivity = new BusinessRequestFromSupplierActivity();
-        BusinessRequestSupplierAdapter businessRequestSupplierAdapter = new BusinessRequestSupplierAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, UserArrayList);
+        BusinessRequestSupplierAdapter businessRequestSupplierAdapter = new BusinessRequestSupplierAdapter(UserArrayList, businessRequestFromSupplierActivity);
 
         try{
             View testView = businessRequestSupplierAdapter.getView(0, null, null);

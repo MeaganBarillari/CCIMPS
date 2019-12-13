@@ -33,6 +33,7 @@ public class MainActivityInstrumentedTest {
 
     @Test
     public void enterEmailIncorrect(){
+        onView(withId(R.id.btn_activity_login)).perform(click());
         onView(withId(R.id.input_email)).perform(typeText("wrong"), closeSoftKeyboard());
         onView(withId(R.id.input_password)).perform(typeText("wrong"), closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());

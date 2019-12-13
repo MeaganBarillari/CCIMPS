@@ -53,14 +53,14 @@ public class SupplierActivityInstrumentedTest {
         onView(withId(R.id.navigation_supplier_profile)).perform(click());
         onView(withId(R.id.user_profile_name)).check(matches(isDisplayed()));
     }
-
+/**
     @Test
     public void testRequestDetail(){
         open();
         onView(withId(R.id.current_requests_listview)).perform(click());
         onView(withId(R.id.requestiems)).check(matches(isDisplayed()));
     }
-
+**/
     @Test
     public void testRequestHistory(){
         open();

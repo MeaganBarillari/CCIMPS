@@ -39,14 +39,14 @@ public class CustomerActivityInstrumentedTest {
         open();
         onView(withId(R.id.customerNavigation)).check(matches(isDisplayed()));
     }
-
+/**
     @Test
     public void testMenu(){
         open();
         onView(withId(R.id.businesslist)).perform(click());
         onView(withId(R.id.btnCart)).check(matches(isDisplayed()));
     }
-
+*
     @Test
     public void testOrderCart(){
         open();
@@ -61,7 +61,7 @@ public class CustomerActivityInstrumentedTest {
         onView(withId(R.id.navigation_customer_order)).perform(click());
         onView(withId(R.id.current_orders_listview)).check(matches(isDisplayed()));
     }
-
+ */
     @Test
     public void testProfile(){
         open();
