@@ -42,7 +42,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BusinessRequestPerSupplierActivity extends AppCompatActivity implements BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierView{
-    Button btnBack, btnCart, btnFeedback;
+    Button btnBack, btnCart;
     ListView listView;
     private User business;
     private String supplierID, supplierName;
@@ -69,7 +69,6 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 
         btnBack = findViewById(R.id.btBack);
         btnCart = findViewById(R.id.btCart);
-        btnFeedback = findViewById(R.id.btFeedback);
         listView = findViewById(R.id.suppliermenu);
 
         selectedInventorySupplier = new ArrayList<>();
@@ -99,13 +98,6 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 //                args.putSerializable("ARRAYLIST",(Serializable) cart);
 //                cartI.putExtra("BUNDLE",args);
 //                startActivity(cartI);
-            }
-        });
-
-        btnFeedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
