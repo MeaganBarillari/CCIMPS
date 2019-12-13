@@ -16,6 +16,6 @@ public interface BusinessRequestFromSupplierInterface {
 
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-        void setupSupplierList(ArrayList<User> UserArrayList);
+        void setupSupplierList();
     }
 }

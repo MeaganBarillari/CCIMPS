@@ -21,15 +21,10 @@ public class BusinessRequestFromSupplierPresenter implements BusinessRequestFrom
         this.userID = businessID;
 
         // TODO: Will need to be replaced by a call to another function that populates the list from the model based off of the supplierID
-        itemArrayList = new ArrayList();
-        itemArrayList.add(item1);
-
-        userArrayList = new ArrayList();
-        userArrayList.add(user1);
     }
 
     @Override
     public void onViewCreate() {
-        businessRequestFromSupplierView.setupSupplierList(userArrayList);
+
     }
 }

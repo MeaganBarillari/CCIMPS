@@ -15,18 +15,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.customer.CustomerMenuActivity;
 import com.example.ccimp.ui.customer.CustomerOrderCartActivity;
 import com.example.ccimp.ui.interfaces.business.BusinessInventoryInterface;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestPerSupplierInterface;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_supplier;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierPresenter;
+import com.example.ccimp.ui.presenter.customer.CustomerMenuAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,10 +44,13 @@ import java.util.ArrayList;
 public class BusinessRequestPerSupplierActivity extends AppCompatActivity implements BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierView{
     Button btnBack, btnCart, btnFeedback;
     ListView listView;
-    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    private User business;
+    private String supplierID, supplierName;
+    ArrayList<inventory_supplier> selectedInventorySupplier;
     BottomNavigationView navigation;
     private BusinessRequestPerSupplierAdapter businessRequestPerSupplierAdapter;
     private BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierPresenter businessRequestPerSupplierPresenter;
+    private inventory_supplier[] values = new inventory_supplier[10000];
 
     ArrayList<inventory_business> cart;
     int price;
@@ -49,17 +62,19 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 
         price = 0;
 
-//        final Intent intent = getIntent();
-//        businessID = intent.getStringExtra("businessID");
-//        System.out.println(businessID);
-//        customer = intent.getParcelableExtra("customer");
-//        businessName = intent.getStringExtra("businessname");
+        final Intent intent = getIntent();
+        supplierID = intent.getStringExtra("supplierID");
+        business = intent.getParcelableExtra("business");
+        supplierName = intent.getStringExtra("supplierName");
 
         btnBack = findViewById(R.id.btBack);
         btnCart = findViewById(R.id.btCart);
         btnFeedback = findViewById(R.id.btFeedback);
+        listView = findViewById(R.id.suppliermenu);
 
-        businessRequestPerSupplierPresenter = new BusinessRequestPerSupplierPresenter(this, user.getUserID());
+        selectedInventorySupplier = new ArrayList<>();
+        setupInventoryList();
+
 
         navigation = findViewById(R.id.businessNavigation);
 
@@ -92,7 +107,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
             }
         });
 
-        listView = findViewById(R.id.suppliermenu);
+
 
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -105,7 +120,6 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 //            }
 //        });
 
-        businessRequestPerSupplierPresenter.onViewCreate();
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -122,18 +136,22 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessRequestPerSupplierActivity.this, BusinessHomeActivity.class);
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestsActivity.class);
+                a.putExtra("business", business);
                 startActivity(a);
                 break;
             case R.id.navigation_inventory:
                 Intent b = new Intent(BusinessRequestPerSupplierActivity.this, BusinessInventoryActivity.class);
+                b.putExtra("business", business);
                 startActivity(b);
                 break;
             case R.id.navigation_business_profile:
                 Intent d = new Intent(BusinessRequestPerSupplierActivity.this, BusinessProfileActivity.class);
+                d.putExtra("business", business);
                 startActivity(d);
                 break;
         }
@@ -141,8 +159,46 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void setupInventoryList(ArrayList<inventory_supplier> inventoryArrayList) {
+    public void setupInventoryList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getSupplierInventory.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("supplierInventory");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                inventory_supplier item = new inventory_supplier(orderObj.getString("itemID"),orderObj.getString("supplierID"),  orderObj.getString("itemName"), orderObj.getString("price"), orderObj.getString("quantity"));
 
+                                if(item.getSupplierID().equals(supplierID)){
+                                    selectedInventorySupplier.add(item);
+
+                                    for(int j = 0 ; j < values.length; j++) {
+                                        if(values[j] == null) {
+                                            values[j] = item;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            BusinessRequestPerSupplierAdapter adapter = new BusinessRequestPerSupplierAdapter(selectedInventorySupplier, getApplicationContext());
+                            listView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
 }
