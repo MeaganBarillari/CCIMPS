@@ -19,8 +19,8 @@ public class BusinessOrderHistoryAdapter extends ArrayAdapter<Order> {
 
     private ArrayList<Order> orderArrayList;
 
-    public BusinessOrderHistoryAdapter(@NonNull Context context, int resourceId, ArrayList<Order> orderArrayList) {
-        super(context, resourceId, orderArrayList);
+    public BusinessOrderHistoryAdapter(ArrayList<Order> orderArrayList, @NonNull Context context) {
+        super(context, R.layout.activity_business_order_history, orderArrayList);
         this.orderArrayList = orderArrayList;
     }
 

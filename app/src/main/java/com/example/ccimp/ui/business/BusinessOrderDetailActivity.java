@@ -15,31 +15,40 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.MainActivity;
 import com.example.ccimp.ui.interfaces.business.BusinessOrderDetailInterface;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.order_info;
+import com.example.ccimp.ui.model.request_info;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailPresenter;
+import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessOrderDetailActivity extends AppCompatActivity implements BusinessOrderDetailInterface.BusinessOrderDetailView {
 
+    ArrayList<order_info> itemList;
     Button btnChangeStatus;
     TextView customerName, totalPrice, orderID, orderStatus;
     BottomNavigationView navigation;
     ListView orderItemListView;
-    Order tempOrder;
     User business;
-    BusinessOrderDetailAdapter businessOrderDetailAdapter;
-    BusinessOrderDetailInterface.BusinessOrderDetailPresenter businessOrderDetailPresenter;
-    Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,8 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         orderID = findViewById(R.id.customer_number);
         orderStatus = findViewById(R.id.request_status);
         totalPrice = findViewById(R.id.request_total_amount);
+        itemList = new ArrayList<>();
+        setupOrderItemList();
 
         String[] items = new String[] {"Decline", "Accept", "Complete", "Ready", "In Progress"};
         Spinner spinner = (Spinner) findViewById(R.id.changestatus);
@@ -63,27 +74,27 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         // Gets order object and sets text view's based on request fields
         // returns the order object that we use to get the supplierID and get the orderItem Listview
         Intent intent = getIntent();
-        tempOrder = getIntentData(intent);
-        if(tempOrder != null){
-            String businessID = tempOrder.getBusinessID();
+        business = intent.getParcelableExtra("business");
+        Bundle bundle = getIntent().getExtras();
+        customerName.setText(bundle.getString("customerName"));
+        orderID.setText(bundle.getString("orderID"));
+        orderStatus.setText(bundle.getString("status"));
+        totalPrice.setText(bundle.getString("totalPrice"));
 
-            businessOrderDetailPresenter = new BusinessOrderDetailPresenter(this, businessID);
-            businessOrderDetailPresenter.onViewCreate();
+        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            }
+        });
 
-                }
-            });
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callBusinessNavigation(item);
+            }
+        });
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callBusinessNavigation(item);
-                }
-            });
-        }
     }
 
     @Override
@@ -91,7 +102,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         switch (businessMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessOrderDetailActivity.this, BusinessHomeActivity.class);
-                c.putExtra("businessID", business.getEmail());
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:
@@ -116,26 +127,45 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
 
     @Override
     public Order getIntentData(Intent intent) {
-        Order order = intent.getParcelableExtra("Order");
-
-        if (order != null){
-            customerName.setText(order.getCustomerName());
-            orderID.setText(order.getOrderID());
-            orderStatus.setText(order.getStatus());
-            totalPrice.setText(order.getTotalPrice());
-            return order;
-        }
         return null;
     }
 
     @Override
-    public void setupOrderItemList(ArrayList<order_info> orderItemArrayList) {
-        businessOrderDetailAdapter = new BusinessOrderDetailAdapter(this, R.layout.row, orderItemArrayList);
-        orderItemListView.setAdapter(businessOrderDetailAdapter);
+    public void setupOrderItemList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getOrderInfo.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("order_info");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                order_info item = new order_info(business.getUsername(), orderObj.getString("OrderID"), orderObj.getString("itemName"), orderObj.getString("price"), orderObj.getString("quantity"));
+                                if(item.getOrderID().equals(orderID.getText())){
+                                    itemList.add(item);
+                                }
+                            }
+
+                            BusinessOrderDetailAdapter adapter = new BusinessOrderDetailAdapter(itemList, getApplicationContext());
+                            orderItemListView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
     @Override
-    public void setBusinessUser(User business) {
-        this.business = business;
+    public void setBusinessUser(User business){
     }
 }

@@ -5,14 +5,15 @@ import android.os.Parcelable;
 
 public class inventory_business implements Parcelable {
 
-    private String itemName, businessID, itemID, quantity, availQuantity, price;
-    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity, String price){
+    private String itemName, businessID, itemID, quantity, availQuantity, price, customDetail;
+    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity, String price, String customDetail){
         this.itemName = itemName;
         this.businessID = businessID;
         this.itemID = itemID;
         this.quantity = quantity;
         this.availQuantity = availQuantity;
         this.price = price;
+        this.customDetail = customDetail;
     }
 
     protected inventory_business(Parcel in) {
@@ -22,6 +23,7 @@ public class inventory_business implements Parcelable {
         quantity = in.readString();
         availQuantity = in.readString();
         price = in.readString();
+        customDetail = in.readString();
     }
 
     @Override
@@ -32,6 +34,7 @@ public class inventory_business implements Parcelable {
         dest.writeString(quantity);
         dest.writeString(availQuantity);
         dest.writeString(price);
+        dest.writeString(customDetail);
     }
 
     @Override
@@ -50,6 +53,10 @@ public class inventory_business implements Parcelable {
             return new inventory_business[size];
         }
     };
+
+    public String getCustomDetail(){
+        return customDetail;
+    }
 
     public String getItemName() {
         return itemName;

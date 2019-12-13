@@ -151,7 +151,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
                             JSONArray array = obj.getJSONArray("businessInventory");
                             for(int i = 0; i< array.length();i++){
                                 JSONObject orderObj = array.getJSONObject(i);
-                                inventory_business item = new inventory_business(orderObj.getString("name"),orderObj.getString("businessID"),  orderObj.getString("itemID"), orderObj.getString("quantity"), orderObj.getString("available quantity"), orderObj.getString("price"));
+                                inventory_business item = new inventory_business(orderObj.getString("name"),orderObj.getString("businessID"),  orderObj.getString("itemID"), orderObj.getString("quantity"), orderObj.getString("available quantity"), orderObj.getString("price"), orderObj.getString("customDetail"));
                                 System.out.println(item.getBusinessID());
 
                                 if(item.getBusinessID().equals(businessID)){
