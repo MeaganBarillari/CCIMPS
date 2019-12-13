@@ -67,6 +67,7 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setSelection(adapter.getPosition(status.toString()));
         spinner.setAdapter(adapter);
 
         // Gets request object and sets text view's based on request fields
@@ -94,14 +95,12 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Toast.makeText(parentView.getContext(),
-                        "OnItemSelectedListener : " + parentView.getItemAtPosition(position).toString(),
-                        Toast.LENGTH_SHORT).show();
+                status.setText(parentView.getItemAtPosition(position).toString());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+
             }
         });
     }
