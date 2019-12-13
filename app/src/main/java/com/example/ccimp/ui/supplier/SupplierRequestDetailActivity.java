@@ -106,12 +106,16 @@ public class SupplierRequestDetailActivity extends AppCompatActivity implements 
         });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int count = 0;
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                status.setText(parentView.getItemAtPosition(position).toString());
-                UpdateStatus updateStatus = new UpdateStatus(SupplierRequestDetailActivity.this);
+                if(count >= 1){
+                    status.setText(parentView.getItemAtPosition(position).toString());
+                    UpdateStatus updateStatus = new UpdateStatus(SupplierRequestDetailActivity.this);
 
-                updateStatus.execute(requestID.getText().toString(), status.getText().toString());
+                    updateStatus.execute(requestID.getText().toString(), status.getText().toString());
+                }
+                count++;
             }
 
             @Override

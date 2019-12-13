@@ -108,18 +108,22 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int count = 0;
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                orderStatus.setText(parentView.getItemAtPosition(position).toString());
-                UpdateStatus updateStatus = new UpdateStatus(BusinessOrderDetailActivity.this);
+                if(count >= 1){
+                    orderStatus.setText(parentView.getItemAtPosition(position).toString());
+                    UpdateStatus updateStatus = new UpdateStatus(BusinessOrderDetailActivity.this);
 
-                updateStatus.execute(orderID.getText().toString(), orderStatus.getText().toString());
+                    updateStatus.execute(orderID.getText().toString(), orderStatus.getText().toString());
+                }
+                count++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-            }});
-
+            }
+        });
     }
 
     @Override
