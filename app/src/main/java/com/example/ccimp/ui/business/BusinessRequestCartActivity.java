@@ -271,7 +271,6 @@ public class BusinessRequestCartActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if(result.equals("Request info waiting")){
-                System.out.println("Hi");
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessRequests.php",
                         new Response.Listener<String>() {
                             @Override
@@ -286,11 +285,12 @@ public class BusinessRequestCartActivity extends AppCompatActivity {
                                                 orderObj.getString("needByDate"), orderObj.getString("requestDate"),
                                                 orderObj.getString("status"));
 
+                                        System.out.println("HI");
                                         if(order.getRequestDate().equals(currentDate) &&
                                                 order.getBusinessID().equals(businessID) &&
                                                 order.getSupplierID().equals(supplierID) &&
                                                 order.getStatus().equals(status) &&
-                                                order.getPrice().equals(totalPrice)){
+                                                order.getPrice().equals(price)){
                                             requestID = order.getRequestID();
                                             for(int j = 0; j < local.size(); j++) {
                                                 System.out.println(local.size());
