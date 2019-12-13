@@ -20,8 +20,8 @@ public class BusinessRequestPerSupplierAdapter extends ArrayAdapter<inventory_su
 
     private ArrayList<inventory_supplier> inventoryArrayList;
 
-    public BusinessRequestPerSupplierAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_supplier> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
+    public BusinessRequestPerSupplierAdapter(ArrayList<inventory_supplier> inventoryArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_request_per_supplier,inventoryArrayList);
         this.inventoryArrayList = inventoryArrayList;
     }
 
@@ -30,16 +30,21 @@ public class BusinessRequestPerSupplierAdapter extends ArrayAdapter<inventory_su
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         View v = view;
         if (v == null) {
-            v = LayoutInflater.from(getContext()).inflate(R.layout.rowoneline, parent, false);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.rowtwolines, parent, false);
         }
 
         // Get request object at the position
         inventory_supplier inventorySupplier = inventoryArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
+        TextView price = v.findViewById(R.id.column2);
 
 
         if (itemName != null){
             itemName.setText(inventorySupplier.getItemName());
+        }
+
+        if (price !=null){
+            price.setText("$"+ inventorySupplier.getPrice());
         }
 
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CCIMP</string>
-    <string name="title_activity_login">Login in</string>
+    <string name="title_activity_login">Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="title_activity_register">Register</string>
@@ -15,6 +15,7 @@
     <string name="title_profile">Profile</string>
     <string name="business_menu">Business Menu</string>
     <string name="menu">Menu</string>
+    <string name="changestatus">Change Status</string>
 
     <string-array name="userTypes">
         <item>Customer</item>

@@ -4,37 +4,42 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.business.BusinessHomeInterface;
-import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.business.BusinessCurrentOrderAdapter;
-import com.example.ccimp.ui.presenter.business.BusinessHomePresenter;
-import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class BusinessHomeActivity extends AppCompatActivity implements BusinessHomeInterface.BusinessHomeView {
 
+
+    ArrayList<Order> orderList;
     Button btnHistory;
-    String businessEmail;
     BottomNavigationView navigation;
     private ListView orderListView;
-    private BusinessCurrentOrderAdapter businessCurrentOrderAdapter;
-    private BusinessHomeInterface.BusinessHomePresenter businessHomePresenter;
+
     private User business;
+
+    private Order[] values = new Order[10000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,43 +48,47 @@ public class BusinessHomeActivity extends AppCompatActivity implements BusinessH
 
         // Get User information from Intent
         Intent intent = getIntent();
-        businessEmail = getIntentData(intent);
-        if(businessEmail != null){
-            businessHomePresenter = new BusinessHomePresenter(this, businessEmail);
+        business = intent.getParcelableExtra("business");
 
-            btnHistory = findViewById(R.id.btnHistory);
-            navigation= findViewById(R.id.businessNavigation);
-            orderListView = findViewById(R.id.orderlist);
+        btnHistory = findViewById(R.id.btnHistory);
+        navigation= findViewById(R.id.businessNavigation);
+        orderListView = findViewById(R.id.orderlist);
+        orderList = new ArrayList<>();
+        setupOrderList();
 
-            businessHomePresenter.onViewCreate();
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderHistoryActivity.class);
+                intent.putExtra("business", business);
+                startActivity(intent);
+            }
+        });
 
-            btnHistory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderHistoryActivity.class);
-                    intent.putExtra("business", business);
-                    startActivity(intent);
-                }
-            });
+        // Get order object and pass it to OrderDetailActivity
+        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
+                intent.putExtra("orderID", values[position].getOrderID());
+                intent.putExtra("customerName", values[position].getCustomerName());
+                intent.putExtra("businessID", values[position].getBusinessID());
+                intent.putExtra("userID", values[position].getUserID());
+                intent.putExtra("createDateTime", values[position].getCreateDateTime());
+                intent.putExtra("status", values[position].getStatus());
+                intent.putExtra("totalPrice", values[position].getTotalPrice());
+                intent.putExtra("business", business);
+                startActivity(intent);
+            }
+        });
 
-            // Get order object and pass it to OrderDetailActivity
-            orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Order  order = (Order) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(BusinessHomeActivity.this, BusinessOrderDetailActivity.class);
-                    intent.putExtra("Order", order);
-                    startActivity(intent);
-                }
-            });
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callBusinessNavigation(item);
+            }
+        });
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callBusinessNavigation(item);
-                }
-            });
-        }
     }
 
     @Override
@@ -110,18 +119,56 @@ public class BusinessHomeActivity extends AppCompatActivity implements BusinessH
     }
 
     @Override
-    public void setupOrderList(ArrayList<Order> orderArrayList) {
-        businessCurrentOrderAdapter = new BusinessCurrentOrderAdapter(this, R.layout.row, orderArrayList);
-        orderListView.setAdapter(businessCurrentOrderAdapter);
+    public void setupOrderList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getCustomerOrder.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("customerOrder");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                Order order = new Order(orderObj.getString("username"),orderObj.getString("orderID"),  orderObj.getString("createDateTime"), orderObj.getString("businessID"), orderObj.getString("userID"), orderObj.getString("status"), orderObj.getString("totalPrice"));
+                                if(order.getBusinessID().equals(business.getUserID())){
+                                    if(! order.getStatus().equals("Complete")) {
+                                        orderList.add(order);
+
+                                        for(int j = 0; j < values.length;j++){
+                                            if(values[j] == null) {
+                                                values[j] = order;
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            BusinessCurrentOrderAdapter adapter = new BusinessCurrentOrderAdapter(orderList, getApplicationContext());
+                            orderListView.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
     @Override
     public String getIntentData(Intent intent) {
-        return intent.getStringExtra("userEmail");
+        return null;
     }
 
     @Override
-    public void setBusinessUser(User business) {
-        this.business = business;
-    }
+    public void setBusinessUser(User business){}
 }

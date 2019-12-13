@@ -4,12 +4,12 @@ import android.view.View;
 
 import com.example.ccimp.ui.customer.CustomerHomeActivity;
 import com.example.ccimp.ui.customer.CustomerMenuActivity;
+import com.example.ccimp.ui.customer.CustomerOrderCartActivity;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.presenter.customer.CustomerCartAdapter;
 import com.example.ccimp.ui.presenter.customer.CustomerHomeAdapter;
 import com.example.ccimp.ui.presenter.customer.CustomerMenuAdapter;
-import com.example.ccimp.ui.presenter.supplier.SupplierRequestHistoryAdapter;
-import com.example.ccimp.ui.supplier.SupplierRequestsHistoryActivity;
 
 import org.junit.Test;
 
@@ -19,35 +19,44 @@ import static org.junit.Assert.assertNotNull;
 
 public class CustomerAdapterUnitTest {
 
-
-    ArrayList<User> userArrayList;
-    ArrayList<inventory_business> inventoryArrayList;
-
+    ArrayList<inventory_business> businesses;
+    ArrayList<User> users;
 
     @Test
-    public void homeTest() {
-        CustomerHomeActivity customerHomeActivity = new CustomerHomeActivity();
-        CustomerHomeAdapter customerHomeAdapter = new CustomerHomeAdapter(customerHomeActivity, R.layout.row, userArrayList);
+    public void testCart(){
+        CustomerOrderCartActivity customerOrderCartActivity = new CustomerOrderCartActivity();
+        CustomerCartAdapter customerCartAdapter = new CustomerCartAdapter(businesses, customerOrderCartActivity);
 
-        try {
+        try{
+            View testView = customerCartAdapter.getView(0, null, null);
+            assertNotNull(testView);
+        }
+        catch(RuntimeException e){}
+    }
+
+    @Test
+    public void testHome(){
+        CustomerHomeActivity customerHomeActivity = new CustomerHomeActivity();
+        CustomerHomeAdapter customerHomeAdapter = new CustomerHomeAdapter(users, customerHomeActivity);
+
+        try{
             View testView = customerHomeAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
         catch(RuntimeException e){}
+
     }
 
-
     @Test
-    public void menuTest() {
+    public void testMenu(){
         CustomerMenuActivity customerMenuActivity = new CustomerMenuActivity();
-        CustomerMenuAdapter customerMenuAdapter = new CustomerMenuAdapter(customerMenuActivity, R.layout.row, inventoryArrayList);
+        CustomerMenuAdapter customerMenuAdapter = new CustomerMenuAdapter(businesses, customerMenuActivity);
 
-        try {
+        try{
             View testView = customerMenuAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
         catch(RuntimeException e){}
+
     }
-
-
 }

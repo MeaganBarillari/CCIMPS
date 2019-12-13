@@ -11,16 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Request;
-import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.model.BusinessRequest;
 
 import java.util.ArrayList;
 
-public class BusinessCurrentRequestsAdapter extends ArrayAdapter<Request> {
-    private ArrayList<Request> requestsArrayList;
+public class BusinessCurrentRequestsAdapter extends ArrayAdapter<BusinessRequest> {
+    private ArrayList<BusinessRequest> requestsArrayList;
 
-    public BusinessCurrentRequestsAdapter(@NonNull Context context, int resourceId, ArrayList<Request> requestsArrayList) {
-        super(context,resourceId,requestsArrayList);
+    public BusinessCurrentRequestsAdapter(ArrayList<BusinessRequest> requestsArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_business_requests,requestsArrayList);
         this.requestsArrayList = requestsArrayList;
     }
 
@@ -32,16 +31,16 @@ public class BusinessCurrentRequestsAdapter extends ArrayAdapter<Request> {
             v = LayoutInflater.from(getContext()).inflate(R.layout.rowtwolines, parent, false);
         }
 
-        // Get request object at the position
-        Request request = requestsArrayList.get(position);
+        // Get businessRequest object at the position
+        BusinessRequest businessRequest = requestsArrayList.get(position);
         TextView date = v.findViewById(R.id.column1);
         TextView status = v.findViewById(R.id.column2);
 
         if (date != null){
-            date.setText(request.getRequestDate());
+            date.setText(businessRequest.getRequestDate());
         }
         if (status != null){
-            status.setText(request.getStatus());
+            status.setText(businessRequest.getStatus());
         }
 
         return v;

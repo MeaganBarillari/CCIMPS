@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Request;
-import com.example.ccimp.ui.model.inventory_supplier;
 import com.example.ccimp.ui.model.request_info;
 
 import java.util.ArrayList;
@@ -20,8 +18,8 @@ import java.util.ArrayList;
 public class SupplierRequestDetailAdapter extends ArrayAdapter<request_info> {
     private ArrayList<request_info> requestItemArrayList;
 
-    public SupplierRequestDetailAdapter(@NonNull Context context, int resourceId, ArrayList<request_info> requestItemArrayList) {
-        super(context, resourceId, requestItemArrayList);
+    public SupplierRequestDetailAdapter(ArrayList<request_info> requestItemArrayList, @NonNull Context context) {
+        super(context, R.layout.activity_supplier_request_detail, requestItemArrayList);
         this.requestItemArrayList = requestItemArrayList;
     }
 
@@ -40,7 +38,7 @@ public class SupplierRequestDetailAdapter extends ArrayAdapter<request_info> {
 
         // TODO: NEED THIS TO BE ITEM NAME, must change the request_info DB and how we will save info
         if (itemName != null){
-            itemName.setText(item.getItemid());
+            itemName.setText(item.getItemName());
         }
         if (quantity != null){
             quantity.setText(item.getQuantity());

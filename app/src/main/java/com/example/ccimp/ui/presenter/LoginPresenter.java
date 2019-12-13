@@ -14,9 +14,9 @@ public class LoginPresenter implements LoginInterface.LoginPresenter {
     }
 
     @Override
-    public void performLogin(String type, String userEmail, String password,String userType, Context context) {
+    public void performLogin(String type, String userEmail, String password, Context context) {
         backgroundWorker bgworker = new backgroundWorker(context);
-        bgworker.execute(type, userEmail, password, userType);
+        bgworker.execute(type, userEmail, password);
 
 
         // might do more validation

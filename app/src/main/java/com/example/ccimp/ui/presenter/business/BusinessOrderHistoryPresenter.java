@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class BusinessOrderHistoryPresenter implements BusinessOrderHistoryInterface.BusinessOrderHistoryPresenter {
 
-    Order order1 = new Order("William", "123456", "2019/11/1", "124578", "987654321", "Done", "600");
     BusinessOrderHistoryInterface.BusinessOrderHistoryView businessOrderHistoryView;
     ArrayList<Order> orderArrayList;
 
@@ -21,14 +20,13 @@ public class BusinessOrderHistoryPresenter implements BusinessOrderHistoryInterf
 
     @Override
     public void onViewCreate() {
-        businessOrderHistoryView.setupOrderHistoryList(orderArrayList);
     }
 
     @Override
     public ArrayList<Order> getOrderHistoryList(String orderID) {
-        ArrayList<Order> list = new ArrayList<Order>();
+
         // TODO: Will need to be replaced by a call to another function that populates the list from the model based off of the supplierID
-        list.add(order1);
-        return list;
+
+        return null;
     }
 }

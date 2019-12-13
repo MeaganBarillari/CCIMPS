@@ -50,7 +50,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessSupplierListActivity.class));
+                startActivity(new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestFromSupplierActivity.class));
             }
         });
 
@@ -107,8 +107,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 
     @Override
     public void setupInventoryList(ArrayList<inventory_supplier> inventoryArrayList) {
-        businessRequestPerSupplierAdapter = new BusinessRequestPerSupplierAdapter(this, R.layout.rowoneline, inventoryArrayList);
-        listView.setAdapter(businessRequestPerSupplierAdapter);
+
     }
 
 }

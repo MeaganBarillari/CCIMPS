@@ -1,18 +1,16 @@
 package com.example.ccimp.ui.presenter.supplier;
 
 import com.example.ccimp.ui.interfaces.supplier.SupplierHomeInterface;
-import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.BusinessRequest;
 import com.example.ccimp.ui.model.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHomePresenter {
-
     private SupplierHomeInterface.SupplierHomeView supplierHomeView;
-    private ArrayList<Request> requestArrayList;
+    private ArrayList<BusinessRequest> requestArrayList;
     private User supplier;
-    private Request request = new Request("Starbucks", "123", "231", "345", "200", "2019/11/1",
+    private BusinessRequest businessRequest = new BusinessRequest("Starbucks", "123", "231", "345", "200", "2019/11/1",
             "2019/10/31", "Working");
 
     public SupplierHomePresenter(SupplierHomeInterface.SupplierHomeView supplierHomeView, String supplierEmail){
@@ -23,8 +21,7 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
 
     @Override
     public void onViewCreate() {
-        supplierHomeView.setupRequestList(requestArrayList);
-        supplierHomeView.setSupplierUser(supplier);
+
     }
 
     @Override
@@ -34,10 +31,8 @@ public class SupplierHomePresenter implements SupplierHomeInterface.SupplierHome
     }
 
     @Override
-    public ArrayList<Request> getCurrentRequest(String supplierID) {
-        ArrayList<Request> list = new ArrayList<Request>();
-        //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
-        list.add(request);
+    public ArrayList<BusinessRequest> getCurrentRequest(String supplierID) {
+        ArrayList<BusinessRequest> list = new ArrayList<BusinessRequest>();
         return list;
     }
 }

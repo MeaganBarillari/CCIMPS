@@ -1,9 +1,7 @@
 package com.example.ccimp.ui.interfaces.business;
 
 import android.view.MenuItem;
-import com.example.ccimp.ui.model.Request;
-
-import com.example.ccimp.ui.model.inventory_business;
+import com.example.ccimp.ui.model.BusinessRequest;
 
 import java.util.ArrayList;
 
@@ -17,6 +15,6 @@ public interface BusinessRequestsInterface {
 
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-        void setupRequestsList(ArrayList<Request> RequestArrayList);
+        void setupRequestsList();
     }
 }

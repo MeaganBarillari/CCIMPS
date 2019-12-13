@@ -24,6 +24,6 @@ public class CustomerHomePresenter implements CustomerHomeInterface.CustomerHome
 
     @Override
     public void onViewCreate() {
-        customerHomeView.setupBusinessList(userArrayList);
     }
+
 }

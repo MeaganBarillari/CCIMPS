@@ -25,37 +25,30 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class CustomerProfileActivity extends AppCompatActivity implements CustomerProfileInterface.CustomerProfileView {
 
     TextView userName, userEmail, userMobile, userAddress;
-
     Button btnlogout;
-
     BottomNavigationView navigation;
     CustomerProfileInterface.CustomerProfilePresenter customerProfilePresenter;
-    private User user = new User("123", "customer1", "customer@gmail.com", "123", "Customer", "2533205453", "123 W Wash");
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_profile);
 
-        btnlogout = findViewById(R.id.btn_logout);
+        Intent intent = getIntent();
+        user = intent.getParcelableExtra("customer");
 
-        btnlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CustomerProfileActivity.this, MainActivity.class));
-            }
-        });
-
-        customerProfilePresenter = new CustomerProfilePresenter(this, user.getUserID());
+        //customerProfilePresenter = new CustomerProfilePresenter(this);
 
         navigation = findViewById(R.id.customerNavigation);
-
+        btnlogout = findViewById(R.id.btn_logout);
         userName = findViewById(R.id.user_profile_name);
         userEmail = findViewById(R.id.user_email);
         userMobile = findViewById(R.id.user_mobile);
         userAddress = findViewById(R.id.user_address);
 
-        customerProfilePresenter.onViewCreate();
+        //customerProfilePresenter.onViewCreate();
+        setupProfile();
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -65,6 +58,14 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
 
         });
 
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerProfileActivity.this, MainActivity.class));
+            }
+        });
+
+
     }
 
     @Override
@@ -72,18 +73,23 @@ public class CustomerProfileActivity extends AppCompatActivity implements Custom
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(CustomerProfileActivity.this, CustomerHomeActivity.class);
+                c.putExtra("customer", user);
                 startActivity(c);
                 break;
             case R.id.navigation_customer_order:
                 Intent a = new Intent(CustomerProfileActivity.this, CustomerOrdersActivity.class);
+                a.putExtra("customer", user);
                 startActivity(a);
                 break;
             case R.id.navigation_customer_profile:
-                Intent b = new Intent(CustomerProfileActivity.this,CustomerProfileActivity.class);
-                startActivity(b);
                 break;
         }
         return false;
+    }
+
+    @Override
+    public User getIntentData(Intent intent) {
+        return null;
     }
 
     @Override

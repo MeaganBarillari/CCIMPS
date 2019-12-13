@@ -11,15 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
-import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.BusinessRequest;
 
 import java.util.ArrayList;
 
-public class SupplierRequestHistoryAdapter extends ArrayAdapter<Request> {
-    private ArrayList<Request> requestArrayList;
+public class SupplierRequestHistoryAdapter extends ArrayAdapter<BusinessRequest> {
+    private ArrayList<BusinessRequest> requestArrayList;
 
-    public SupplierRequestHistoryAdapter(@NonNull Context context, int resourceId, ArrayList<Request> requestArrayList) {
-        super(context,resourceId,requestArrayList);
+    public SupplierRequestHistoryAdapter(ArrayList<BusinessRequest> requestArrayList, @NonNull Context context ) {
+        super(context,R.layout.activity_supplier_request_history,requestArrayList);
         this.requestArrayList = requestArrayList;
     }
 
@@ -30,20 +30,20 @@ public class SupplierRequestHistoryAdapter extends ArrayAdapter<Request> {
             v = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
         }
 
-        // Get request object at the position
-        Request request = requestArrayList.get(position);
+        // Get businessRequest object at the position
+        BusinessRequest businessRequest = requestArrayList.get(position);
         TextView requestID = v.findViewById(R.id.column1);
         TextView requestDateTime = v.findViewById(R.id.column2);
         TextView requestStatus = v.findViewById(R.id.column3);
 
         if (requestID != null){
-            requestID.setText(request.getRequestID());
+            requestID.setText(businessRequest.getRequestID());
         }
         if (requestDateTime != null){
-            requestDateTime.setText(request.getRequestDate());
+            requestDateTime.setText(businessRequest.getRequestDate());
         }
         if(requestStatus != null){
-            requestStatus.setText(request.getStatus());
+            requestStatus.setText(businessRequest.getStatus());
         }
 
         return v;

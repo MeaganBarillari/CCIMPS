@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.L
         setContentView(R.layout.activity_login);
         etEmail = findViewById(R.id.input_email);
         etPassword = findViewById(R.id.input_password);
-        spinner = (Spinner) findViewById(R.id.login_userType);
         btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -36,9 +35,8 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.L
 
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
-                String userType = spinner.getSelectedItem().toString();
                 String type = "login";
-                mLoginPresenter.performLogin(type, userEmail, userPassword, userType, LoginActivity.this);
+                mLoginPresenter.performLogin(type, userEmail, userPassword,  LoginActivity.this);
             }
         });
         tvSignup = findViewById(R.id.link_signup);
@@ -66,5 +64,10 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.L
     @Override
     public void loginError(){
         Toast.makeText(getApplicationContext(), "Login Failure", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }

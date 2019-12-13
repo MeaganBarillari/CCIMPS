@@ -1,11 +1,11 @@
 package com.example.ccimp.ui.model;
 
 public class order_info {
-    private String businessName, OrderID, itemID, quantity, totalPrice;
-    public order_info(String businessName, String OrderID, String itemID, String quantity, String totalPrice){
+    private String businessName, OrderID, itemName, quantity, totalPrice;
+    public order_info(String businessName, String OrderID, String itemName, String quantity, String totalPrice){
         this.businessName = businessName;
         this.OrderID = OrderID;
-        this.itemID = itemID;
+        this.itemName = itemName;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
@@ -26,12 +26,12 @@ public class order_info {
         OrderID = orderID;
     }
 
-    public String getItemID() {
-        return itemID;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setItemID(String itemID) {
-        this.itemID = itemID;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getQuantity() {

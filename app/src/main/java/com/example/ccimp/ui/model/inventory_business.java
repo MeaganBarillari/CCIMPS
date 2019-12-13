@@ -1,15 +1,61 @@
 package com.example.ccimp.ui.model;
 
-public class inventory_business {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String itemName, businessID, itemID, quantity, availQuantity, price;
-    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity, String price){
+public class inventory_business implements Parcelable {
+
+    private String itemName, businessID, itemID, quantity, availQuantity, price, customDetail;
+    public inventory_business(String itemName, String businessID, String itemID, String quantity, String availQuantity, String price, String customDetail){
         this.itemName = itemName;
         this.businessID = businessID;
         this.itemID = itemID;
         this.quantity = quantity;
         this.availQuantity = availQuantity;
         this.price = price;
+        this.customDetail = customDetail;
+    }
+
+    protected inventory_business(Parcel in) {
+        itemName = in.readString();
+        businessID = in.readString();
+        itemID = in.readString();
+        quantity = in.readString();
+        availQuantity = in.readString();
+        price = in.readString();
+        customDetail = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(itemName);
+        dest.writeString(businessID);
+        dest.writeString(itemID);
+        dest.writeString(quantity);
+        dest.writeString(availQuantity);
+        dest.writeString(price);
+        dest.writeString(customDetail);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<inventory_business> CREATOR = new Creator<inventory_business>() {
+        @Override
+        public inventory_business createFromParcel(Parcel in) {
+            return new inventory_business(in);
+        }
+
+        @Override
+        public inventory_business[] newArray(int size) {
+            return new inventory_business[size];
+        }
+    };
+
+    public String getCustomDetail(){
+        return customDetail;
     }
 
     public String getItemName() {

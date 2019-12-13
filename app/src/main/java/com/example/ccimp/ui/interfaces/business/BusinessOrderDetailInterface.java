@@ -22,7 +22,7 @@ public interface BusinessOrderDetailInterface {
 
         boolean callBusinessNavigation(MenuItem businessMenuItem);
         Order getIntentData(Intent intent);
-        void setupOrderItemList(ArrayList<order_info> orderItemArrayList);
+        void setupOrderItemList();
         void setBusinessUser(User business);
     }
 }

@@ -3,7 +3,7 @@ package com.example.ccimp.ui.interfaces.supplier;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.example.ccimp.ui.model.Request;
+import com.example.ccimp.ui.model.BusinessRequest;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.request_info;
 
@@ -21,8 +21,8 @@ public interface SupplierRequestDetailInterface {
     interface SupplierRequestDetailView {
 
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
-        Request getIntentData(Intent intent);
+        BusinessRequest getIntentData(Intent intent);
         void setSupplierUser(User supplier);
-        void setupRequestItemList(ArrayList<request_info> requestItemArrayList);
+        void setupRequestItemList();
     }
 }

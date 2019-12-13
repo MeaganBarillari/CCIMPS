@@ -2,11 +2,9 @@ package com.example.ccimp;
 
 import android.view.View;
 
-import com.example.ccimp.ui.business.BusinessRequestCartActivity;
-import com.example.ccimp.ui.model.Request;
-import com.example.ccimp.ui.model.inventory_supplier;
+import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.request_info;
-import com.example.ccimp.ui.presenter.business.BusinessCartAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierCurrentRequestAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierInventoryAdapter;
 import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
@@ -19,36 +17,35 @@ import com.example.ccimp.ui.supplier.SupplierRequestsHistoryActivity;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
 public class SupplierAdapterUnitTest {
 
-    ArrayList<Request> requestList;
-    ArrayList<inventory_supplier> inventoryArrayList;
-    ArrayList<request_info> requestItemArrayList;
-    ArrayList<Request> requestArrayList;
-
+    ArrayList<BusinessRequest> requestList;
+    List<Item> itemList;
+    ArrayList<request_info> infoList;
 
 
     @Test
-    public void currentRequestTest() {
+    public void testCurrentRequest(){
         SupplierHomeActivity supplierHomeActivity = new SupplierHomeActivity();
-        SupplierCurrentRequestAdapter supplierRequestAdapter = new SupplierCurrentRequestAdapter(supplierHomeActivity, R.layout.row, requestList);
+        SupplierCurrentRequestAdapter supplierCurrentRequestAdapter = new SupplierCurrentRequestAdapter(requestList, supplierHomeActivity);
 
-        try {
-            View testView = supplierRequestAdapter.getView(0, null, null);
+        try{
+            View testView = supplierCurrentRequestAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
         catch(RuntimeException e){}
     }
 
     @Test
-    public void currentInventoryTest() {
+    public void testInventory(){
         SupplierInventoryActivity supplierInventoryActivity = new SupplierInventoryActivity();
-        SupplierInventoryAdapter supplierInventoryAdapter = new SupplierInventoryAdapter(supplierInventoryActivity, R.layout.row, inventoryArrayList);
+        SupplierInventoryAdapter supplierInventoryAdapter = new SupplierInventoryAdapter(itemList, supplierInventoryActivity);
 
-        try {
+        try{
             View testView = supplierInventoryAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
@@ -56,11 +53,11 @@ public class SupplierAdapterUnitTest {
     }
 
     @Test
-    public void requestDetailTest() {
+    public void testRequestDetail(){
         SupplierRequestDetailActivity supplierRequestDetailActivity = new SupplierRequestDetailActivity();
-        SupplierRequestDetailAdapter supplierRequestDetailAdapter = new SupplierRequestDetailAdapter(supplierRequestDetailActivity, R.layout.row, requestItemArrayList);
+        SupplierRequestDetailAdapter supplierRequestDetailAdapter = new SupplierRequestDetailAdapter(infoList, supplierRequestDetailActivity);
 
-        try {
+        try{
             View testView = supplierRequestDetailAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
@@ -68,14 +65,15 @@ public class SupplierAdapterUnitTest {
     }
 
     @Test
-    public void requestHistoryTest() {
-        SupplierRequestsHistoryActivity supplierRequestHistoryActivity = new SupplierRequestsHistoryActivity();
-        SupplierRequestHistoryAdapter supplierRequestHistoryAdapter = new SupplierRequestHistoryAdapter(supplierRequestHistoryActivity, R.layout.row, requestArrayList);
+    public void testRequestHistory(){
+        SupplierRequestsHistoryActivity supplierRequestsHistoryActivity = new SupplierRequestsHistoryActivity();
+        SupplierRequestHistoryAdapter supplierRequestHistoryAdapter = new SupplierRequestHistoryAdapter(requestList, supplierRequestsHistoryActivity);
 
-        try {
+        try{
             View testView = supplierRequestHistoryAdapter.getView(0, null, null);
             assertNotNull(testView);
         }
         catch(RuntimeException e){}
+
     }
 }

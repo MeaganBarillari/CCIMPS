@@ -11,16 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.inventory_supplier;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SupplierInventoryAdapter extends ArrayAdapter<inventory_supplier> {
-    private ArrayList<inventory_supplier> inventoryArrayList;
+public class SupplierInventoryAdapter extends ArrayAdapter<Item> {
+    private List<Item> inventoryArrayList;
+    private Context ctx;
 
-    public SupplierInventoryAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_supplier> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
+    public SupplierInventoryAdapter(List<Item> inventoryArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_supplier_inventory,inventoryArrayList);
         this.inventoryArrayList = inventoryArrayList;
+        this.ctx = context;
     }
 
     @NonNull
@@ -32,15 +36,15 @@ public class SupplierInventoryAdapter extends ArrayAdapter<inventory_supplier> {
         }
 
         // Get request object at the position
-        inventory_supplier inventorySupplier = inventoryArrayList.get(position);
+        Item item = inventoryArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
         TextView price = v.findViewById(R.id.column2);
 
         if (itemName != null){
-            itemName.setText(inventorySupplier.getItemName());
+            itemName.setText(item.getName());
         }
         if (price != null){
-            price.setText(inventorySupplier.getPrice());
+            price.setText(item.getPrice());
         }
 
         return v;

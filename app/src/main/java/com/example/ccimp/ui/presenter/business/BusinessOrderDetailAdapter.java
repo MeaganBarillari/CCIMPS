@@ -19,8 +19,8 @@ public class BusinessOrderDetailAdapter extends ArrayAdapter<order_info> {
 
     private ArrayList<order_info> orderItemArrayList;
 
-    public BusinessOrderDetailAdapter(@NonNull Context context, int resourceId, ArrayList<order_info> orderItemArrayList) {
-        super(context,resourceId,orderItemArrayList);
+    public BusinessOrderDetailAdapter(ArrayList<order_info> orderItemArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_business_order_detail,orderItemArrayList);
         this.orderItemArrayList = orderItemArrayList;
     }
 
@@ -39,7 +39,7 @@ public class BusinessOrderDetailAdapter extends ArrayAdapter<order_info> {
 
         // TODO: NEED THIS TO BE ITEM NAME, must change the request_info DB and how we will save info
         if (itemName != null){
-            itemName.setText(item.getItemID());
+            itemName.setText(item.getItemName());
         }
         if (quantity != null){
             quantity.setText(item.getQuantity());

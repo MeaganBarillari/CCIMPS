@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class BusinessInventoryAdapter extends ArrayAdapter<inventory_business> {
     private ArrayList<inventory_business> inventoryArrayList;
 
-    public BusinessInventoryAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_business> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
+    public BusinessInventoryAdapter(ArrayList<inventory_business> inventoryArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_business_inventory,inventoryArrayList);
         this.inventoryArrayList = inventoryArrayList;
     }
 

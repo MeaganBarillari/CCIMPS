@@ -17,6 +17,6 @@ public interface BusinessInventoryInterface {
 
         boolean callSupplierNavigation(MenuItem supplierMenuItem);
 
-        void setupInventoryList(ArrayList<inventory_business> inventoryArrayList);
+        void setupInventoryList();
     }
 }
