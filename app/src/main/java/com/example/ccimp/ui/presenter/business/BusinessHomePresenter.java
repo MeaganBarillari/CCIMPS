@@ -12,8 +12,6 @@ public class BusinessHomePresenter implements BusinessHomeInterface.BusinessHome
     private BusinessHomeInterface.BusinessHomeView businessHomeView;
     private ArrayList<Order> orderArrayList;
     private User business;
-    private Order order = new Order("meagan", "222", "2019/10/11",
-            "124", "111", "working", "$200");
 
     public BusinessHomePresenter(BusinessHomeActivity businessHomeView, String businessEmail) {
         this.businessHomeView = businessHomeView;
@@ -23,20 +21,16 @@ public class BusinessHomePresenter implements BusinessHomeInterface.BusinessHome
 
     @Override
     public void onViewCreate() {
-        businessHomeView.setupOrderList(orderArrayList);
-        businessHomeView.setBusinessUser(business);
+
     }
 
     @Override
     public User getBusiness(String businessEmail) {
-        return new User("124", "business", "business@ccimp.com", "123", "Supplier", "2533205453", "123 W Wash");
-    }
+return null;    }
 
     @Override
     public ArrayList<Order> getCurrentOrders(String businessID) {
-        ArrayList<Order> list = new ArrayList<Order>();
-        //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
-        list.add(order);
-        return list;
+
+        return null;
     }
 }

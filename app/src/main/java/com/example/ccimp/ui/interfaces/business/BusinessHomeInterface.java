@@ -22,7 +22,7 @@ public interface BusinessHomeInterface {
     interface BusinessHomeView {
         boolean callBusinessNavigation(MenuItem businessMenuItem);
 
-        void setupOrderList(ArrayList<Order> orderArrayList);
+        void setupOrderList();
 
         String getIntentData(Intent intent);
 

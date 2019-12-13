@@ -37,22 +37,21 @@ public class BusinessOrderHistoryActivity extends AppCompatActivity implements B
         // Get business object from
         Intent intent = getIntent();
         business = getIntentData(intent);
-        if(business != null) {
-            orderListView = findViewById(R.id.pastorders);
-            navigation = findViewById(R.id.businessNavigation);
+        orderListView = findViewById(R.id.pastorders);
+        navigation = findViewById(R.id.businessNavigation);
 
-            // Pass to presenter the userID so we can properly populate the history list from the business
-            businessOrderHistoryPresenter = new BusinessOrderHistoryPresenter(this, business);
+        // Pass to presenter the userID so we can properly populate the history list from the business
+        businessOrderHistoryPresenter = new BusinessOrderHistoryPresenter(this, business);
 
-            businessOrderHistoryPresenter.onViewCreate();
+        businessOrderHistoryPresenter.onViewCreate();
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callBusinessNavigation(item);
-                }
-            });
-        }
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callBusinessNavigation(item);
+            }
+        });
+
     }
 
     @Override
@@ -60,7 +59,7 @@ public class BusinessOrderHistoryActivity extends AppCompatActivity implements B
         switch (businessMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);
-                c.putExtra("userEmail", business.getUserID());
+                c.putExtra("business", business);
                 startActivity(c);
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessOrderHistoryActivity.this, BusinessRequestsActivity.class);

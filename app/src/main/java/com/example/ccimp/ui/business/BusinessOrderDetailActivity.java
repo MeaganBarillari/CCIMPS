@@ -29,11 +29,8 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
     TextView customerName, totalPrice, orderID, orderStatus;
     BottomNavigationView navigation;
     ListView orderItemListView;
-    Order tempOrder;
     User business;
-    BusinessOrderDetailAdapter businessOrderDetailAdapter;
-    BusinessOrderDetailInterface.BusinessOrderDetailPresenter businessOrderDetailPresenter;
-    Item item1 = new Item("123", "coffee", "300", "231", "3", "no ice");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +48,27 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         // Gets order object and sets text view's based on request fields
         // returns the order object that we use to get the supplierID and get the orderItem Listview
         Intent intent = getIntent();
-        tempOrder = getIntentData(intent);
-        if(tempOrder != null){
-            String businessID = tempOrder.getBusinessID();
+        business = intent.getParcelableExtra("business");
+        Bundle bundle = getIntent().getExtras();
+        customerName.setText(bundle.getString("customerName"));
+        orderID.setText(bundle.getString("orderID"));
+        orderStatus.setText(bundle.getString("status"));
+        totalPrice.setText(bundle.getString("totalPrice"));
 
-            businessOrderDetailPresenter = new BusinessOrderDetailPresenter(this, businessID);
-            businessOrderDetailPresenter.onViewCreate();
+        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            }
+        });
 
-                }
-            });
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return callBusinessNavigation(item);
+            }
+        });
 
-            navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return callBusinessNavigation(item);
-                }
-            });
-        }
     }
 
     @Override
@@ -79,7 +76,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         switch (businessMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessOrderDetailActivity.this, BusinessHomeActivity.class);
-                c.putExtra("businessID", business.getEmail());
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:
@@ -104,26 +101,15 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
 
     @Override
     public Order getIntentData(Intent intent) {
-        Order order = intent.getParcelableExtra("Order");
-
-        if (order != null){
-            customerName.setText(order.getCustomerName());
-            orderID.setText(order.getOrderID());
-            orderStatus.setText(order.getStatus());
-            totalPrice.setText(order.getTotalPrice());
-            return order;
-        }
         return null;
     }
 
     @Override
     public void setupOrderItemList(ArrayList<order_info> orderItemArrayList) {
-        businessOrderDetailAdapter = new BusinessOrderDetailAdapter(this, R.layout.row, orderItemArrayList);
-        orderItemListView.setAdapter(businessOrderDetailAdapter);
+
     }
 
     @Override
-    public void setBusinessUser(User business) {
-        this.business = business;
+    public void setBusinessUser(User business){
     }
 }

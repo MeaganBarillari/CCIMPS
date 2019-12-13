@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class BusinessCurrentOrderAdapter extends ArrayAdapter<Order> {
     private ArrayList<Order> orderArrayList;
 
-    public BusinessCurrentOrderAdapter(@NonNull Context context, int resourceId, ArrayList<Order> orderArrayList) {
-        super(context,resourceId,orderArrayList);
+    public BusinessCurrentOrderAdapter(ArrayList<Order> orderArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_business_home,orderArrayList);
         this.orderArrayList = orderArrayList;
     }
 
