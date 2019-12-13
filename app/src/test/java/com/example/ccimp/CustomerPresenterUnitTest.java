@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class CustomerUnitTest {
+public class CustomerPresenterUnitTest {
 
     private User user = new User("123", "customer", "customer@gmail.com", "123", "Customer", "2533205453", "123 W Wash");
 
