@@ -30,15 +30,33 @@ Instructions:\
     \
 8.After you click the login button, you would go to different screens based on the type you used , and you could use the bottom navigation bar to switch to different screens. You should be able to click on the table entries, it will bring you to detail pages or menu lists with static information. Button functionality that corresponds to adding orders/requests/items are disabled.\
 \
-Using JUnit Test How to:\
-\
-We have implemented four unit tests for both login and register activities. To run the test. Go to the folder called com.example.ccimp(test) in Android Studio, which is under the same folder of our user interface. Right click on the test and run the test. The result will be shown in the Run window. \
-\
-    1)login_Success: test if login using the correct email and password would show the message “login success”, which means the login           information is correct\
-    \
-    2)Incorrect_email: test if login using the wrong email would show the message “login fail”\
-    \
-    3)Incorrect_password: test if login using the wrong password and correct email would show the message “login fail”\
-    \
-    4)register_Success: test if register using the information provided will show a message of “Register success” and write the registered user to the database \
+9.Running tests:\
+  1) Unit tests: In android studio, right click on the folder named com.example.ccimp (app/src/test/java/com.example.ccimp)\
+    and select "Run tests in ccimp with coverage". This will run all the unit tests, and provide code coverage information.\
+  2) Instrumented tests: In android studio, right click on the folder named com.example.ccimp\  
+    (app/src/androidTest/java/com.example.ccimp) and select "Run tests in com.example.ccimp". This will run all the\
+    instrumented tests in the emulator, and show the test results in the console. Note that the emulator must be open and\
+    active for these tests.
+  3) Automatic Regression tests: In order to automatically run all the unit tests whenever a commit is pushed to a remote\
+     repository, place the following script in a file named pre-push, in .git/hooks:
+    
+#!/bin/bash
+CMD="./gradlew clean test"
 
+commits=`git log @{u}..`
+if [ -z "$commits" ]; then
+ exit 0
+fi
+$CMD
+RESULT=$?
+if [ $RESULT -ne 0 ]; then
+ echo "failed $CMD"
+ exit 1
+fi
+exit 0
+
+  4) Firebase test labs testing: In order to evaluate the app performance in firebase test labs, follow the instructions for\             
+     performing a firebase robo test. When firebase says to upload the apk, click Build -> Build Bundle(s) / APK(s) -> Build\
+     APK(s) in android studio to generate the apk. This apk is found at app/builds/output/apk/debug/app-debug.apk
+    
+  
