@@ -271,6 +271,7 @@ public class BusinessRequestCartActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if(result.equals("Request info waiting")){
+                System.out.println("Hi");
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getBusinessRequests.php",
                         new Response.Listener<String>() {
                             @Override

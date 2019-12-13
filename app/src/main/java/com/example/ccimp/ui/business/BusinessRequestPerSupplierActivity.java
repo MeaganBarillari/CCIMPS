@@ -90,7 +90,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
             @Override
             public void onClick(View v) {
                 Intent cartI = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestCartActivity.class);
-                cartI.putExtra("suppplierID", supplierID);
+                cartI.putExtra("supplierID", supplierID);
                 cartI.putExtra("business", business);
                 cartI.putExtra("supplierName", supplierName);
                 cartI.putExtra("price" , Integer.toString(price));
