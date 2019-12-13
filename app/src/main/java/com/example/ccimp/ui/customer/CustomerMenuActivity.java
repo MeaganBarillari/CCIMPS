@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,14 +32,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 public class CustomerMenuActivity extends AppCompatActivity implements CustomerMenuInterface.CustomerMenuView{
 
     Button btnCart;
+    int price;
     ListView businessMenuListView;
-    private String businessID;
+    private String businessID, businessName;
     private User customer;
-    ArrayList<inventory_business> selectedInventoryBusiness;
+    ArrayList<inventory_business> selectedInventoryBusiness, cart;
     BottomNavigationView navigation;
     private CustomerMenuAdapter customerMenuAdapter;
     private CustomerMenuInterface.CustomerMenuPresenter customerMenuPresenter;
@@ -49,10 +52,13 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_menu);
 
+        price = 0;
+
         final Intent intent = getIntent();
         businessID = intent.getStringExtra("businessID");
         System.out.println(businessID);
         customer = intent.getParcelableExtra("customer");
+        businessName = intent.getStringExtra("businessname");
 
         //customerMenuPresenter = new CustomerMenuPresenter(this, businessID);
 
@@ -60,6 +66,7 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         navigation = findViewById(R.id.customerNavigation);
         businessMenuListView = findViewById(R.id.businessmenulist);
         selectedInventoryBusiness = new ArrayList<>();
+        cart = new ArrayList<>();
         setupInventoryList();
 
        // customerMenuPresenter.onViewCreate();
@@ -67,10 +74,15 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cart = new Intent(CustomerMenuActivity.this, CustomerOrderCartActivity.class);
-                cart.putExtra("businessID", businessID);
-                cart.putExtra("customer", customer);
-                startActivity(cart);
+                Intent cartI = new Intent(CustomerMenuActivity.this, CustomerOrderCartActivity.class);
+                cartI.putExtra("businessID", businessID);
+                cartI.putExtra("customer", customer);
+                cartI.putExtra("businessname", businessName);
+                cartI.putExtra("price" , Integer.toString(price));
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable) cart);
+                cartI.putExtra("BUNDLE",args);
+                startActivity(cartI);
             }
         });
 
@@ -79,7 +91,10 @@ public class CustomerMenuActivity extends AppCompatActivity implements CustomerM
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 inventory_business  item = (inventory_business) parent.getItemAtPosition(position);
-                addItemToCart(item);
+                Toast toast=Toast. makeText(getApplicationContext(),"Item " + item.getItemName() + " added to cart",Toast. LENGTH_SHORT);
+                toast.show();
+                cart.add(item);
+                price = price + Integer.valueOf(item.getPrice());
             }
         });
 

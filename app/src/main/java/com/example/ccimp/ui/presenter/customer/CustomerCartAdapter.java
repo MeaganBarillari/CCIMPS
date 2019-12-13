@@ -1,5 +1,6 @@
 package com.example.ccimp.ui.presenter.customer;
 
+import android.widget.ArrayAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ccimp.R;
+import com.example.ccimp.ui.model.User;
+import com.example.ccimp.ui.model.inventory_business;
 import com.example.ccimp.ui.model.inventory_business;
 
 import java.util.ArrayList;
 
-public class CustomerMenuAdapter extends ArrayAdapter<inventory_business> {
-    private ArrayList<inventory_business> inventoryArrayList;
+public class CustomerCartAdapter extends ArrayAdapter<inventory_business> {
+    private ArrayList<inventory_business> itemArrayList;
 
-    public CustomerMenuAdapter(ArrayList<inventory_business> inventoryArrayList, @NonNull Context context) {
-        super(context,R.layout.activity_customer_menu,inventoryArrayList);
-        this.inventoryArrayList = inventoryArrayList;
+    public CustomerCartAdapter(ArrayList<inventory_business> itemArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_customer_order_cart,itemArrayList);
+        this.itemArrayList = itemArrayList;
     }
 
     @NonNull
@@ -32,16 +35,18 @@ public class CustomerMenuAdapter extends ArrayAdapter<inventory_business> {
         }
 
         // Get request object at the position
-        inventory_business inventoryBusiness = inventoryArrayList.get(position);
+        inventory_business item = itemArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
-        TextView add = v.findViewById(R.id.column2);
+        TextView delete = v.findViewById(R.id.column2);
 
 
         if (itemName != null){
-            itemName.setText(inventoryBusiness.getItemName());
+            itemName.setText(item.getItemName());
         }
 
-        add.setText("Add");
+        if (delete != null){
+            delete.setText("delete");
+        }
 
         return v;
     }
