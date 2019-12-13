@@ -1,6 +1,8 @@
 package com.example.ccimp.ui.business;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +39,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +85,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setSelection(adapter.getPosition(orderStatus.getText().toString()), true);
         spinner.setAdapter(adapter);
 
         // Gets order object and sets text view's based on request fields
@@ -79,18 +93,12 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         Intent intent = getIntent();
 
         business = intent.getParcelableExtra("business");
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle = getIntent().getExtras();
         customerName.setText(bundle.getString("customerName"));
         orderID.setText(bundle.getString("orderID"));
         orderStatus.setText(bundle.getString("status"));
         totalPrice.setText(bundle.getString("totalPrice"));
 
-        btnChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -99,16 +107,18 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
             }
         });
 
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                orderStatus.setText(parentView.getItemAtPosition(position).toString());
+                UpdateStatus updateStatus = new UpdateStatus(BusinessOrderDetailActivity.this);
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }});
+                updateStatus.execute(orderID.getText().toString(), orderStatus.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }});
 
     }
 
@@ -178,6 +188,65 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
 
         };
         Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
+    }
+
+    private class UpdateStatus extends AsyncTask<String, Void, String> {
+        Context context;
+
+        UpdateStatus(Context ctx){
+            this.context =ctx;
+        }
+
+        @Override
+        protected String doInBackground(String... params){
+            String update_url = "http://shifanzhou.com/updateStatus.php";
+            try {
+                String id = params[0];
+                String status = params[1];
+                URL url = new URL(update_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("orderID", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&"
+                        + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
+                System.out.println(id);
+                System.out.println(status);
+
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result.equals("Status updated")) {
+                Toast.makeText(context, "Status updated", Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 
     @Override
