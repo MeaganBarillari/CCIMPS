@@ -1,14 +1,5 @@
 package com.example.ccimp;
 
-import android.content.Context;
-
-import com.example.ccimp.ui.LoginActivity;
-import com.example.ccimp.ui.model.backgroundWorker;
-
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertEquals;
-
 public class LoginUnitTest {
     /**
     @Test
@@ -22,7 +13,6 @@ public class LoginUnitTest {
 
         assertEquals("login success", result);
     }
-**/
     @Test
     public void incorrect_Email(){
         Context context = new LoginActivity();
@@ -47,7 +37,6 @@ public class LoginUnitTest {
 
         assertEquals("login fail", result);
     }
-/**
     @Test
     public void register_Success(){
         Context context = new RegisterActivity();
