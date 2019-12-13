@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dip" >
+        android:padding="10dip"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,6 +19,12 @@
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id = "@+id/current_orders_list"
@@ -58,13 +60,30 @@
                 android:text = "Order Status" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
         <ListView
             android:id="@+id/current_orders_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight = "1"
             android:background="@color/colorGreyBackground"
             android:textColor="@color/colorBlack">
         </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
@@ -74,6 +93,12 @@
             android:text="Order History"
             android:textSize="20dp"
             android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id = "@+id/relativeLayout2"
@@ -109,25 +134,33 @@
                 android:text = "Order Status" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
         <ListView
             android:id="@+id/previous_orders_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:background="@color/colorGreyBackground" >
+            android:layout_weight = "1"
+            android:background="@color/colorGreyBackground"
+            android:textColor="@color/colorBlack">
         </ListView>
 
     </LinearLayout>
 
-</ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/customerNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    app:menu="@menu/customer_navigation"
+    android:background="@color/colorPrimary"
+    app:itemIconTint="@color/colorNavIcon"
+    app:itemTextColor="@color/colorNavText"/>
 
-<com.google.android.material.bottomnavigation.BottomNavigationView
-android:id="@+id/customerNavigation"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
-app:menu="@menu/customer_navigation"
-android:background="@color/colorPrimary"
-app:itemIconTint="@color/colorNavIcon"
-app:itemTextColor="@color/colorNavText"/>
-</RelativeLayout>
+</LinearLayout>

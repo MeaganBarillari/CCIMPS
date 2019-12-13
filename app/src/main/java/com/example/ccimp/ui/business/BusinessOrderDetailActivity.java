@@ -48,6 +48,9 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
     BottomNavigationView navigation;
     ListView orderItemListView;
     User business;
+    Spinner spinner;
+
+
 
 
     @Override
@@ -65,7 +68,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         setupOrderItemList();
 
         String[] items = new String[] {"Decline", "Accept", "Complete", "Ready", "In Progress"};
-        Spinner spinner = (Spinner) findViewById(R.id.changestatus);
+        spinner = (Spinner) findViewById(R.id.changestatus);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -74,6 +77,7 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
         // Gets order object and sets text view's based on request fields
         // returns the order object that we use to get the supplierID and get the orderItem Listview
         Intent intent = getIntent();
+
         business = intent.getParcelableExtra("business");
         Bundle bundle = getIntent().getExtras();
         customerName.setText(bundle.getString("customerName"));
@@ -94,6 +98,17 @@ public class BusinessOrderDetailActivity extends AppCompatActivity implements Bu
                 return callBusinessNavigation(item);
             }
         });
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // your code here
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }});
 
     }
 
