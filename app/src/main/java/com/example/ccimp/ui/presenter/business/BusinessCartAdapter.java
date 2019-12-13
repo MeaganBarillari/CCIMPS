@@ -16,11 +16,11 @@ import com.example.ccimp.ui.model.inventory_supplier;
 import java.util.ArrayList;
 
 public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
-    private ArrayList<inventory_supplier> inventoryArrayList;
+    private ArrayList<inventory_supplier> itemArrayList;
 
-    public BusinessCartAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_supplier> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
-        this.inventoryArrayList = inventoryArrayList;
+    public BusinessCartAdapter(ArrayList<inventory_supplier> itemArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_customer_order_cart,itemArrayList);
+        this.itemArrayList = itemArrayList;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
         }
 
         // Get request object at the position
-        inventory_supplier inventorySupplier = inventoryArrayList.get(position);
+        inventory_supplier inventorySupplier = itemArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
         TextView supplier = v.findViewById(R.id.column2);
         TextView Q = v.findViewById(R.id.column3);
