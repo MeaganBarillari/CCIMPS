@@ -19,12 +19,11 @@ public class BusinessRequestPerSupplierPresenter implements BusinessRequestPerSu
         this.userID = businessID;
 
         // TODO: Will need to be replaced by a call to another function that populates the list from the model based off of the supplierID
-        inventoryArrayList = new ArrayList();
-        inventoryArrayList.add(inventory1);
+
     }
 
     @Override
     public void onViewCreate() {
-        businessRequestPerSupplierView.setupInventoryList(inventoryArrayList);
+
     }
 }

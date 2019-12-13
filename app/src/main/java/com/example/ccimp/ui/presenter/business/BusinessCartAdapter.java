@@ -16,11 +16,11 @@ import com.example.ccimp.ui.model.inventory_supplier;
 import java.util.ArrayList;
 
 public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
-    private ArrayList<inventory_supplier> inventoryArrayList;
+    private ArrayList<inventory_supplier> itemArrayList;
 
-    public BusinessCartAdapter(@NonNull Context context, int resourceId, ArrayList<inventory_supplier> inventoryArrayList) {
-        super(context,resourceId,inventoryArrayList);
-        this.inventoryArrayList = inventoryArrayList;
+    public BusinessCartAdapter(ArrayList<inventory_supplier> itemArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_customer_order_cart,itemArrayList);
+        this.itemArrayList = itemArrayList;
     }
 
     @NonNull
@@ -28,15 +28,14 @@ public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         View v = view;
         if (v == null) {
-            v = LayoutInflater.from(getContext()).inflate(R.layout.rowfourlines, parent, false);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
         }
 
         // Get request object at the position
-        inventory_supplier inventorySupplier = inventoryArrayList.get(position);
+        inventory_supplier inventorySupplier = itemArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
         TextView supplier = v.findViewById(R.id.column2);
-        TextView Q = v.findViewById(R.id.column3);
-        TextView price = v.findViewById(R.id.column4);
+        TextView price = v.findViewById(R.id.column3);
 
 
         if (itemName != null){
@@ -44,9 +43,6 @@ public class BusinessCartAdapter extends ArrayAdapter<inventory_supplier> {
         }
         if (supplier != null){
             supplier.setText(inventorySupplier.getSupplierID());
-        }
-        if (Q != null){
-            Q.setText(inventorySupplier.getQuantity());
         }
         if (price != null){
             price.setText(inventorySupplier.getPrice());

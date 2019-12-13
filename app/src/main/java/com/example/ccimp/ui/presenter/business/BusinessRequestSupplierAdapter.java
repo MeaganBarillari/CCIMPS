@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class BusinessRequestSupplierAdapter extends ArrayAdapter<User> {
     private ArrayList<User> userArrayList;
 
-    public BusinessRequestSupplierAdapter(@NonNull Context context, int resourceId, ArrayList<User> userArrayList) {
-        super(context,resourceId,userArrayList);
+    public BusinessRequestSupplierAdapter(ArrayList<User> userArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_request_from_supplier,userArrayList);
         this.userArrayList = userArrayList;
     }
 
