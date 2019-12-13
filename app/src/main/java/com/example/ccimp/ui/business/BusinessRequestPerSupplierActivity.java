@@ -46,13 +46,12 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
     ListView listView;
     private User business;
     private String supplierID, supplierName;
-    ArrayList<inventory_supplier> selectedInventorySupplier;
+    ArrayList<inventory_supplier> selectedInventorySupplier, cart;
     BottomNavigationView navigation;
     private BusinessRequestPerSupplierAdapter businessRequestPerSupplierAdapter;
     private BusinessRequestPerSupplierInterface.BusinessRequestPerSupplierPresenter businessRequestPerSupplierPresenter;
     private inventory_supplier[] values = new inventory_supplier[10000];
 
-    ArrayList<inventory_business> cart;
     int price;
 
     @Override
@@ -72,6 +71,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
         listView = findViewById(R.id.suppliermenu);
 
         selectedInventorySupplier = new ArrayList<>();
+        cart = new ArrayList<>();
         setupInventoryList();
 
 
@@ -87,30 +87,30 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent cartI = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestCartActivity.class);
-//                cartI.putExtra("businessID", businessID);
-//                cartI.putExtra("customer", customer);
-//                cartI.putExtra("businessname", businessName);
-//                cartI.putExtra("price" , Integer.toString(price));
-//                Bundle args = new Bundle();
-//                args.putSerializable("ARRAYLIST",(Serializable) cart);
-//                cartI.putExtra("BUNDLE",args);
-//                startActivity(cartI);
+                Intent cartI = new Intent(BusinessRequestPerSupplierActivity.this, BusinessRequestCartActivity.class);
+                cartI.putExtra("suppplierID", supplierID);
+                cartI.putExtra("business", business);
+                cartI.putExtra("supplierName", supplierName);
+                cartI.putExtra("price" , Integer.toString(price));
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable) cart);
+                cartI.putExtra("BUNDLE",args);
+                startActivity(cartI);
             }
         });
 
 
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                inventory_business  item = (inventory_business) parent.getItemAtPosition(position);
-//                Toast toast=Toast. makeText(getApplicationContext(),"Item " + item.getItemName() + " added to cart",Toast. LENGTH_SHORT);
-//                toast.show();
-//                cart.add(item);
-//                price = price + Integer.valueOf(item.getPrice());
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                inventory_supplier  item = (inventory_supplier) parent.getItemAtPosition(position);
+                Toast toast=Toast. makeText(getApplicationContext(),"Item " + item.getItemName() + " added to cart",Toast. LENGTH_SHORT);
+                toast.show();
+                cart.add(item);
+                price = price + Integer.valueOf(item.getPrice());
+            }
+        });
 
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
