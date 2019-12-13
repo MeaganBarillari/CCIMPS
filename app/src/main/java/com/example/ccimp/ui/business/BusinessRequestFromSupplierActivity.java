@@ -3,27 +3,39 @@ package com.example.ccimp.ui.business;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestFromSupplierInterface;
-import com.example.ccimp.ui.model.Item;
+import com.example.ccimp.ui.model.Handler;
 import com.example.ccimp.ui.model.User;
-import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
+import com.example.ccimp.ui.presenter.customer.CustomerHomeAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class BusinessRequestFromSupplierActivity extends AppCompatActivity implements BusinessRequestFromSupplierInterface.BusinessRequestFromSupplierView {
 
-    ListView listView1, listView2;
-    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
+    ArrayList<User> supplierList;
+    User[] values = new User[10000];
+    ListView supplierListView;
+    User business;
     BottomNavigationView navigation;
-    private BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter;
     private BusinessRequestSupplierAdapter businessRequestSupplierAdapter;
     private BusinessRequestFromSupplierInterface.BusinessRequestFromSupplierPresenter businessRequestFromSupplierPresenter;
 
@@ -32,16 +44,30 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_from_supplier);
 
-        businessRequestFromSupplierPresenter = new BusinessRequestFromSupplierPresenter(this, user.getUserID());
+        Intent intent = getIntent();
+        business= intent.getParcelableExtra("business");
 
         navigation = findViewById(R.id.businessNavigation);
 
-        listView1 = findViewById(R.id.current_request_listview);
+        supplierListView = findViewById(R.id.previous_requests_listview);
 
 
-        listView2 = findViewById(R.id.previous_requests_listview);
+        supplierList = new ArrayList<>();
+        setupSupplierList();
 
-        businessRequestFromSupplierPresenter.onViewCreate();
+        supplierListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(BusinessRequestFromSupplierActivity.this, BusinessRequestPerSupplierActivity.class);
+                intent.putExtra("supplierID", values[position].getUserID());
+                intent.putExtra("supplierName", values[position].getUsername());
+                intent.putExtra("business", business);
+                startActivity(intent);
+            }
+        });
+
+
+
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -57,34 +83,62 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessRequestFromSupplierActivity.this, BusinessHomeActivity.class);
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessRequestFromSupplierActivity.this, BusinessRequestsActivity.class);
+                a.putExtra("business", business);
                 startActivity(a);
                 break;
             case R.id.navigation_inventory:
                 Intent b = new Intent(BusinessRequestFromSupplierActivity.this, BusinessInventoryActivity.class);
+                b.putExtra("business", business);
                 startActivity(b);
                 break;
             case R.id.navigation_business_profile:
                 Intent d = new Intent(BusinessRequestFromSupplierActivity.this, BusinessProfileActivity.class);
+                d.putExtra("business", business);
                 startActivity(d);
                 break;
         }
         return false;
     }
 
-    @Override
-    public void setupItemList(ArrayList<Item> ItemArrayList) {
-        businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(this, R.layout.rowoneline, ItemArrayList);
-        listView1.setAdapter(businessRequestFromMenuAdapter);
-    }
 
     @Override
-    public void setupSupplierList(ArrayList<User> UserArrayList) {
-        businessRequestSupplierAdapter = new BusinessRequestSupplierAdapter(this, R.layout.rowoneline, UserArrayList);
-        listView2.setAdapter(businessRequestSupplierAdapter);
+    public void setupSupplierList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://shifanzhou.com/getSupplierUser.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("supplier");
+                            for(int i = 0; i< array.length();i++){
+                                JSONObject orderObj = array.getJSONObject(i);
+                                User user = new User(orderObj.getString("userId"),orderObj.getString("username"),  orderObj.getString("email"), orderObj.getString("password"), orderObj.getString("type"), orderObj.getString("phone"), orderObj.getString("address"));
+                                supplierList.add(user);
+                                values[i] = user;
+
+                            }
+
+                            BusinessRequestSupplierAdapter adapter = new BusinessRequestSupplierAdapter(supplierList, getApplicationContext());
+                            supplierListView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
 
     }
 }
