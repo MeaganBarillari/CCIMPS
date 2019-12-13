@@ -88,14 +88,14 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
             int tota = Integer.valueOf(tPrice);
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                local.remove(position);
+
                 if (local.size() != 0){
                     tota -= Integer.valueOf(local.get(position).getPrice());
                 }
                 else{
                     tota = 0;
                 }
-
+                local.remove(position);
                 totalPrice.setText(Integer.toString(tota));
                 listView.setAdapter(adapter);
 
