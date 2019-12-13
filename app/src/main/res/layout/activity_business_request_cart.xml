@@ -33,11 +33,11 @@
                 android:paddingLeft="16dp"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/colorBlack"
-                android:text="Total Amount:" />
+                android:text="Total Price:" />
 
             <TextView
                 android:id="@+id/order_price"
-                android:layout_width="269dp"
+                android:layout_width="294dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:gravity="left"
@@ -70,7 +70,7 @@
                 android:padding = "5dp"
                 android:textColor="@color/colorBlack"
                 android:background="@color/colorTableHeader"
-                android:text = "Supplier"/>
+                android:text = "Supplier ID"/>
 
             <TextView
                 android:layout_width = "0dp"
