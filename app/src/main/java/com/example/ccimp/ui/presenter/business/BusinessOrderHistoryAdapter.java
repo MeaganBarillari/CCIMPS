@@ -43,8 +43,8 @@ public class BusinessOrderHistoryAdapter extends ArrayAdapter<Order> {
         if (customerDateTime != null){
             customerDateTime.setText(order.getCreateDateTime());
         }
-        if(customerDateTime != null){
-            customerDateTime.setText(order.getStatus());
+        if(customerStatus != null){
+            customerStatus.setText(order.getStatus());
         }
 
         return v;

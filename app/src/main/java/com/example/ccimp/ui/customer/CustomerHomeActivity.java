@@ -59,6 +59,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerH
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CustomerHomeActivity.this, CustomerMenuActivity.class);
                 intent.putExtra("businessID", values[position].getUserID());
+                intent.putExtra("businessname", values[position].getUsername());
                 intent.putExtra("customer", customer);
                 startActivity(intent);
             }
