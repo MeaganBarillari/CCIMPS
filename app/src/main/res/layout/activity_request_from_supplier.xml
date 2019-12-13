@@ -4,10 +4,12 @@
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,26 +22,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="Purchase Inventory"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
+            android:textSize="25dp"
             android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Request By Current Menu"
-            android:textSize="15dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorBlack"/>
-
-        <ListView
-            android:id="@+id/current_request_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#D8D8D8"
-            android:textColor="@color/colorBlack">
-        </ListView>
 
         <TextView
             android:layout_width="match_parent"
@@ -55,12 +39,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
+            android:layout_marginBottom="50dp"
             android:background="#D8D8D8" >
         </ListView>
 
     </LinearLayout>
 
-</ScrollView>
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/businessNavigation"
