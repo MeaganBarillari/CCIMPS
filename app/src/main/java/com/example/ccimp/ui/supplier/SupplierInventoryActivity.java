@@ -42,8 +42,7 @@ public class SupplierInventoryActivity extends AppCompatActivity implements Supp
     ListView listView;
     private User supplier;
     BottomNavigationView navigation;
-    private SupplierInventoryAdapter supplierInventoryAdapter;
-    private SupplierInventoryInterface.SupplierInventoryPresenter supplierInventoryPresenter;
+
     Button btnAddItem;
 
     @Override
@@ -54,15 +53,12 @@ public class SupplierInventoryActivity extends AppCompatActivity implements Supp
         Intent intent = getIntent();
         supplier = intent.getParcelableExtra("supplier");
 
-        supplierInventoryPresenter = new SupplierInventoryPresenter(this, supplier.getUserID());
-
         btnAddItem = findViewById(R.id.btnadditem);
         navigation = findViewById(R.id.supplierNavigation);
         listView = findViewById(R.id.supplier_inventory_listview);
         itemList = new ArrayList<>();
         setupInventoryList();
 
-        //TODO: AHHHHHHHHHHHHHHHHHHH
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
