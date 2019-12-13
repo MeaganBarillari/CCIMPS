@@ -37,15 +37,15 @@ public class CustomerCartAdapter extends ArrayAdapter<inventory_business> {
         // Get request object at the position
         inventory_business item = itemArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
-        TextView delete = v.findViewById(R.id.column2);
+        TextView price = v.findViewById(R.id.column2);
 
 
         if (itemName != null){
             itemName.setText(item.getItemName());
         }
 
-        if (delete != null){
-            delete.setText("delete");
+        if (price != null){
+            price.setText("$" + item.getPrice());
         }
 
         return v;

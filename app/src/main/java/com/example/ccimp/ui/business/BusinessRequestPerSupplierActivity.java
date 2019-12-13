@@ -107,8 +107,7 @@ public class BusinessRequestPerSupplierActivity extends AppCompatActivity implem
 
     @Override
     public void setupInventoryList(ArrayList<inventory_supplier> inventoryArrayList) {
-        businessRequestPerSupplierAdapter = new BusinessRequestPerSupplierAdapter(this, R.layout.rowoneline, inventoryArrayList);
-        listView.setAdapter(businessRequestPerSupplierAdapter);
+
     }
 
 }

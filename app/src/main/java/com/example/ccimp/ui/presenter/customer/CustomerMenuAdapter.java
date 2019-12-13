@@ -34,14 +34,16 @@ public class CustomerMenuAdapter extends ArrayAdapter<inventory_business> {
         // Get request object at the position
         inventory_business inventoryBusiness = inventoryArrayList.get(position);
         TextView itemName = v.findViewById(R.id.column1);
-        TextView add = v.findViewById(R.id.column2);
+        TextView price = v.findViewById(R.id.column2);
 
 
         if (itemName != null){
             itemName.setText(inventoryBusiness.getItemName());
         }
 
-        add.setText("Add");
+        if(price != null){
+            price.setText("$" + inventoryBusiness.getPrice());
+        }
 
         return v;
     }

@@ -68,8 +68,6 @@ public class CustomerOrderCartActivity extends AppCompatActivity {
             }
         });
 
-        final int totalPriceint = Integer.valueOf(tPrice);
-
 
 
         listView = findViewById(R.id.customer_checkout_listview);
