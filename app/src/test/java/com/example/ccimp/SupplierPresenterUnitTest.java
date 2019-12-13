@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertNotNull;
 
-public class SupplierUnitTest {
+public class SupplierPresenterUnitTest {
 
     private User user = new User("123", "customer", "customer@gmail.com", "123", "Customer", "2533205453", "123 W Wash");
     private BusinessRequest businessRequest = new BusinessRequest("a","a", "a", "a", "a", "a", "a", "a");

@@ -1,8 +1,6 @@
 package com.example.ccimp;
 
-import com.example.ccimp.ui.business.BusinessHomeActivity;
 import com.example.ccimp.ui.business.BusinessInventoryActivity;
-import com.example.ccimp.ui.business.BusinessOrderDetailActivity;
 import com.example.ccimp.ui.business.BusinessOrderHistoryActivity;
 import com.example.ccimp.ui.business.BusinessProfileActivity;
 import com.example.ccimp.ui.business.BusinessRequestCartActivity;
@@ -15,12 +13,9 @@ import com.example.ccimp.ui.interfaces.business.BusinessProfileInterface;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestFromSupplierInterface;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestPerSupplierInterface;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestsInterface;
-import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.business.BusinessCartPresenter;
-import com.example.ccimp.ui.presenter.business.BusinessHomePresenter;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryPresenter;
-import com.example.ccimp.ui.presenter.business.BusinessOrderDetailPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessProfilePresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
@@ -29,22 +24,11 @@ import com.example.ccimp.ui.presenter.business.BusinessRequestsPresenter;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertNotNull;
 
 public class BusinessPresenterUnitTest {
 
-    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
-
-
-    @Test
-    public void testBusinessDetail(){
-        BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
-
-        BusinessOrderDetailPresenter businessOrderDetailPresenter = new BusinessOrderDetailPresenter(businessOrderDetailView, "businessID");
-        businessOrderDetailPresenter.getBusiness("business Email");
-    }
+    private User user = new User("12", "business", "business@gmail.com", "123", "Business", "2533205453", "123 W Wash");
 
     @Test
     public void testCart(){
@@ -63,19 +47,6 @@ public class BusinessPresenterUnitTest {
 
         assertNotNull(businessProfilePresenter);
         assertNotNull(businessProfileView);
-    }
-
-    @Test
-    public void testHome(){
-        BusinessHomeActivity businessHomeView = new BusinessHomeActivity();
-        BusinessHomePresenter businessHomePresenter = new BusinessHomePresenter(businessHomeView, "business@ccimp.com");
-
-        User testUser = businessHomePresenter.getBusiness("business@ccimp.com");
-        ArrayList<Order> testOrders = businessHomePresenter.getCurrentOrders("12");
-        assertNotNull(businessHomePresenter);
-        assertNotNull(businessHomeView);
-        assertNotNull(testUser);
-        assertNotNull(testOrders);
     }
 
     @Test

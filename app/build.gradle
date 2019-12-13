@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0-beta01'
     implementation 'org.mockito:mockito-all:2.0.2-beta'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.3.0-alpha03'
 }

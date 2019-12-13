@@ -22,17 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.ccimp.R;
-import com.example.ccimp.ui.MainActivity;
 import com.example.ccimp.ui.interfaces.business.BusinessOrderDetailInterface;
 import com.example.ccimp.ui.model.Handler;
-import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.order_info;
-import com.example.ccimp.ui.model.request_info;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
-import com.example.ccimp.ui.presenter.business.BusinessOrderDetailPresenter;
-import com.example.ccimp.ui.presenter.supplier.SupplierRequestDetailAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -51,7 +46,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BusinessOrderDetailActivity extends AppCompatActivity implements BusinessOrderDetailInterface.BusinessOrderDetailView {
 

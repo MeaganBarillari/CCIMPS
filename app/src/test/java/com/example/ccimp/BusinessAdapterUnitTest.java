@@ -11,6 +11,7 @@ import com.example.ccimp.ui.business.BusinessRequestFromSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestPerSupplierActivity;
 import com.example.ccimp.ui.business.BusinessRequestsActivity;
 import com.example.ccimp.ui.model.BusinessRequest;
+import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.Order;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.model.inventory_business;
@@ -23,6 +24,7 @@ import com.example.ccimp.ui.presenter.business.BusinessHistoryRequestsAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderDetailAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryAdapter;
+import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestPerSupplierAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
 
@@ -40,6 +42,7 @@ public class BusinessAdapterUnitTest {
     ArrayList<inventory_business> inventoryBusinessArrayList;
     ArrayList<order_info> orderItemArrayList;
     ArrayList<User> UserArrayList;
+    ArrayList<Item> ItemArrayList;
 
     @Test
     public void cartTest(){
@@ -55,7 +58,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void currentOrderTest(){
         BusinessHomeActivity businessHomeActivity = new BusinessHomeActivity();
-        BusinessCurrentOrderAdapter businessCurrentOrderAdapter = new BusinessCurrentOrderAdapter(businessHomeActivity, R.layout.row, orderArrayList);
+        BusinessCurrentOrderAdapter businessCurrentOrderAdapter = new BusinessCurrentOrderAdapter(orderArrayList, businessHomeActivity);
 
         try{
             View testView = businessCurrentOrderAdapter.getView(0, null, null);
@@ -68,7 +71,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void currentRequestsTest(){
         BusinessRequestsActivity businessRequestsActivity = new BusinessRequestsActivity();
-        BusinessCurrentRequestsAdapter businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(businessRequestsActivity, R.layout.rowtwolines, requestArrayList);
+        BusinessCurrentRequestsAdapter businessCurrentRequestsAdapter = new BusinessCurrentRequestsAdapter(requestArrayList, businessRequestsActivity);
 
         try{
             View testView = businessCurrentRequestsAdapter.getView(0, null, null);
@@ -80,7 +83,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void historyRequestsTest(){
         BusinessRequestsActivity businessRequestsActivity = new BusinessRequestsActivity();
-        BusinessHistoryRequestsAdapter businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(businessRequestsActivity, R.layout.row, requestArrayList);
+        BusinessHistoryRequestsAdapter businessHistoryRequestsAdapter = new BusinessHistoryRequestsAdapter(requestArrayList, businessRequestsActivity);
 
         try{
             View testView = businessHistoryRequestsAdapter.getView(0, null, null);
@@ -92,7 +95,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void inventoryTest(){
         BusinessInventoryActivity businessInventoryActivity = new BusinessInventoryActivity();
-        BusinessInventoryAdapter businessInventoryAdapter = new BusinessInventoryAdapter(businessInventoryActivity, R.layout.rowfourlines, inventoryBusinessArrayList);
+        BusinessInventoryAdapter businessInventoryAdapter = new BusinessInventoryAdapter(inventoryBusinessArrayList, businessInventoryActivity);
 
         try{
             View testView = businessInventoryAdapter.getView(0, null, null);
@@ -104,7 +107,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void orderDetailTest(){
         BusinessOrderDetailActivity businessOrderDetailActivity = new BusinessOrderDetailActivity();
-        BusinessOrderDetailAdapter businessOrderDetailAdapter = new BusinessOrderDetailAdapter(businessOrderDetailActivity, R.layout.row, orderItemArrayList);
+        BusinessOrderDetailAdapter businessOrderDetailAdapter = new BusinessOrderDetailAdapter(orderItemArrayList, businessOrderDetailActivity);
 
         try{
             View testView = businessOrderDetailAdapter.getView(0, null, null);
@@ -116,7 +119,7 @@ public class BusinessAdapterUnitTest {
     @Test
     public void orderHistoryTest(){
         BusinessOrderHistoryActivity businessOrderHistoryActivity = new BusinessOrderHistoryActivity();
-        BusinessOrderHistoryAdapter businessOrderHistoryAdapter = new BusinessOrderHistoryAdapter(businessOrderHistoryActivity, R.layout.row, orderArrayList);
+        BusinessOrderHistoryAdapter businessOrderHistoryAdapter = new BusinessOrderHistoryAdapter(orderArrayList, businessOrderHistoryActivity);
 
         try{
             View testView = businessOrderHistoryAdapter.getView(0, null, null);
@@ -125,18 +128,22 @@ public class BusinessAdapterUnitTest {
         catch(RuntimeException e){}
     }
 
-    /**
     @Test
     public void requestFromMenuTest(){
         BusinessRequestFromSupplierActivity businessRequestFromSupplierActivity = new BusinessRequestFromSupplierActivity();
-        BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, UserArrayList);
+        BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(businessRequestFromSupplierActivity, R.layout.rowoneline, ItemArrayList);
+
+        try{
+            View testView = businessRequestFromMenuAdapter.getView(0, null, null);
+            assertNotNull(testView);
+        }
+        catch(RuntimeException e){}
     }
-     **/
 
     @Test
     public void requestPerSupplierTest(){
         BusinessRequestPerSupplierActivity businessRequestPerSupplierActivity = new BusinessRequestPerSupplierActivity();
-        BusinessRequestPerSupplierAdapter businessRequestPerSupplierAdapter = new BusinessRequestPerSupplierAdapter(businessRequestPerSupplierActivity, R.layout.rowoneline, inventoryArrayList);
+        BusinessRequestPerSupplierAdapter businessRequestPerSupplierAdapter = new BusinessRequestPerSupplierAdapter(inventoryArrayList, businessRequestPerSupplierActivity);
         try{
             View testView = businessRequestPerSupplierAdapter.getView(0, null, null);
             assertNotNull(testView);
