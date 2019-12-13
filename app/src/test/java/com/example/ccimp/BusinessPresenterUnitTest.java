@@ -1,8 +1,6 @@
 package com.example.ccimp;
 
-import com.example.ccimp.ui.business.BusinessHomeActivity;
 import com.example.ccimp.ui.business.BusinessInventoryActivity;
-import com.example.ccimp.ui.business.BusinessOrderDetailActivity;
 import com.example.ccimp.ui.business.BusinessOrderHistoryActivity;
 import com.example.ccimp.ui.business.BusinessProfileActivity;
 import com.example.ccimp.ui.business.BusinessRequestCartActivity;
@@ -17,9 +15,7 @@ import com.example.ccimp.ui.interfaces.business.BusinessRequestPerSupplierInterf
 import com.example.ccimp.ui.interfaces.business.BusinessRequestsInterface;
 import com.example.ccimp.ui.model.User;
 import com.example.ccimp.ui.presenter.business.BusinessCartPresenter;
-import com.example.ccimp.ui.presenter.business.BusinessHomePresenter;
 import com.example.ccimp.ui.presenter.business.BusinessInventoryPresenter;
-import com.example.ccimp.ui.presenter.business.BusinessOrderDetailPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessOrderHistoryPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessProfilePresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
@@ -34,7 +30,7 @@ public class BusinessPresenterUnitTest {
 
     private User user = new User("12", "business", "business@gmail.com", "123", "Business", "2533205453", "123 W Wash");
 
-
+/**
     @Test
     public void testBusinessDetail(){
         BusinessOrderDetailActivity businessOrderDetailView = new BusinessOrderDetailActivity();
@@ -43,7 +39,7 @@ public class BusinessPresenterUnitTest {
         assertNotNull(businessOrderDetailPresenter);
         assertNotNull(businessOrderDetailView);
     }
-
+**/
     @Test
     public void testCart(){
         BusinessCartInterface.BusinessCartView businessCartView = new BusinessRequestCartActivity();
@@ -62,7 +58,7 @@ public class BusinessPresenterUnitTest {
         assertNotNull(businessProfilePresenter);
         assertNotNull(businessProfileView);
     }
-
+/**
     @Test
     public void testHome(){
         BusinessHomeActivity businessHomeView = new BusinessHomeActivity();
@@ -70,7 +66,7 @@ public class BusinessPresenterUnitTest {
         assertNotNull(businessHomePresenter);
         assertNotNull(businessHomeView);
     }
-
+**/
     @Test
     public void testInventory(){
         BusinessInventoryInterface.BusinessInventoryView businessInventoryView = new BusinessInventoryActivity();
