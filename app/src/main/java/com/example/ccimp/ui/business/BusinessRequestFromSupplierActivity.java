@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ccimp.R;
 import com.example.ccimp.ui.interfaces.business.BusinessRequestFromSupplierInterface;
-import com.example.ccimp.ui.model.Item;
 import com.example.ccimp.ui.model.User;
-import com.example.ccimp.ui.presenter.business.BusinessRequestFromMenuAdapter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestFromSupplierPresenter;
 import com.example.ccimp.ui.presenter.business.BusinessRequestSupplierAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,7 +21,6 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
     ListView listView1, listView2;
     private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     BottomNavigationView navigation;
-    private BusinessRequestFromMenuAdapter businessRequestFromMenuAdapter;
     private BusinessRequestSupplierAdapter businessRequestSupplierAdapter;
     private BusinessRequestFromSupplierInterface.BusinessRequestFromSupplierPresenter businessRequestFromSupplierPresenter;
 
@@ -75,11 +72,6 @@ public class BusinessRequestFromSupplierActivity extends AppCompatActivity imple
         return false;
     }
 
-    @Override
-    public void setupItemList(ArrayList<Item> ItemArrayList) {
-        businessRequestFromMenuAdapter = new BusinessRequestFromMenuAdapter(this, R.layout.rowoneline, ItemArrayList);
-        listView1.setAdapter(businessRequestFromMenuAdapter);
-    }
 
     @Override
     public void setupSupplierList(ArrayList<User> UserArrayList) {

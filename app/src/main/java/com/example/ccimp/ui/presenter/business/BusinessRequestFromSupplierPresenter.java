@@ -30,7 +30,6 @@ public class BusinessRequestFromSupplierPresenter implements BusinessRequestFrom
 
     @Override
     public void onViewCreate() {
-        businessRequestFromSupplierView.setupItemList(itemArrayList);
         businessRequestFromSupplierView.setupSupplierList(userArrayList);
     }
 }

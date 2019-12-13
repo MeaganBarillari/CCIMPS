@@ -28,24 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Request By Current Menu"
-            android:textSize="15dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorBlack"/>
-
-        <ListView
-            android:id="@+id/current_request_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#D8D8D8"
-            android:textColor="@color/colorBlack">
-        </ListView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:gravity="center_vertical"
             android:text="Request By Supplier"
             android:textSize="20dp"
             android:textColor="@color/colorBlack"/>
