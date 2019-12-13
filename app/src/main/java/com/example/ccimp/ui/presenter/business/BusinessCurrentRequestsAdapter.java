@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class BusinessCurrentRequestsAdapter extends ArrayAdapter<BusinessRequest> {
     private ArrayList<BusinessRequest> requestsArrayList;
 
-    public BusinessCurrentRequestsAdapter(@NonNull Context context, int resourceId, ArrayList<BusinessRequest> requestsArrayList) {
-        super(context,resourceId,requestsArrayList);
+    public BusinessCurrentRequestsAdapter(ArrayList<BusinessRequest> requestsArrayList, @NonNull Context context) {
+        super(context,R.layout.activity_business_requests,requestsArrayList);
         this.requestsArrayList = requestsArrayList;
     }
 

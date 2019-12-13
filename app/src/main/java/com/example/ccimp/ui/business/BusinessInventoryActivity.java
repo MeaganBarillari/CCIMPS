@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 public class BusinessInventoryActivity extends AppCompatActivity implements BusinessInventoryInterface.BusinessInventoryView {
 
+    User business;
     ListView listView;
     private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
     BottomNavigationView navigation;
@@ -42,6 +43,9 @@ public class BusinessInventoryActivity extends AppCompatActivity implements Busi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_inventory);
+
+        Intent intent = getIntent();
+        business = intent.getParcelableExtra("business");
 
         businessInventoryPresenter = new BusinessInventoryPresenter(this, user.getUserID());
 
@@ -74,6 +78,7 @@ public class BusinessInventoryActivity extends AppCompatActivity implements Busi
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessInventoryActivity.this, BusinessHomeActivity.class);
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:

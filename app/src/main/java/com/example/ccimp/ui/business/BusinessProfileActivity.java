@@ -27,12 +27,14 @@ public class BusinessProfileActivity extends AppCompatActivity implements Busine
     Button btnLogout;
     BottomNavigationView navigation;
     BusinessProfileInterface.BusinessProfilePresenter businessProfilePresenter;
-    private User user = new User("123", "business", "business@gmail.com", "123", "Supplier", "2533205453", "123 W Wash");
-
+    User business;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_profile);
+
+        Intent intent = getIntent();
+        business = intent.getParcelableExtra("business");
 
         btnLogout = findViewById(R.id.btnLogout);
 
@@ -43,7 +45,7 @@ public class BusinessProfileActivity extends AppCompatActivity implements Busine
             }
         });
 
-        businessProfilePresenter = new BusinessProfilePresenter(this, user.getUserID());
+        businessProfilePresenter = new BusinessProfilePresenter(this, business.getUserID());
 
         navigation = findViewById(R.id.businessNavigation);
 
@@ -69,18 +71,22 @@ public class BusinessProfileActivity extends AppCompatActivity implements Busine
         switch (supplierMenuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent c = new Intent(BusinessProfileActivity.this, BusinessHomeActivity.class);
+                c.putExtra("business", business);
                 startActivity(c);
                 break;
             case R.id.navigation_requests:
                 Intent a = new Intent(BusinessProfileActivity.this, BusinessRequestsActivity.class);
+                a.putExtra("business", business);
                 startActivity(a);
                 break;
             case R.id.navigation_inventory:
                 Intent b = new Intent(BusinessProfileActivity.this, BusinessInventoryActivity.class);
+                b.putExtra("business", business);
                 startActivity(b);
                 break;
             case R.id.navigation_business_profile:
                 Intent d = new Intent(BusinessProfileActivity.this,BusinessProfileActivity.class);
+                d.putExtra("business", business);
                 startActivity(d);
                 break;
         }
@@ -89,9 +95,9 @@ public class BusinessProfileActivity extends AppCompatActivity implements Busine
 
     @Override
     public void setupProfile() {
-        userName.setText(user.getUsername());
-        userEmail.setText(user.getEmail());
-        userMobile.setText(user.getPhone());
-        userAddress.setText(user.getAddress());
+        userName.setText(business.getUsername());
+        userEmail.setText(business.getEmail());
+        userMobile.setText(business.getPhone());
+        userAddress.setText(business.getAddress());
     }
 }

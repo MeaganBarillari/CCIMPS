@@ -39,8 +39,6 @@ public class CustomerOrdersActivity extends AppCompatActivity {
     ArrayList<Order> pastOrderList;
     ListView currentOrdersListView, previousOrdersListView;
     User customer;
-    Order[] currentOrders = new Order[1000];
-    Order[] pastOrders = new Order[1000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

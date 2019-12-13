@@ -19,6 +19,6 @@ public interface BusinessOrderHistoryInterface {
     interface BusinessOrderHistoryView {
         boolean callBusinessNavigation(MenuItem businessMenuItem);
         User getIntentData(Intent intent);
-        void setupOrderHistoryList(ArrayList<Order> orderArrayList);
+        void setupOrderHistoryList();
     }
 }

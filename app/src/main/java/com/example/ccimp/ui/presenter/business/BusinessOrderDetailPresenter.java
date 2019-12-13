@@ -13,7 +13,6 @@ public class BusinessOrderDetailPresenter implements BusinessOrderDetailInterfac
     BusinessOrderDetailInterface.BusinessOrderDetailView businessOrderDetailView;
     ArrayList<order_info> orderItemArrayList;
     User business;
-    order_info order_info = new order_info("business@ccimp.com", "200", "3", "4", "$200");
 
 
     public BusinessOrderDetailPresenter(BusinessOrderDetailActivity businessOrderDetailActivity, String businessID) {
@@ -24,20 +23,17 @@ public class BusinessOrderDetailPresenter implements BusinessOrderDetailInterfac
 
     @Override
     public void onViewCreate() {
-        businessOrderDetailView.setupOrderItemList(orderItemArrayList);
-        businessOrderDetailView.setBusinessUser(business);
+
     }
 
     @Override
     public User getBusiness(String businessEmail) {
-        return new User("124", "business", "business@ccimp.com", "123", "Supplier", "2533205453", "123 W Wash");
+        return null;
     }
 
     @Override
     public ArrayList<order_info> getOrderItems(String businessID) {
-        ArrayList<order_info> list = new ArrayList<order_info>();
-        //TODO: HAVE CALL TO BACKGROUND WORKER FROM THE MODEL
-        list.add(order_info);
-        return list;
+
+        return null;
     }
 }
