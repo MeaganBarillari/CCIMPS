@@ -3,6 +3,7 @@ CS506 Fall 2019 Project\
 \
 Bug Tracker: http://shifanzhou.com/mantis/login_page.php \
   You will need to create an account to see the bugs. The register email sent by Mantis takes a while to appear, just a heads up.\
+\
 Instructions:\
 \
 1.Download android studio
