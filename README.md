@@ -12,7 +12,7 @@ Instructions:\
 \
 3.Open cloned repo in android studio
 \
-4.Checkout branch - geetika
+4.Checkout branch - finaldemo\
 \
 5.Compile and run application
 \
