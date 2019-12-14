@@ -28,7 +28,7 @@ Instructions:\
     Email: supplier@ccimp.com\
     Password: 123\
     \
-8.After you click the login button, you would go to different screens based on the type you used , and you could use the bottom navigation bar to switch to different screens. You should be able to click on the table entries, it will bring you to detail pages or menu lists with static information. Button functionality that corresponds to adding orders/requests/items are disabled.
+8.After you click the login button, you would go to different screens based on the type you used , and you could use the bottom navigation bar to switch to different screens. You should be able to click on the table entries, it will bring you to detail pages or menu lists with static information.
 
 9.Running tests:
   1) Unit tests: In android studio, right click on the folder named com.example.ccimp (app/src/test/java/com.example.ccimp)    and select "Run tests in ccimp with coverage". This will run all the unit tests, and provide code coverage information.
