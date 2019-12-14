@@ -3,19 +3,19 @@ CS506 Fall 2019 Project\
 \
 Instructions:\
 \
-1.Download android studio\
+1.Download android studio
 \
-2.Clone git repo\
+2.Clone git repo
 \
-3.Open cloned repo in android studio\
+3.Open cloned repo in android studio
 \
-4.Checkout branch - geetika\
+4.Checkout branch - geetika
 \
-5.Compile and run application\
+5.Compile and run application
 \
-6.Register is functional, but we have made already made accounts for testing ease. Please feel free to register new accounts if you’d like\
+6.Register is functional, but we have made already made accounts for testing ease. Please feel free to register new accounts if you’d like
 \
-7. Login info is provided below:\
+7. Login info is provided below:
   1)Login Info as a Customer: \
     Email : customer@ccimp.com\
     Password: 123\
